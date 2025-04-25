@@ -1,0 +1,264 @@
+/* HeroSection CSS */
+
+#introOverlay {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  transition: opacity 1s ease, visibility 1s ease;
+  z-index: 1000;
+  flex-direction: column;
+}
+
+#introOverlay.hidden { 
+  opacity: 0; 
+  visibility: hidden; 
+}
+
+#introOverlay::before {
+  content: ''; 
+  position: absolute; 
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(128,78,171,0.3) 0%, rgba(0,0,0,0.8) 70%);
+  z-index: -1;
+}
+
+.content-wrapper {
+  background: rgba(18,18,22,0.75); 
+  backdrop-filter: blur(12px);
+  border-radius: 16px; 
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  text-align: center; 
+  padding: 40px; 
+  max-width: 560px; 
+  width: 90%;
+  position: relative; 
+  overflow: hidden;
+}
+
+.greeting, .intro, .name-form { 
+  opacity: 0; 
+  animation: fadeIn 1s ease forwards; 
+}
+
+.greeting {
+  font-size: 2.5rem; 
+  font-weight: 700; 
+  color: white;
+  margin-bottom: 20px;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center;
+  flex-wrap: wrap; 
+  gap: 8px;
+}
+
+.greeting .emoji { 
+  font-size: 2.5rem; 
+}
+
+.dots::after {
+  content: ''; 
+  display: inline-block;
+  animation: dots 2s steps(6, end) forwards;
+}
+
+@keyframes fadeIn { 
+  to { opacity: 1; } 
+}
+
+@keyframes dots {
+  0%{content:'';}
+  16%{content:'.';}
+  32%{content:'..';}
+  48%{content:'...';}
+  64%{content:'....';}
+  80%{content:'.....';}
+  100%{content:'......🤔';}
+}
+
+.name-form, .intro { 
+  display: none; 
+}
+
+.name-form.active, .intro.active { 
+  display: block; 
+}
+
+.form-label1 { 
+  font-size: 1.1rem; 
+  color: #e0e0e0; 
+  margin-bottom: 10px; 
+}
+
+input[type="text"] {
+  width: 100%; 
+  padding: 14px 20px; 
+  margin-bottom: 20px;
+  border: 1px solid rgba(255,255,255,0.2); 
+  border-radius: 8px;
+  background: rgba(255,255,255,0.07); 
+  color: #fff; 
+  transition: 0.3s;
+}
+
+input[type="text"]:focus {
+  outline: none; 
+  border-color: #a67ef1;
+  box-shadow: 0 0 0 3px rgba(166,126,241,0.3);
+}
+
+button {
+  padding: 12px 30px; 
+  background: linear-gradient(135deg, #9c5cf1, #6930c3);
+  color: white; 
+  border: none; 
+  border-radius: 8px; 
+  font-weight: 600;
+  cursor: pointer; 
+  position: relative; 
+  overflow: hidden; 
+  transition: 0.3s;
+}
+
+button::before {
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: -100%; 
+  width: 100%; 
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.6s;
+}
+
+button:hover::before { 
+  left: 100%; 
+}
+
+button:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 10px 20px -10px rgba(156,92,241,0.5); 
+}
+
+.intro-subtitle { 
+  color: #a8a8b3; 
+  font-size: 1.1rem; 
+}
+
+.intro-name { 
+  font-size: 2.6rem; 
+  font-weight: 800; 
+  margin: 15px 0; 
+  color: white; 
+}
+
+.role-wrapper { 
+  margin: 25px 0; 
+  height: 30px; 
+}
+
+.role { 
+  font-weight: 600; 
+  font-size: 1.2rem; 
+  color: #00ffae; 
+  position: relative; 
+}
+
+.role::after {
+  content: "Full Stack Web Developer";
+  animation: roleCycle 8s infinite;
+}
+
+@keyframes roleCycle {
+  0%,20%{content:"Full Stack Web Developer";}
+  25%,45%{content:"React Developer";}
+  50%,70%{content:"Frontend Developer";}
+  75%,100%{content:"JavaScript Developer";}
+}
+
+.scroll-button {
+  margin-top: 30px; 
+  font-size: 16px;
+  background: linear-gradient(135deg, #2196F3, #0d47a1);
+  padding: 14px 32px; 
+  border: none; 
+  border-radius: 8px;
+  color: white; 
+  cursor: pointer; 
+  font-weight: 600; 
+  transition: 0.3s;
+}
+
+.scroll-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px -10px rgba(33,150,243,0.6);
+}
+
+.scroll-button::after {
+  content: '↓'; 
+  margin-left: 10px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,20%,50%,80%,100%{transform:translateY(0);}
+  40%{transform:translateY(-8px);}
+  60%{transform:translateY(-4px);}
+}
+
+.spinner {
+  margin-left: 160px;
+  --size: 30px;
+  --color: white;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: block;
+}
+
+.spinner::after, .spinner::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  width: var(--size);
+  height: var(--size);
+  top: 50%;
+  animation: up 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+  left: 50%;
+  background: var(--color);
+  box-shadow: 0 0 calc(var(--size) / 3) rgba(0, 0, 0, 0.25);
+}
+
+.spinner::after {
+  background: var(--color);
+  top: calc(50% - var(--size));
+  left: calc(50% - var(--size));
+  animation: down 2.4s cubic-bezier(0, 0, 0.24, 1.21) infinite;
+}
+
+@keyframes down {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(100%); }
+  50% { transform: translateX(100%) translateY(100%); }
+  75% { transform: translateY(100%); }
+}
+
+@keyframes up {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-100%); }
+  50% { transform: translateX(-100%) translateY(-100%); }
+  75% { transform: translateY(-100%); }
+}
+
+/* Shake animation for invalid form input */
+@keyframes shake {
+  0%, 100% {transform: translateX(0);}
+  10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
+  20%, 40%, 60%, 80% {transform: translateX(5px);}
+}

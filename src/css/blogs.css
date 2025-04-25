@@ -1,0 +1,131 @@
+
+  
+  .container {
+    width: 100%;
+    
+    max-width: 1000px;
+ height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #1a3a5c; /* 60% Blue */
+    font-weight: bold;
+   
+    letter-spacing: 1px;
+  }
+  
+  /* Grid Section */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: fadeInCard 1s forwards;
+  }
+  
+  .card:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .card:nth-child(2) {
+    animation-delay: 0.4s;
+  }
+  .card:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card .content {
+    padding: 25px;
+  }
+  
+  .card h2 {
+    font-size: 1.8rem;
+    color: #1a3a5c; /* 60% Blue */
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #5a6a7b; /* 30% Gray */
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .card .date {
+    font-size: 0.9rem;
+    color: #a2a9b0; /* 10% Accent Gray */
+    margin-bottom: 20px;
+  }
+  
+  .card .read-more {
+    padding: 12px 30px;
+    background-color: #f15f79; /* Accent Color */
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+  }
+  
+  .card .read-more:hover {
+    background-color: #e14e6f;
+    transform: scale(1.05);
+  }
+  
+  /* Animations */
+  @keyframes fadeInCard {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2rem;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .card .content {
+      padding: 15px;
+    }
+    .card h2 {
+      font-size: 1.4rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+    }
+  }
+  

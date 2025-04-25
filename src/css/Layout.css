@@ -1,0 +1,35 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.layout-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.layout-container {
+  background-color: rgb(248, 240, 240);
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.layout-container.dark {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.theme-toggle {
+  margin: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+}
+
+.theme-toggle:hover {
+  background-color: #0056b3;
+}
