@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 function Skills() {
   const containerRef = useRef(null);
@@ -39,8 +39,8 @@ function Skills() {
     ]
   };
 
-  // Define initial positions that look like the first image
-  const initialLayout = [
+  // Define initial positions that look like the first image - wrapped in useMemo
+  const initialLayout = useMemo(() => [
     // Green bubbles (Databases - scattered around)
     { color: "green", icon: "brand-mongodb", x: 25, y: 20 },
     { color: "green", icon: "sql", x: 75, y: 20 },
@@ -65,7 +65,7 @@ function Skills() {
     { color: "blue", icon: "brand-javascript", x: 50, y: 80 },
     { color: "blue", icon: "brand-react", x: 80, y: 80 },
     { color: "blue", icon: "brand-tailwind", x: 65, y: 50 }
-  ];
+  ], []);
   
   // Handle window resizing
   useEffect(() => {
@@ -98,7 +98,7 @@ function Skills() {
     
     setPositions(actualPositions);
     setInitialized(true);
-  }, [initialized, windowSize]); // Re-initialize when window size changes
+  }, [initialized, windowSize, initialLayout]); // Added initialLayout to dependencies
 
   // Get organized position for when hovered
   const getOrganizedPosition = (skill, index, category) => {
@@ -151,19 +151,6 @@ function Skills() {
       default:
         return { x: centerX, y: centerY };
     }
-  };
-
-  // Get icon element based on icon name
-  const getIcon = (iconName) => {
-    const iconSize = windowSize.width < 576 ? 18 : 
-                     windowSize.width < 768 ? 20 : 
-                     windowSize.width < 1024 ? 22 : 24;
-                     
-    return (
-      <svg xmlns="http://www.w3.org/2000/svg" className="icon" width={iconSize} height={iconSize} viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <use href={`https://cdn.jsdelivr.net/npm/@tabler/icons@2.40.0/tabler-sprite.svg#tabler-${iconName}`} />
-      </svg>
-    );
   };
 
   // Draw curved paths
@@ -311,6 +298,150 @@ function Skills() {
   const isTouchDevice = typeof window !== 'undefined' ? 
     ('ontouchstart' in window || navigator.maxTouchPoints > 0) : false;
 
+  // Function to render blue dots
+  const renderBlueDots = () => {
+    return skills.blue.map((skill, i) => {
+      if (!containerRef.current) return null;
+      const centerX = containerRef.current.clientWidth / 2;
+      const centerY = containerRef.current.clientHeight / 2;
+      const pos = getOrganizedPosition(skill, i, "blue");
+      
+      // Adjust number of dots based on screen size
+      const dotCount = windowSize.width < 576 ? 2 : 3;
+      
+      const dots = [];
+      for (let j = 0; j < dotCount; j++) {
+        dots.push(
+          <circle
+            key={`blue-dot-${i}-${j}`}
+            r={windowSize.width < 576 ? 2 : 3}
+            className="animated-dot blue-dot"
+            style={{
+              animationDelay: `${j * 1}s`,
+              offset: j * (1/dotCount)
+            }}
+          >
+            <animateMotion
+              path={getCurvedPath(pos.x, pos.y, centerX, centerY, "up")}
+              dur={windowSize.width < 576 ? "4s" : "3s"}
+              begin={`${j * 1}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        );
+      }
+      return <g key={`blue-dot-group-${i}`}>{dots}</g>;
+    });
+  };
+
+  // Function to render yellow dots
+  const renderYellowDots = () => {
+    return skills.yellow.map((skill, i) => {
+      if (!containerRef.current) return null;
+      const centerX = containerRef.current.clientWidth / 2;
+      const centerY = containerRef.current.clientHeight / 2;
+      const pos = getOrganizedPosition(skill, i, "yellow");
+      
+      // Adjust number of dots based on screen size
+      const dotCount = windowSize.width < 576 ? 2 : 3;
+      
+      const dots = [];
+      for (let j = 0; j < dotCount; j++) {
+        dots.push(
+          <circle
+            key={`yellow-dot-${i}-${j}`}
+            r={windowSize.width < 576 ? 2 : 3}
+            className="animated-dot yellow-dot"
+            style={{
+              animationDelay: `${j * 1}s`,
+              offset: j * (1/dotCount)
+            }}
+          >
+            <animateMotion
+              path={getCurvedPath(pos.x, pos.y, centerX, centerY, "left")}
+              dur={windowSize.width < 576 ? "4s" : "3s"}
+              begin={`${j * 1}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        );
+      }
+      return <g key={`yellow-dot-group-${i}`}>{dots}</g>;
+    });
+  };
+
+  // Function to render orange dots
+  const renderOrangeDots = () => {
+    return skills.orange.map((skill, i) => {
+      if (!containerRef.current) return null;
+      const centerX = containerRef.current.clientWidth / 2;
+      const centerY = containerRef.current.clientHeight / 2;
+      const pos = getOrganizedPosition(skill, i, "orange");
+      
+      // Adjust number of dots based on screen size
+      const dotCount = windowSize.width < 576 ? 2 : 3;
+      
+      const dots = [];
+      for (let j = 0; j < dotCount; j++) {
+        dots.push(
+          <circle
+            key={`orange-dot-${i}-${j}`}
+            r={windowSize.width < 576 ? 2 : 3}
+            className="animated-dot orange-dot"
+            style={{
+              animationDelay: `${j * 1}s`,
+              offset: j * (1/dotCount)
+            }}
+          >
+            <animateMotion
+              path={getCurvedPath(pos.x, pos.y, centerX, centerY, "right")}
+              dur={windowSize.width < 576 ? "4s" : "3s"}
+              begin={`${j * 1}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        );
+      }
+      return <g key={`orange-dot-group-${i}`}>{dots}</g>;
+    });
+  };
+
+  // Function to render green dots
+  const renderGreenDots = () => {
+    return skills.green.map((skill, i) => {
+      if (!containerRef.current) return null;
+      const centerX = containerRef.current.clientWidth / 2;
+      const centerY = containerRef.current.clientHeight / 2;
+      const pos = getOrganizedPosition(skill, i, "green");
+      
+      // Adjust number of dots based on screen size
+      const dotCount = windowSize.width < 576 ? 2 : 3;
+      
+      const dots = [];
+      for (let j = 0; j < dotCount; j++) {
+        dots.push(
+          <circle
+            key={`green-dot-${i}-${j}`}
+            r={windowSize.width < 576 ? 2 : 3}
+            className="animated-dot green-dot"
+            style={{
+              animationDelay: `${j * 1}s`,
+              offset: j * (1/dotCount)
+            }}
+          >
+            <animateMotion
+              path={getCurvedPath(pos.x, pos.y, centerX, centerY, "down")}
+              dur={windowSize.width < 576 ? "4s" : "3s"}
+              begin={`${j * 1}s`}
+              repeatCount="indefinite"
+            />
+          </circle>
+        );
+      }
+      return <g key={`green-dot-group-${i}`}>{dots}</g>;
+    });
+  };
+
   return (
     <div className="skills-container">
       {/* Add Tabler Icons CDN */}
@@ -383,11 +514,11 @@ function Skills() {
             </defs>
             
             {/* Blue connections */}
-            {skills.blue.map((_, i) => {
+            {skills.blue.map((skill, i) => {
               if (!containerRef.current) return null;
               const centerX = containerRef.current.clientWidth / 2;
               const centerY = containerRef.current.clientHeight / 2;
-              const pos = getOrganizedPosition(_, i, "blue");
+              const pos = getOrganizedPosition(skill, i, "blue");
               
               return (
                 <path
@@ -399,11 +530,11 @@ function Skills() {
             })}
             
             {/* Yellow connections */}
-            {skills.yellow.map((_, i) => {
+            {skills.yellow.map((skill, i) => {
               if (!containerRef.current) return null;
               const centerX = containerRef.current.clientWidth / 2;
               const centerY = containerRef.current.clientHeight / 2;
-              const pos = getOrganizedPosition(_, i, "yellow");
+              const pos = getOrganizedPosition(skill, i, "yellow");
               
               return (
                 <path
@@ -415,11 +546,11 @@ function Skills() {
             })}
             
             {/* Orange connections */}
-            {skills.orange.map((_, i) => {
+            {skills.orange.map((skill, i) => {
               if (!containerRef.current) return null;
               const centerX = containerRef.current.clientWidth / 2;
               const centerY = containerRef.current.clientHeight / 2;
-              const pos = getOrganizedPosition(_, i, "orange");
+              const pos = getOrganizedPosition(skill, i, "orange");
               
               return (
                 <path
@@ -431,11 +562,11 @@ function Skills() {
             })}
             
             {/* Green connections */}
-            {skills.green.map((_, i) => {
+            {skills.green.map((skill, i) => {
               if (!containerRef.current) return null;
               const centerX = containerRef.current.clientWidth / 2;
               const centerY = containerRef.current.clientHeight / 2;
-              const pos = getOrganizedPosition(_, i, "green");
+              const pos = getOrganizedPosition(skill, i, "green");
               
               return (
                 <path
@@ -447,143 +578,10 @@ function Skills() {
             })}
             
             {/* Moving dots along paths */}
-            <>
-              {/* Blue dots */}
-              {skills.blue.map((_, i) => {
-                if (!containerRef.current) return null;
-                const centerX = containerRef.current.clientWidth / 2;
-                const centerY = containerRef.current.clientHeight / 2;
-                const pos = getOrganizedPosition(_, i, "blue");
-                
-                // Adjust number of dots based on screen size
-                const dotCount = windowSize.width < 576 ? 2 : 3;
-                
-                const dots = [];
-                for (let j = 0; j < dotCount; j++) {
-                  dots.push(
-                    <circle
-                      key={`blue-dot-${i}-${j}`}
-                      r={windowSize.width < 576 ? 2 : 3}
-                      className="animated-dot blue-dot"
-                      style={{
-                        animationDelay: `${j * 1}s`,
-                        offset: j * (1/dotCount)
-                      }}
-                    >
-                      <animateMotion
-                        path={getCurvedPath(pos.x, pos.y, centerX, centerY, "up")}
-                        dur={windowSize.width < 576 ? "4s" : "3s"}
-                        begin={`${j * 1}s`}
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  );
-                }
-                return <g key={`blue-dot-group-${i}`}>{dots}</g>;
-              })}
-              
-              {/* Yellow dots */}
-              {skills.yellow.map((_, i) => {
-                if (!containerRef.current) return null;
-                const centerX = containerRef.current.clientWidth / 2;
-                const centerY = containerRef.current.clientHeight / 2;
-                const pos = getOrganizedPosition(_, i, "yellow");
-                
-                // Adjust number of dots based on screen size
-                const dotCount = windowSize.width < 576 ? 2 : 3;
-                
-                const dots = [];
-                for (let j = 0; j < dotCount; j++) {
-                  dots.push(
-                    <circle
-                      key={`yellow-dot-${i}-${j}`}
-                      r={windowSize.width < 576 ? 2 : 3}
-                      className="animated-dot yellow-dot"
-                      style={{
-                        animationDelay: `${j * 1}s`,
-                        offset: j * (1/dotCount)
-                      }}
-                    >
-                      <animateMotion
-                        path={getCurvedPath(pos.x, pos.y, centerX, centerY, "left")}
-                        dur={windowSize.width < 576 ? "4s" : "3s"}
-                        begin={`${j * 1}s`}
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  );
-                }
-                return <g key={`yellow-dot-group-${i}`}>{dots}</g>;
-              })}
-              
-              {/* Orange dots */}
-              {skills.orange.map((_, i) => {
-                if (!containerRef.current) return null;
-                const centerX = containerRef.current.clientWidth / 2;
-                const centerY = containerRef.current.clientHeight / 2;
-                const pos = getOrganizedPosition(_, i, "orange");
-                
-                // Adjust number of dots based on screen size
-                const dotCount = windowSize.width < 576 ? 2 : 3;
-                
-                const dots = [];
-                for (let j = 0; j < dotCount; j++) {
-                  dots.push(
-                    <circle
-                      key={`orange-dot-${i}-${j}`}
-                      r={windowSize.width < 576 ? 2 : 3}
-                      className="animated-dot orange-dot"
-                      style={{
-                        animationDelay: `${j * 1}s`,
-                        offset: j * (1/dotCount)
-                      }}
-                    >
-                      <animateMotion
-                        path={getCurvedPath(pos.x, pos.y, centerX, centerY, "right")}
-                        dur={windowSize.width < 576 ? "4s" : "3s"}
-                        begin={`${j * 1}s`}
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  );
-                }
-                return <g key={`orange-dot-group-${i}`}>{dots}</g>;
-              })}
-              
-              {/* Green dots */}
-              {skills.green.map((_, i) => {
-                if (!containerRef.current) return null;
-                const centerX = containerRef.current.clientWidth / 2;
-                const centerY = containerRef.current.clientHeight / 2;
-                const pos = getOrganizedPosition(_, i, "green");
-                
-                // Adjust number of dots based on screen size
-                const dotCount = windowSize.width < 576 ? 2 : 3;
-                
-                const dots = [];
-                for (let j = 0; j < dotCount; j++) {
-                  dots.push(
-                    <circle
-                      key={`green-dot-${i}-${j}`}
-                      r={windowSize.width < 576 ? 2 : 3}
-                      className="animated-dot green-dot"
-                      style={{
-                        animationDelay: `${j * 1}s`,
-                        offset: j * (1/dotCount)
-                      }}
-                    >
-                      <animateMotion
-                        path={getCurvedPath(pos.x, pos.y, centerX, centerY, "down")}
-                        dur={windowSize.width < 576 ? "4s" : "3s"}
-                        begin={`${j * 1}s`}
-                        repeatCount="indefinite"
-                      />
-                    </circle>
-                  );
-                }
-                return <g key={`green-dot-group-${i}`}>{dots}</g>;
-              })}
-            </>
+            {renderBlueDots()}
+            {renderYellowDots()}
+            {renderOrangeDots()}
+            {renderGreenDots()}
           </svg>
         )}
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { FaMapMarkerAlt, FaGraduationCap, FaSchool, FaUniversity, FaBookOpen } from 'react-icons/fa';
@@ -70,13 +70,13 @@ const AboutMe = () => {
   ];
 
   // Custom marker icon (created once)
-  const customIcon = new L.Icon({
+  const customIcon = useMemo(() => new L.Icon({
     iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png',
     iconSize: [40, 40],
     iconAnchor: [20, 40],
     popupAnchor: [0, -40],
     className: 'pulse-marker'
-  });
+  }), []);
 
   // Initialize the map
   useEffect(() => {
@@ -116,27 +116,27 @@ const AboutMe = () => {
         popupRef.current = null;
       }
     };
-  }, []); // Empty dependency array means this runs once on mount and cleanup on unmount
+  }, [location.lat, location.lng, details, customIcon]); // Added all dependencies
 
   // Update map when location changes
   useEffect(() => {
     if (mapInstanceRef.current && markerRef.current && popupRef.current) {
       // Update marker position
       markerRef.current.setLatLng([location.lat, location.lng]);
-      
+
       // Update popup content
       popupRef.current.setContent(`<div class="custom-popup">
         <div>${details || 'Select a location to view details'}</div>
       </div>`);
-      
+
       // Pan the map to the new location
       mapInstanceRef.current.setView([location.lat, location.lng], 13, {
         animate: true,
         duration: 1
       });
     }
-  }, [location, details]);
-
+  }, [location, details, customIcon, location.lat, location.lng]);
+  
   useEffect(() => {
     // Initial animation
     const sections = document.querySelectorAll('.animate-section');

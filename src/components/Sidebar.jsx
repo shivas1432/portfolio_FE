@@ -31,15 +31,6 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
       toggleSidebar();
     }
   };
-
-  // Handle logout functionality
-  const handleSignOut = () => {
-    if (onLogout) {
-      onLogout();
-    }
-    navigate('/');
-    toggleSidebar();
-  };
   
   // Handle animation for videos when menu opens
   useEffect(() => {

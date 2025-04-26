@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaPhoneAlt, FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin, FaNewspaper } from 'react-icons/fa';
 import { WiTime3, WiDayCloudyGusts } from 'react-icons/wi';
 import { BsCalendarDate } from 'react-icons/bs';
 import { MdAccessTimeFilled } from 'react-icons/md';
+import { FaNewspaper } from 'react-icons/fa';
 import { useTheme } from './ThemeContext';
 import '../css/HomePage.css';
 import '../css/styles.css';
@@ -23,13 +23,14 @@ const HomePage = ({ onLogout }) => {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(100);
   
-  const developerRoles = [
+  // Use useMemo to wrap the developerRoles array
+  const developerRoles = useMemo(() => [
     "full-stack web developer",
     "react developer",
     "frontend developer",
     "backend developer",
     "UI/UX developer"
-  ];
+  ], []);
 
   const { isDarkMode, toggleTheme } = useTheme();
 
@@ -77,7 +78,6 @@ const HomePage = ({ onLogout }) => {
     
     if (isDeleting) {
       // If we're deleting, shorten the text
-      setTypingSpeed(50);
       timer = setTimeout(() => {
         setText(fullText.substring(0, text.length - 1));
       }, typingSpeed);
@@ -90,7 +90,6 @@ const HomePage = ({ onLogout }) => {
       }
     } else {
       // If we're typing, extend the text
-      setTypingSpeed(100);
       timer = setTimeout(() => {
         setText(fullText.substring(0, text.length + 1));
       }, typingSpeed);
@@ -105,13 +104,7 @@ const HomePage = ({ onLogout }) => {
     
     // Clean up timer
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, developerRoles]);
-
-  // For debugging
-  useEffect(() => {
-    const currentIndex = loopNum % developerRoles.length;
-    console.log(`Current role: ${developerRoles[currentIndex]}, text: ${text}, isDeleting: ${isDeleting}`);
-  }, [loopNum, text, isDeleting, developerRoles]);
+  }, [text, isDeleting, loopNum, developerRoles, typingSpeed]);
 
   const createParallaxItems = () => {
     const parallax = document.getElementById('parallax');

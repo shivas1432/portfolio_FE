@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../css/Weatherpage.css';
 
@@ -10,7 +10,6 @@ const WeatherPage = ({ user }) => {
   const [loadingCities, setLoadingCities] = useState(true);
   const [loadingWeather, setLoadingWeather] = useState(false);
   const [error, setError] = useState('');
-  const [currentTime, setCurrentTime] = useState('');
   const [date, setDate] = useState('');
   const [weatherQuote, setWeatherQuote] = useState('');
   const [recentlySearched, setRecentlySearched] = useState([
@@ -58,87 +57,6 @@ const WeatherPage = ({ user }) => {
       "Live in the sunshine, swim in the sea, drink the wild air.",
       "Wherever you go, no matter the weather, always bring your own sunshine."
     ]
-  };
-
-  useEffect(() => {
-    const fetchUkCities = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/api/uk-cities');
-        setUkCities(response.data);
-        
-        // Set a default city on initial load (preferably Luton to match the design)
-        if (response.data.length > 0) {
-          const defaultCity = response.data.find(city => city.city === 'Luton') || response.data[0];
-          setSelectedCity(defaultCity.city);
-          fetchWeatherData(defaultCity.lat, defaultCity.lng);
-        }
-      } catch (err) {
-        console.error('Failed to fetch cities:', err);
-        setError('Failed to load city data. Please try again.');
-      } finally {
-        setLoadingCities(false);
-      }
-    };
-    
-    fetchUkCities();
-
-    // Set current time and date in the format shown in the design
-    const updateDateTime = () => {
-      const now = new Date();
-      setCurrentTime(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-      
-      // Format: Friday, April 18
-      setDate(now.toLocaleDateString('en-US', { 
-        weekday: 'long', 
-        month: 'long', 
-        day: 'numeric' 
-      }));
-    };
-    
-    updateDateTime();
-    const intervalId = setInterval(updateDateTime, 60000);
-    
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const fetchWeatherData = async (lat, lng) => {
-    setLoadingWeather(true);
-    try {
-      const apiKey = 'd64f16538655b7a8d0b91db23b1cc0c6';
-      
-      // Get current weather
-      const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
-      );
-      setWeatherData(weatherResponse.data);
-      
-      // Set weather quote based on condition
-      setRandomWeatherQuote(weatherResponse.data.weather[0].main);
-      
-      // Get 5-day forecast
-      const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
-      );
-      
-      // Process forecast data to get daily forecasts
-      const dailyData = processForecastData(forecastResponse.data);
-      setForecastData(dailyData);
-      
-      // Add to recently searched if it's not already in the list
-      if (!isInitialRender.current) {
-        updateRecentlySearched({
-          city: `${weatherResponse.data.name}, UK`,
-          temp: `${Math.round(weatherResponse.data.main.temp)}°`,
-          condition: weatherResponse.data.weather[0].description
-        });
-      }
-      isInitialRender.current = false;
-    } catch (error) {
-      console.error('Weather fetch error:', error);
-      setError('Unable to fetch weather data. Please try again.');
-    } finally {
-      setLoadingWeather(false);
-    }
   };
 
   const setRandomWeatherQuote = (condition) => {
@@ -202,6 +120,90 @@ const WeatherPage = ({ user }) => {
     
     return dailyForecasts;
   };
+
+  // Function to fetch weather data wrapped in useCallback
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchWeatherData = useCallback(async (lat, lng) => {
+    setLoadingWeather(true);
+    try {
+      const apiKey = 'd64f16538655b7a8d0b91db23b1cc0c6';
+      
+      // Get current weather
+      const weatherResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
+      );
+      setWeatherData(weatherResponse.data);
+      
+      // Set weather quote based on condition
+      setRandomWeatherQuote(weatherResponse.data.weather[0].main);
+      
+      // Get 5-day forecast
+      const forecastResponse = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
+      );
+      
+      // Process forecast data to get daily forecasts
+      const dailyData = processForecastData(forecastResponse.data);
+      setForecastData(dailyData);
+      
+      // Add to recently searched if it's not already in the list
+      if (!isInitialRender.current) {
+        updateRecentlySearched({
+          city: `${weatherResponse.data.name}, UK`,
+          temp: `${Math.round(weatherResponse.data.main.temp)}°`,
+          condition: weatherResponse.data.weather[0].description
+        });
+      }
+      isInitialRender.current = false;
+    } catch (error) {
+      console.error('Weather fetch error:', error);
+      setError('Unable to fetch weather data. Please try again.');
+    } finally {
+      setLoadingWeather(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const fetchUkCities = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/api/uk-cities');
+        setUkCities(response.data);
+        
+        // Set a default city on initial load (preferably Luton to match the design)
+        if (response.data.length > 0) {
+          const defaultCity = response.data.find(city => city.city === 'Luton') || response.data[0];
+          setSelectedCity(defaultCity.city);
+          fetchWeatherData(defaultCity.lat, defaultCity.lng);
+        }
+      } catch (err) {
+        console.error('Failed to fetch cities:', err);
+        setError('Failed to load city data. Please try again.');
+      } finally {
+        setLoadingCities(false);
+      }
+    };
+    
+    fetchUkCities();
+
+    // Set current time and date in the format shown in the design
+    const updateDateTime = () => {
+      const now = new Date();
+      
+      // Format: Friday, April 18
+      setDate(now.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        month: 'long', 
+        day: 'numeric' 
+      }));
+    };
+    
+    updateDateTime();
+    const intervalId = setInterval(updateDateTime, 60000);
+    
+    return () => clearInterval(intervalId);
+  }, [fetchWeatherData]); // Added fetchWeatherData to the dependency array
 
   const handleCitySelect = (event) => {
     const city = event.target.value;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import '../css/Contact.css';
 
