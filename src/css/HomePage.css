@@ -706,3 +706,57 @@ button:hover,
     height: 80px;
   }
 }
+/* Add this to your existing CSS files */
+
+.service-note {
+  background-color: rgba(255, 0, 0, 0.1);
+  border-left: 4px solid #ff0000;
+  color: #ff0000;
+  padding: 10px 15px;
+  margin: 10px 0 20px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.service-note p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.service-note a {
+  color: #ff0000;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.service-note a:hover {
+  color: #cc0000;
+}
+
+/* Animation for the service note */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dark mode adjustments */
+.dark-mode .service-note {
+  background-color: rgba(255, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .service-note {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    margin: 8px 10px 15px;
+  }
+}

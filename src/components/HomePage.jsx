@@ -164,6 +164,11 @@ const HomePage = ({ onLogout }) => {
           <button onClick={handleSignOut} className="custom-button">Sign Out</button>
         </div>
 
+        {/* Service Note - Added here above the widgets container */}
+        <div className="service-note">
+          <p>⚠️ Note: services are using free plans and might not work properly. Please <a href="/contact">contact me</a> or refer to my <a href="https://github.com/shivas1432/portfolio_FE" target="_blank" rel="noopener noreferrer">GitHub</a> for more information.</p>
+        </div>
+
         <div className="widget-container-section">
           <div className="widget-wrapper">
             <div className="widget-row single-row">
