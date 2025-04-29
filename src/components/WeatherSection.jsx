@@ -45,8 +45,8 @@ const WeatherSection = ({ user }) => {
     { city: 'Palermo, Italy', temp: '-2°', condition: 'Light Snow' }
   ]);
 
-  // API key for OpenWeatherMap
-  const apiKey = 'd64f16538655b7a8d0b91db23b1cc0c6';
+  // Backend API base URL
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://portfolio-be-sad5.onrender.com';
 
   // Use a ref to track if this is the initial render
   const isInitialRender = React.useRef(true);
@@ -156,18 +156,18 @@ const WeatherSection = ({ user }) => {
   const fetchWeatherData = useCallback(async (lat, lng) => {
     setLoadingWeather(true);
     try {
-      // Get current weather
+      // Get current weather from our backend proxy instead of directly from OpenWeatherMap
       const weatherResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
+        `${API_BASE_URL}/api/weather/current?lat=${lat}&lon=${lng}`
       );
       setWeatherData(weatherResponse.data);
       
       // Set weather quote based on condition
       setRandomWeatherQuote(weatherResponse.data.weather[0].main);
       
-      // Get 5-day forecast
+      // Get 5-day forecast from our backend proxy
       const forecastResponse = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
+        `${API_BASE_URL}/api/weather/forecast?lat=${lat}&lon=${lng}`
       );
       
       // Process forecast data to get daily forecasts
@@ -189,7 +189,7 @@ const WeatherSection = ({ user }) => {
     } finally {
       setLoadingWeather(false);
     }
-  }, [apiKey]);
+  }, [API_BASE_URL]);
 
   useEffect(() => {
     // Instead of fetching cities from backend, use the predefined majorUkCities array
