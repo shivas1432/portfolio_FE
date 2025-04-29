@@ -12,7 +12,7 @@ function LoginPage({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/api/login', { email, password });
+      const response = await axios.post('https://portfolio-be-sad5.onrender.com/api/login', { email, password });
       onLogin(response.data.user);
       navigate('/');
     } catch (error) {

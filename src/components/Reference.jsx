@@ -25,7 +25,7 @@ const Reference = () => {
   const fetchReferences = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:8081/api/references');
+      const res = await fetch('https://portfolio-be-sad5.onrender.com/api/references');
       
       if (!res.ok) {
         throw new Error('Failed to fetch references');
@@ -46,7 +46,7 @@ const Reference = () => {
   }, []);
 
   const handleViewLoR = (lorPath) => {
-    setSelectedLoR(`http://localhost:8081/${lorPath}`);
+    setSelectedLoR(`https://portfolio-be-sad5.onrender.com/${lorPath}`);
     setIsModalOpen(true);
   };
 
@@ -92,7 +92,7 @@ const Reference = () => {
               <div key={ref.id} className="reference-item">
                 <div className="reference-content">
                   <img 
-                    src={`http://localhost:8081/${ref.image_path || 'noimage.png'}`} 
+                    src={`https://portfolio-be-sad5.onrender.com/${ref.image_path || 'noimage.png'}`}
                     alt={`${ref.name}`} 
                     className="reference-image"
                     onError={(e) => {
@@ -118,7 +118,7 @@ const Reference = () => {
                       <div className="reference-signature">
                         <p><strong>Signature:</strong></p>
                         <img 
-                          src={`http://localhost:8081/${ref.signature_path}`} 
+                          src={`https://portfolio-be-sad5.onrender.com/${ref.signature_path}`}
                           alt="Signature" 
                           className="signature-image"
                           onError={(e) => {

@@ -168,7 +168,7 @@ const WeatherPage = ({ user }) => {
   useEffect(() => {
     const fetchUkCities = async () => {
       try {
-        const response = await axios.get('http://localhost:8081/api/uk-cities');
+        const response = await axios.get('https://portfolio-be-sad5.onrender.com/api/uk-cities');
         setUkCities(response.data);
         
         // Set a default city on initial load (preferably Luton to match the design)

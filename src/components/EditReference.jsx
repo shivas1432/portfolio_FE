@@ -11,11 +11,11 @@ const EditReference = () => {
 
   const fetchReferenceDetails = useCallback(async () => {
     try {
-      const response = await fetch(`http://localhost:8081/api/references/${id}`);
+      const response = await fetch(`https://portfolio-be-sad5.onrender.com/api/references/${id}`);
       if (!response.ok) throw new Error('Failed to fetch reference details');
       const data = await response.json();
       setFormData({ name: data.name || '', email: data.email || '', jobTitle: data.job_title || '', company: data.company || '', relationship: data.relationship || '', image: null });
-      setImagePreview(data.image_path ? `http://localhost:8081/${data.image_path}` : null);
+      setImagePreview(data.image_path ? `https://portfolio-be-sad5.onrender.com/${data.image_path}` : null);
     } catch (error) {
       setStatus('Error fetching reference details.');
     }
@@ -42,7 +42,7 @@ const EditReference = () => {
     for (const key in formData) formDataToSend.append(key, formData[key]);
 
     try {
-      const response = await fetch(`http://localhost:8081/api/references/${id}`, { method: 'PUT', body: formDataToSend });
+      const response = await fetch(`https://portfolio-be-sad5.onrender.com/api/references/${id}`, { method: 'PUT', body: formDataToSend });
       if (!response.ok) throw new Error('Failed to update reference');
       setStatus('Reference updated successfully!');
       navigate('/references');
@@ -54,7 +54,7 @@ const EditReference = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this reference?')) {
       try {
-        const response = await fetch(`http://localhost:8081/api/references/${id}`, { method: 'DELETE' });
+        const response = await fetch(`https://portfolio-be-sad5.onrender.com/api/references/${id}`, { method: 'DELETE' });
         if (!response.ok) throw new Error('Failed to delete reference');
         setStatus('Reference deleted successfully!');
         navigate('/references');

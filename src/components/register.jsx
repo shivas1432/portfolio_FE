@@ -15,7 +15,7 @@ function RegisterPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/api/register', { name, email, password });
+      const response = await axios.post('https://portfolio-be-sad5.onrender.com/api/register', { name, email, password });
       console.log('Registration successful:', response.data);
       toast.success('Successfully registered!'); // Show success notification
       navigate('/login'); // Redirect to the login page

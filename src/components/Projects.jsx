@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import "../css/Projects.css";
 
 const Project = ({ title, languages, description, image, video, website }) => {
@@ -11,7 +11,7 @@ const Project = ({ title, languages, description, image, video, website }) => {
   const handleCloseClick = () => {
     setIsVideoPlaying(false);
   };
-
+  
   return (
     <div className={`project-card ${isVideoPlaying ? "show-video" : ""}`}>
       <div className="project-content">
@@ -91,20 +91,35 @@ const FeaturedProject = ({ title, description, technologies, image, githubLink, 
 };
 
 const ProjectsList = () => {
-  const [activeSection, setActiveSection] = useState(0);
-  const featuredProjectsRef = useRef(null);
-  const sectionRefs = useRef([]);
+  const [currentProject, setCurrentProject] = useState(0);
+  const [previousProject, setPreviousProject] = useState(null);
+  const [direction, setDirection] = useState("next");
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const featuredSectionRef = useRef(null);
 
   const featuredProjects = [
     {
       id: 1,
-      title: "DEVELOPER PORTFOLIO",
-      description: "A sleek and responsive portfolio built with Next.js, TypeScript, and Tailwind CSS. It showcases my skills, projects, and services with smooth animations using Framer Motion. Integrated with MongoDB and Appwrite for dynamic content management, ensuring a seamless experience.",
-      technologies: ["NEXT.JS", "TYPESCRIPT", "REACT.JS", "TAILWIND", "FRAMER-MOTION", "MONGODB", "APPWRITE"],
+      title: "CARWASH WEB APPLICATION",
+      description: "A full-stack web application for booking and managing car wash services. Users can book services, manage their bookings, and make payments securely. Built with React, Node.js, and MySQL.",
+      technologies: [
+        "REACT.JS", 
+        "NODE.JS", 
+        "CSS", 
+        "MYSQL", 
+        "GOOGLE CLOUD", 
+        "NPM", 
+        "FRAMER-MOTION", 
+        "AI ASSISTANCE", 
+        "REAL-TIME UPDATES", 
+        "SECURE AUTHENTICATION", 
+        "GOOGLE LOGIN"
+      ],
       image: "https://example.com/portfolio-preview.png",
       githubLink: "https://github.com/username/portfolio",
       liveLink: "https://portfolio-demo.com"
     },
+    
     {
       id: 2,
       title: "DASHBOARD LAYOUT",
@@ -113,6 +128,15 @@ const ProjectsList = () => {
       image: "https://example.com/dashboard-preview.png",
       githubLink: "https://github.com/username/dashboard",
       liveLink: "https://dashboard-demo.com"
+    },
+    {
+      id: 3,
+      title: "E-COMMERCE PLATFORM",
+      description: "A fully-featured e-commerce solution with product catalog, shopping cart, and secure checkout. Integrated payment gateways and responsive design for all devices. Backend powered by Node.js with MongoDB database.",
+      technologies: ["REACT", "NODE.JS", "EXPRESS", "MONGODB", "STRIPE", "REDUX"],
+      image: "https://example.com/ecommerce-preview.png",
+      githubLink: "https://github.com/username/ecommerce",
+      liveLink: "https://ecommerce-demo.com"
     }
   ];
   
@@ -122,7 +146,7 @@ const ProjectsList = () => {
       title: "PRO HEALTH",
       languages: "HTML + CSS + JavaScript",
       description: "A backend API built using Flask for data processing.",
-      image: "https://imgur.com/l53zwrf.png",
+      image: "https://imgur.com/B2v6MJH.png",
       video: "lMaUKLqXt_Q",
       website: "https://prohealthssk.netlify.app",
     },
@@ -131,8 +155,8 @@ const ProjectsList = () => {
       title: "MELODY PULSE",
       languages: "HTML + CSS + JavaScript",
       description: "A static website for a portfolio with responsive design.",
-      image: "https://imgur.com/mUGqOMU.png",
-      video: "0tIzAk_gw7k",
+      image: "https://imgur.com/3mV3g4v.png",
+      video: "quzclXC6k9Q",
       website: "https://melodypulsessk.netlify.app",
     },
     {
@@ -158,8 +182,8 @@ const ProjectsList = () => {
       title: "SOLAR",
       languages: "HTML + CSS + JavaScript",
       description: "An enterprise application for managing inventory.",
-      image: "https://imgur.com/ocaXLSy.png",
-      video: "GwuPy4u9-EY",
+      image: "https://imgur.com/YFyxZ0o.png",
+      video: "FMCN35s9wi0",
       website: "https://solarssk.netlify.app",
     },
     {
@@ -167,8 +191,8 @@ const ProjectsList = () => {
       title: "RESTAURANT",
       languages: "HTML + CSS + JavaScript",
       description: "A content management system for blogs.",
-      image: "https://imgur.com/bg2gSkJ.png",
-      video: "hlFJpgoCrmY",
+      image: "https://imgur.com/stjW8BW.png",
+      video: "_QX9Q7v7Upg",
       website: "https://restaurantssk.netlify.app",
     },
     {
@@ -185,8 +209,8 @@ const ProjectsList = () => {
       title: "GAME STORE",
       languages: "HTML + CSS + JavaScript",
       description: "A mobile application for tracking expenses.",
-      image: "https://imgur.com/Lb0Bty1.png",
-      video: "YwQ14oDNOtM",
+      image: "https://imgur.com/w33xXou.png",
+      video: "Ehfmu4sBU4U",
       website: "https://gamestoressk.netlify.app",
     },
     {
@@ -194,8 +218,8 @@ const ProjectsList = () => {
       title: "CYBER JUNGLE",
       languages: "HTML + Bootstrap",
       description: "An Android app for fitness tracking.",
-      image: "https://imgur.com/oIykZoR.png",
-      video: "UuAE2ATZTiw",
+      image: "https://imgur.com/8l7CBm4.png",
+      video: "Srjrm8rpq0o",
       website: "https://cyberjunglessk.netlify.app",
     },
     {
@@ -203,66 +227,190 @@ const ProjectsList = () => {
       title: "WILDLIFE",
       languages: "HTML + CSS",
       description: "A high-performance web server for handling requests.",
-      image: "https://imgur.com/fuOBDkL.png",
+      image: "https://imgur.com/etjs1HV.png",
       video: "-oqwdIdGhdY",
       website: "https://wildlifessk.netlify.app",
+    },
+    {
+      id: 11,
+      title: "tech",
+      languages: "HTML + CSS",
+      description: "Evolution of technology and its impact from 1950-2050",
+      image: "https://imgur.com/WzGqSiJ.png",
+      video: "YBZVor_cBww",
+      website: "https://1950-2050.netlify.app",
     }
   ];
 
   const backendProjects = [
     {
       id: 1,
-      title: "API AUTHENTICATION",
-      languages: "Node.js + Express",
-      description: "A backend API for handling user authentication with JWT.",
-      image: "https://imgur.com/fuOBDkL.png",
-      video: "dQw4w9WgXcQ",
+      title: "weather",
+      languages: "Node.js + Express + React",
+      description: "weather API for fetching weather data by city name.",
+      image: "https://imgur.com/UMIkVdp.png",
+      video: "5nC9VG6jv3o",
       website: "https://apiauthentication.com",
     },
+    {
+      id: 2,
+      title: "vapeshop",
+      languages: "Node.js + Express + React",
+      description: "order API for managing orders and products.",
+      image: "https://imgur.com/PKPyEq8.png",
+      video: "m64VLKz5l04",
+      website: "https://apiauthentication.com",
+    },
+    {
+      id: 3,
+      title: "news",
+      languages: "Node.js + Express + React",
+      description: "live news API for fetching news articles by category.",
+      image: "https://imgur.com/FVRHzT0.png",
+      video: "1jXD-ZnBPTY",
+      website: "https://apiauthentication.com",
+    }
   ];
 
+  // Define changeProject function before it's used in useEffect
+  const changeProject = useCallback((dir) => {
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
+    setDirection(dir);
+    setPreviousProject(currentProject);
+    
+    if (dir === "next") {
+      setCurrentProject((prev) => (prev + 1) % featuredProjects.length);
+    } else {
+      setCurrentProject((prev) => (prev - 1 + featuredProjects.length) % featuredProjects.length);
+    }
+    
+    // Reset transition state after animation completes
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 800); // Match this to your CSS transition duration
+  }, [currentProject, isTransitioning, featuredProjects.length]);
+
+  // Wheel event handler for desktop
   useEffect(() => {
-    const isInViewport = (element) => {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.bottom >= 0
-      );
-    };
-
-    const handleFeaturedProjectsAnimation = () => {
-      if (!featuredProjectsRef.current) return;
-
-      if (isInViewport(featuredProjectsRef.current)) {
-        const featuredProjectsRect = featuredProjectsRef.current.getBoundingClientRect();
-        const containerTop = featuredProjectsRect.top;
-        const containerHeight = featuredProjectsRect.height;
-
-        const scrollProgress = Math.max(0, Math.min(1, 
-          1 - (containerTop / (containerHeight * 0.5))
-        ));
-
-        if (scrollProgress > 0.5) {
-          setActiveSection(1);
-          sectionRefs.current[0].style.opacity = Math.max(0, 1 - ((scrollProgress - 0.5) * 2));
-          sectionRefs.current[1].style.opacity = Math.min(1, (scrollProgress - 0.5) * 2);
-          sectionRefs.current[1].style.transform = `translateY(${Math.max(0, 100 - ((scrollProgress - 0.5) * 200))}%)`;
-        } else {
-          setActiveSection(0);
-          sectionRefs.current[0].style.opacity = 1;
-          sectionRefs.current[1].style.opacity = 0;
-          sectionRefs.current[1].style.transform = 'translateY(100%)';
-        }
+    let wheelTimeout;
+    const handleScroll = (e) => {
+      if (!featuredSectionRef.current) return;
+      
+      const rect = featuredSectionRef.current.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInView || isTransitioning) return;
+      
+      // Check if mouse is within the featured section
+      const mouseY = e.clientY;
+      const isMouseInFeaturedSection = 
+        mouseY >= rect.top && 
+        mouseY <= rect.bottom;
+      
+      if (isMouseInFeaturedSection) {
+        // Prevent default scroll behavior
+        e.preventDefault();
+        
+        // Get scroll direction
+        const isScrollingDown = e.deltaY > 0;
+        
+        // Debounce scroll events
+        clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(() => {
+          if (isScrollingDown) {
+            changeProject("next");
+          } else {
+            changeProject("prev");
+          }
+        }, 50);
       }
     };
 
-    window.addEventListener('scroll', handleFeaturedProjectsAnimation);
-    handleFeaturedProjectsAnimation();
-
+    // Use wheel event instead of scroll
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    
     return () => {
-      window.removeEventListener('scroll', handleFeaturedProjectsAnimation);
+      window.removeEventListener("wheel", handleScroll);
+      clearTimeout(wheelTimeout);
     };
-  }, []);
+  }, [isTransitioning, changeProject]);
+
+  // Touch event handlers for mobile
+  useEffect(() => {
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 50;
+    
+    const handleTouchStart = (e) => {
+      if (!featuredSectionRef.current) return;
+      const rect = featuredSectionRef.current.getBoundingClientRect();
+      
+      // Check if touch is within featured section
+      const touchY = e.touches[0].clientY;
+      const isTouchInFeaturedSection = 
+        touchY >= rect.top && 
+        touchY <= rect.bottom;
+      
+      if (isTouchInFeaturedSection) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+    
+    const handleTouchMove = (e) => {
+      if (!featuredSectionRef.current) return;
+      const rect = featuredSectionRef.current.getBoundingClientRect();
+      
+      // Check if touch is within featured section
+      const touchY = e.touches[0].clientY;
+      const isTouchInFeaturedSection = 
+        touchY >= rect.top && 
+        touchY <= rect.bottom;
+      
+      if (isTouchInFeaturedSection) {
+        // Prevent page scroll when touching in featured section
+        e.preventDefault();
+      }
+    };
+    
+    const handleTouchEnd = (e) => {
+      if (!featuredSectionRef.current || isTransitioning) return;
+      const rect = featuredSectionRef.current.getBoundingClientRect();
+      
+      touchEndY = e.changedTouches[0].clientY;
+      
+      // Calculate swipe distance
+      const swipeDistance = touchStartY - touchEndY;
+      
+      // Check if touch ended within featured section
+      const touchY = e.changedTouches[0].clientY;
+      const isTouchInFeaturedSection = 
+        touchY >= rect.top && 
+        touchY <= rect.bottom;
+      
+      if (isTouchInFeaturedSection && Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          // Swiped up, show next
+          changeProject("next");
+        } else {
+          // Swiped down, show previous
+          changeProject("prev");
+        }
+      }
+    };
+    
+    // Add touch event listeners
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd);
+    
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isTransitioning, changeProject]);
 
   return (
     <div className="projects-container">
@@ -278,16 +426,64 @@ const ProjectsList = () => {
         <p className="hero-subtitle">A collection of my work and experiments</p>
       </div>
 
-      <div className="featured-projects" ref={featuredProjectsRef}>
-        {featuredProjects.map((project, index) => (
-          <div 
-            key={project.id} 
-            className={`featured-section ${activeSection === index ? 'active' : ''}`}
-            ref={el => sectionRefs.current[index] = el}
-          >
-            <FeaturedProject {...project} />
+      <div className="featured-projects-container" ref={featuredSectionRef}>
+        <div className="featured-projects-title">
+          <h2>Clients Projects</h2>
+          <div className="project-navigation">
+            <button 
+              className="nav-button prev" 
+              onClick={() => changeProject("prev")}
+              aria-label="Previous project"
+            >
+              &#8592;
+            </button>
+            <div className="project-indicators">
+              {featuredProjects.map((_, index) => (
+                <span 
+                  key={index} 
+                  className={`indicator ${index === currentProject ? "active" : ""}`}
+                  onClick={() => {
+                    if (index !== currentProject) {
+                      setDirection(index > currentProject ? "next" : "prev");
+                      setPreviousProject(currentProject);
+                      setCurrentProject(index);
+                    }
+                  }}
+                ></span>
+              ))}
+            </div>
+            <button 
+              className="nav-button next" 
+              onClick={() => changeProject("next")}
+              aria-label="Next project"
+            >
+              &#8594;
+            </button>
           </div>
-        ))}
+        </div>
+        
+        <div className="featured-projects-wrapper">
+          <div className="featured-projects-scroll-info">
+            <div className="scroll-icon">
+              <div className="scroll-wheel"></div>
+            </div>
+            <p>Scroll to navigate projects</p>
+          </div>
+          
+          <div className="featured-projects">
+            {featuredProjects.map((project, index) => (
+              <div 
+                key={project.id}
+                className={`featured-section 
+                  ${index === currentProject ? "active" : ""} 
+                  ${index === previousProject ? "previous" : ""}
+                  ${direction}`}
+              >
+                <FeaturedProject {...project} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className="all-projects-section">
