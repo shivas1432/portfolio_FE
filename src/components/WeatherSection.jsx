@@ -1,8 +1,36 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import '../css/Weatherpage.css';
 
-const WeatherPage = ({ user }) => {
+const WeatherSection = ({ user }) => {
+  // List of major UK cities to use instead of database
+  const majorUkCities = [
+    { city: 'London', lat: 51.5074, lng: -0.1278 },
+    { city: 'Birmingham', lat: 52.4862, lng: -1.8904 },
+    { city: 'Manchester', lat: 53.4808, lng: -2.2426 },
+    { city: 'Glasgow', lat: 55.8642, lng: -4.2518 },
+    { city: 'Liverpool', lat: 53.4084, lng: -2.9916 },
+    { city: 'Bristol', lat: 51.4545, lng: -2.5879 },
+    { city: 'Edinburgh', lat: 55.9533, lng: -3.1883 },
+    { city: 'Leeds', lat: 53.8008, lng: -1.5491 },
+    { city: 'Sheffield', lat: 53.3811, lng: -1.4701 },
+    { city: 'Cardiff', lat: 51.4816, lng: -3.1791 },
+    { city: 'Belfast', lat: 54.5973, lng: -5.9301 },
+    { city: 'Newcastle', lat: 54.9783, lng: -1.6178 },
+    { city: 'Nottingham', lat: 52.9548, lng: -1.1581 },
+    { city: 'Leicester', lat: 52.6369, lng: -1.1398 },
+    { city: 'Coventry', lat: 52.4068, lng: -1.5197 },
+    { city: 'Brighton', lat: 50.8225, lng: -0.1372 },
+    { city: 'Southampton', lat: 50.9097, lng: -1.4044 },
+    { city: 'Portsmouth', lat: 50.8198, lng: -1.0880 },
+    { city: 'Plymouth', lat: 50.3755, lng: -4.1427 },
+    { city: 'Luton', lat: 51.8787, lng: -0.4200 },
+    { city: 'Aberdeen', lat: 57.1497, lng: -2.0943 },
+    { city: 'Oxford', lat: 51.7520, lng: -1.2577 },
+    { city: 'Cambridge', lat: 52.2053, lng: 0.1218 }
+  ];
+
   const [ukCities, setUkCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -16,6 +44,9 @@ const WeatherPage = ({ user }) => {
     { city: 'Liverpool, UK', temp: '16°', condition: 'Light Clouds' },
     { city: 'Palermo, Italy', temp: '-2°', condition: 'Light Snow' }
   ]);
+
+  // API key for OpenWeatherMap
+  const apiKey = 'd64f16538655b7a8d0b91db23b1cc0c6';
 
   // Use a ref to track if this is the initial render
   const isInitialRender = React.useRef(true);
@@ -122,12 +153,9 @@ const WeatherPage = ({ user }) => {
   };
 
   // Function to fetch weather data wrapped in useCallback
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchWeatherData = useCallback(async (lat, lng) => {
     setLoadingWeather(true);
     try {
-      const apiKey = 'd64f16538655b7a8d0b91db23b1cc0c6';
-      
       // Get current weather
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}&units=metric`
@@ -146,7 +174,7 @@ const WeatherPage = ({ user }) => {
       const dailyData = processForecastData(forecastResponse.data);
       setForecastData(dailyData);
       
-      // Add to recently searched if it's not already in the list
+      // Add to recently searched if it's not already in the list and not initial render
       if (!isInitialRender.current) {
         updateRecentlySearched({
           city: `${weatherResponse.data.name}, UK`,
@@ -161,31 +189,17 @@ const WeatherPage = ({ user }) => {
     } finally {
       setLoadingWeather(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [apiKey]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const fetchUkCities = async () => {
-      try {
-        const response = await axios.get('https://portfolio-be-sad5.onrender.com/api/uk-cities');
-        setUkCities(response.data);
-        
-        // Set a default city on initial load (preferably Luton to match the design)
-        if (response.data.length > 0) {
-          const defaultCity = response.data.find(city => city.city === 'Luton') || response.data[0];
-          setSelectedCity(defaultCity.city);
-          fetchWeatherData(defaultCity.lat, defaultCity.lng);
-        }
-      } catch (err) {
-        console.error('Failed to fetch cities:', err);
-        setError('Failed to load city data. Please try again.');
-      } finally {
-        setLoadingCities(false);
-      }
-    };
+    // Instead of fetching cities from backend, use the predefined majorUkCities array
+    setUkCities(majorUkCities);
+    setLoadingCities(false);
     
-    fetchUkCities();
+    // Set a default city on initial load (preferably Luton to match the design)
+    const defaultCity = majorUkCities.find(city => city.city === 'Luton') || majorUkCities[0];
+    setSelectedCity(defaultCity.city);
+    fetchWeatherData(defaultCity.lat, defaultCity.lng);
 
     // Set current time and date in the format shown in the design
     const updateDateTime = () => {
@@ -203,7 +217,7 @@ const WeatherPage = ({ user }) => {
     const intervalId = setInterval(updateDateTime, 60000);
     
     return () => clearInterval(intervalId);
-  }, [fetchWeatherData]); // Added fetchWeatherData to the dependency array
+  }, [fetchWeatherData]);
 
   const handleCitySelect = (event) => {
     const city = event.target.value;
@@ -402,4 +416,4 @@ const WeatherPage = ({ user }) => {
   );
 };
 
-export default WeatherPage;
+export default WeatherSection;

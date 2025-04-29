@@ -80,7 +80,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     },
     { 
       className: 'div8', 
-      link: 'assets/resume.pdf', 
+      link: '/cv.pdf', 
       label: 'Resume', 
       icon: <FaFilePdf />,
       download: true
