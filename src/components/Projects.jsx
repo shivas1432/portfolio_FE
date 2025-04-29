@@ -115,28 +115,52 @@ const ProjectsList = () => {
         "SECURE AUTHENTICATION", 
         "GOOGLE LOGIN"
       ],
-      image: "https://example.com/portfolio-preview.png",
-      githubLink: "https://github.com/username/portfolio",
-      liveLink: "https://portfolio-demo.com"
+      image: "https://i.imgur.com/eSPsj0A.jpeg",
+      githubLink: "/uc",
+      liveLink: "/uc"
     },
     
     {
       id: 2,
-      title: "DASHBOARD LAYOUT",
-      description: "A dynamic drag-and-drop workflow builder for seamless automation pipeline creation. Built with React, Next.js, and Tailwind for an intuitive and responsive UI. Powered by Node.js and TypeScript for efficient performance.",
-      technologies: ["REACT", "TYPESCRIPT", "NEXT.JS", "NODE.JS", "TAILWIND"],
+      title: "POLYHOUSE FARMING VEGETABLES",
+      description: "A web application for managing polyhouse farming operations. Users can track available vegitables ,fresh meat, and ordering online. Built with React, Node.js, and MongoDB.",
+      technologies: [
+        "REACT.JS", 
+        "NODE.JS", 
+        "CSS", 
+        "MYSQL", 
+        "GOOGLE CLOUD", 
+        "NPM", 
+        "FRAMER-MOTION", 
+        "AI ASSISTANCE", 
+        "REAL-TIME UPDATES", 
+        "SECURE AUTHENTICATION", 
+        "GOOGLE LOGIN"
+      ],
       image: "https://example.com/dashboard-preview.png",
-      githubLink: "https://github.com/username/dashboard",
-      liveLink: "https://dashboard-demo.com"
+      githubLink: "/uc",
+      liveLink: "/uc"
     },
     {
       id: 3,
-      title: "E-COMMERCE PLATFORM",
-      description: "A fully-featured e-commerce solution with product catalog, shopping cart, and secure checkout. Integrated payment gateways and responsive design for all devices. Backend powered by Node.js with MongoDB database.",
-      technologies: ["REACT", "NODE.JS", "EXPRESS", "MONGODB", "STRIPE", "REDUX"],
+      title: " VAPESHOP E-COMMERCE APPLICATION", 
+      description: "A full-stack e-commerce platform for managing vape products and orders. Users can browse products, manage their orders, and make payments securely to buy bulk orders. Built with React, Node.js, and MySQL.",
+      technologies: [
+        "REACT.JS", 
+        "NODE.JS", 
+        "CSS", 
+        "MYSQL", 
+        "GOOGLE CLOUD", 
+        "NPM", 
+        "FRAMER-MOTION", 
+        "AI ASSISTANCE", 
+        "REAL-TIME UPDATES", 
+        "SECURE AUTHENTICATION", 
+        "GOOGLE LOGIN"
+      ],
       image: "https://example.com/ecommerce-preview.png",
-      githubLink: "https://github.com/username/ecommerce",
-      liveLink: "https://ecommerce-demo.com"
+      githubLink: "/uc",
+      liveLink: "/uc"
     }
   ];
   
