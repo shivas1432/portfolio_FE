@@ -100,7 +100,7 @@ const ProjectsList = () => {
   const featuredProjects = [
     {
       id: 1,
-      title: "CARWASH WEB APPLICATION",
+      title: "CARWASH WEB APPLICATION[date fixed]",
       description: "A full-stack web application for booking and managing car wash services. Users can book services, manage their bookings, and make payments securely. Built with React, Node.js, and MySQL.",
       technologies: [
         "REACT.JS", 
@@ -122,7 +122,7 @@ const ProjectsList = () => {
     
     {
       id: 2,
-      title: "POLYHOUSE FARMING VEGETABLES",
+      title: "POLYHOUSE FARMING VEGETABLES[work in progress]",
       description: "A web application for managing polyhouse farming operations. Users can track available vegitables ,fresh meat, and ordering online. Built with React, Node.js, and MongoDB.",
       technologies: [
         "REACT.JS", 
@@ -143,7 +143,7 @@ const ProjectsList = () => {
     },
     {
       id: 3,
-      title: " VAPESHOP E-COMMERCE APPLICATION", 
+      title: " VAPESHOP E-COMMERCE APPLICATION[work in progress]", 
       description: "A full-stack e-commerce platform for managing vape products and orders. Users can browse products, manage their orders, and make payments securely to buy bulk orders. Built with React, Node.js, and MySQL.",
       technologies: [
         "REACT.JS", 
@@ -158,7 +158,7 @@ const ProjectsList = () => {
         "SECURE AUTHENTICATION", 
         "GOOGLE LOGIN"
       ],
-      image: "https://example.com/ecommerce-preview.png",
+      image: "https://i.imgur.com/ktvx1r4.png",
       githubLink: "/uc",
       liveLink: "/uc"
     }
