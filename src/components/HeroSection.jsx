@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-
 const HeroSection = ({ onSuccess }) => {
   const [username, setUsername] = useState('');
   const [showNameForm, setShowNameForm] = useState(false);
@@ -9,12 +8,12 @@ const HeroSection = ({ onSuccess }) => {
   const [showIntro, setShowIntro] = useState(false);
   const [typedGreeting, setTypedGreeting] = useState('');
   const [spinnerVisible, setSpinnerVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowNameForm(true);
-    }, 3000); // After 3 seconds show name form
-
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,8 +35,37 @@ const HeroSection = ({ onSuccess }) => {
     typeChar();
   };
 
-  const handleSubmit = () => {
-    if (username.trim()) {
+  const handleSubmit = async () => {
+    setErrorMessage('');
+    if (!username.trim()) {
+      shakeInput();
+      return;
+    }
+
+    // Client-side check: only letters and spaces
+    if (!/^[A-Za-z\s]+$/.test(username)) {
+      setErrorMessage('Please enter only letters. No numbers or symbols allowed.');
+      shakeInput();
+      return;
+    }
+
+    try {
+      const res = await fetch('https://portfolio-be-sad5.onrender.com/api/guests', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: username }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMessage(data?.errors?.[0]?.msg || 'Invalid name.');
+        shakeInput();
+        return;
+      }
+
       setShowNameForm(false);
       setTimeout(() => {
         typeText(`Hi ${username} 👋`, () => {
@@ -47,24 +75,27 @@ const HeroSection = ({ onSuccess }) => {
           }, 1200);
         });
       }, 400);
-    } else {
-      // Shake animation - add/remove a CSS class
-      const input = document.getElementById('username');
-      if (input) {
-        input.style.animation = 'shake 1s';
-        setTimeout(() => (input.style.animation = ''), 500);
-      }
+
+    } catch (error) {
+      console.error('Error submitting name:', error);
+      setErrorMessage('Failed to connect to server. Please try again later.');
+    }
+  };
+
+  const shakeInput = () => {
+    const input = document.getElementById('username');
+    if (input) {
+      input.style.animation = 'shake 0.5s';
+      setTimeout(() => (input.style.animation = ''), 500);
     }
   };
 
   const handleExplore = () => {
     setShowIntro(false);
     setSpinnerVisible(true);
-
     setTimeout(() => {
-      // Final transition
       onSuccess(username);
-    }, 3000); // 2s spinner + 1s fade
+    }, 3000);
   };
 
   return (
@@ -102,13 +133,13 @@ const HeroSection = ({ onSuccess }) => {
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
             />
             <button id="submitBtn" onClick={handleSubmit}>Continue</button>
+            {errorMessage && <p style={{ color: 'red', marginTop: '0.5rem' }}>{errorMessage}</p>}
           </div>
         )}
 
         {showIntro && (
           <div className="intro active" id="introText">
             <p className="intro-subtitle">Welcome to MyPortfolio</p>
-           
             <h1 className="intro-name">Shivashanker Kanugula</h1>
             <div className="role-wrapper">
               <p className="intro-subtitle">I'm a <span className="role"></span></p>

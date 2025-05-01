@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from './ThemeContext'; // Import useTheme to access theme context
 import Sidebar from './Sidebar';
-import FloatingIcon from './FloatingIcon';
+
 import '../css/Layout.css'; // Include your layout-specific styles here
 
 const Layout = ({ user, onLogout, children }) => {
@@ -31,8 +31,7 @@ const Layout = ({ user, onLogout, children }) => {
       {/* Only show the floating icon and sidebar if user or guest access is granted */}
       {guestAccessGranted && (
         <>
-          {/* Floating Icon to Open Sidebar */}
-          <FloatingIcon onClick={toggleSidebar} />
+          
 
           {/* Sidebar Component */}
           <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
