@@ -38,16 +38,16 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
   }, [isOpen]);
 
   const menuItems = [
-    { className: 'div1', link: '/projects', video: 'background', label: 'Projects', icon: <FaProjectDiagram /> },
+    { className: 'div1', link: '/projects',  label: 'Projects', icon: <FaProjectDiagram /> },
     { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
     { className: 'div3', link: '/services', label: 'SERVICES', icon: <FaTools /> },
     { 
       className: 'div4', link: '/contact', label: 'Get in Touch', icon: <FaEnvelope />, icons: true 
     },
-    { className: 'div5', link: '/about', video: 'background', label: 'About Me', icon: <FaAddressCard /> },
+    { className: 'div5', link: '/about',label: 'About Me', icon: <FaAddressCard /> },
     { className: 'div8', link: '/cv.pdf', label: 'Resume', icon: <FaFilePdf />, download: true },
     { 
-      className: 'div7', link: '/references', video: 'background', label: 'References', icon: <FaUserTie />, requireCode: true 
+      className: 'div7', link: '/references',  label: 'References', icon: <FaUserTie />, requireCode: true 
     },
     { className: 'div6', link: '/blogs', label: 'Blogs', icon: <FaBlog /> }
   ];
