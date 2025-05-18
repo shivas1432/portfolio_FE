@@ -10,9 +10,30 @@ function AIChat() {
   const chatBoxRef = useRef(null);
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://portfolio-be-sad5.onrender.com';
   
+  const portfolioContext = React.useMemo(() => ({
+    name: "Shivashanker",
+    website: "https://shivashankerportfolio.netlify.app/",
+    greeting: "Hello! I'm Shivashanker's portfolio assistant. I can help you learn about his skills, experience, and projects. How can I assist you today?",
+  }), []);
+  
+  useEffect(() => {
+    if (chatHistory.length === 0) {
+      setChatHistory([{ 
+        type: 'ai', 
+        message: portfolioContext.greeting
+      }]);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+    }
+  }, [chatHistory]);
+
   const handleAskSubmit = async () => {
-    if (!userQuestion.trim() || userQuestion.trim().length > 500) {
-      setChatHistory(prev => [...prev, { type: 'error', message: 'Message too long. Please limit to 500 characters.' }]);
+    if (!userQuestion.trim()) {
       return;
     }
     
@@ -20,7 +41,13 @@ function AIChat() {
     setChatHistory(prev => [...prev, { type: 'user', message: userQuestion }]);
     
     try {
-      const response = await axios.post(`${API_BASE_URL}/api/chat`, { message: userQuestion });
+      const enhancedPrompt = createEnhancedPrompt(userQuestion);
+      
+      const response = await axios.post(`${API_BASE_URL}/api/chat`, { 
+        message: enhancedPrompt,
+        isPortfolioQuestion: true
+      });
+      
       const aiResponse = response.data?.response || 'Invalid response structure or no response found';
       setChatHistory(prev => [...prev, { type: 'ai', message: aiResponse }]);
       setUserQuestion('');
@@ -34,6 +61,31 @@ function AIChat() {
     }
   };
   
+  const createEnhancedPrompt = (userQuery) => {
+    return `You are an AI assistant for Shivashanker's portfolio website (${portfolioContext.website}). 
+    You help visitors learn about Shivashanker's skills, experience, and projects.
+    
+    IMPORTANT RULES:
+    1. Provide detailed information about Shivashanker's portfolio, resume, skills, and experience
+    2. For general greetings, respond politely but briefly
+    3. If you don't have specific information about Shivashanker, provide what you know and suggest visiting his website
+    4. Include specific details from his portfolio when available
+    5. Always include the portfolio website link with your answers
+    
+    User's question: ${userQuery}`;
+  };
+  
+  const handlePresetQuestionClick = (questionText) => {
+    setUserQuestion(questionText);
+    setTimeout(() => {
+      handleAskSubmit();
+    }, 100);
+  };
+  
+  const toggleChat = () => {
+    setShowChat(!showChat);
+  };
+  
   const recentChats = [
     { id: 1, title: "Show me Shivashanker's recent projects" },
     { id: 2, title: "What tech stack does he specialize in?" },
@@ -43,30 +95,18 @@ function AIChat() {
     { id: 6, title: "Give a quick overview of Shivashanker's skills" },
     { id: 7, title: "What kind of frontend frameworks has he worked with?" }
   ];
-  
-
-  useEffect(() => {
-    if (chatBoxRef.current) chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
-  }, [chatHistory]);
-
-  // Function to toggle chat display on mobile
-  const toggleChat = () => {
-    setShowChat(!showChat);
-  };
 
   return (
     <div className="aivo-app-container">
-      {/* Mobile chat toggle button */}
       <div className="mobile-chat-toggle" onClick={toggleChat}>
         <i className="chat-icon">💬</i>
       </div>
       
-      {/* Dashboard view (left side in desktop) */}
       <div className={`dashboard-view ${showChat ? 'hidden-mobile' : ''}`}>
         <div className="user-greeting">
           <div className="greeting-text">
             <span className="greeting">Hi</span>
-            <h2>This is shiva's portfolio Assistant</h2>
+            <h2>This is Shiva's Portfolio Assistant</h2>
             <p>How can I assist you today?</p>
           </div>
         </div>
@@ -74,12 +114,16 @@ function AIChat() {
         <div className="recent-chats-section">
           <div className="section-header">
             <h3>Frequent questions</h3>
-            
           </div>
           
           <div className="chats-list">
             {recentChats.map(chat => (
-              <div key={chat.id} className="chat-item">
+              <div 
+                key={chat.id} 
+                className="chat-item" 
+                onClick={() => handlePresetQuestionClick(chat.title)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="chat-icon">🔆</div>
                 <div className="chat-title">{chat.title}</div>
               </div>
@@ -93,22 +137,19 @@ function AIChat() {
               </div>
             </div>
             
-            <div className="feature-options">
-  <a href="/contact" className="feature-option" style={{ textDecoration: 'none', color: 'inherit' }}>
-    <div className="option-icon image-icon">🖼️</div>
-    <div className="option-text">
-      <p><strong>Say Hello to Shiva — One Touch Away!</strong></p>
-    </div>
-    <div className="option-arrow">→</div>
-  </a>
-</div>
-
+            <div className="features-options">
+              <a href="/contact" className="feature-option" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <div className="option-icon image-icon">🖼️</div>
+                <div className="option-text">
+                  <p><strong>Say Hello to Shiva — One Touch Away!</strong></p>
+                </div>
+                <div className="option-arrow">→</div>
+              </a>
+            </div>
           </div>
-     
         </div>
       </div>
       
-      {/* Chat view (right side in desktop) */}
       <div className={`chat-view ${!showChat ? 'hidden-mobile' : ''}`}>
         <div className="chat-header">
           <div className="back-button" onClick={toggleChat}>
@@ -116,9 +157,7 @@ function AIChat() {
           </div>
           <div className="chat-title">
             <h3>Resume and Portfolio Assistant</h3>
-         
           </div>
-        
         </div>
         
         <div className="ai-chat-history" ref={chatBoxRef} aria-live="polite">
@@ -131,7 +170,7 @@ function AIChat() {
                 />
               </div>
               <div className="ai-chat-text">{chat.message}</div>
-              <div className="message-timestamp">12:18 AM</div>
+              <div className="message-timestamp">{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
             </div>
           ))}
           {loadingChat && 
@@ -147,12 +186,17 @@ function AIChat() {
               className="ai-chat-textarea" 
               value={userQuestion} 
               onChange={(e) => setUserQuestion(e.target.value)} 
-              placeholder="Ask me about my skills, projects, or anything else!" 
+              placeholder="Ask me about Shiva's skills, projects, or experience!" 
               rows={1} 
-              disabled={loadingChat} 
+              disabled={loadingChat}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleAskSubmit();
+                }
+              }}
             />
             <div className="input-buttons">
-             
               <button 
                 className={`send-button ${userQuestion.trim() ? 'active' : ''}`} 
                 onClick={handleAskSubmit} 

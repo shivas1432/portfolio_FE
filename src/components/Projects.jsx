@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "../css/Projects.css";
+import { FaInstagram, FaTelegram } from 'react-icons/fa'; // Import the icons
 
 const Project = ({ title, languages, description, image, video, website }) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -96,6 +97,10 @@ const ProjectsList = () => {
   const [direction, setDirection] = useState("next");
   const [isTransitioning, setIsTransitioning] = useState(false);
   const featuredSectionRef = useRef(null);
+  
+  // New state for show more functionality
+  const [showAllFrontend, setShowAllFrontend] = useState(false);
+  const [showAllBackend, setShowAllBackend] = useState(false);
 
   const featuredProjects = [
     {
@@ -165,8 +170,63 @@ const ProjectsList = () => {
   ];
   
   const frontendProjects = [
+       {
+      id: 12,
+      title: "Time Travel",
+      languages: "HTML + CSS + JavaScript",
+      description: "A backend API built using Flask for data processing.",
+      image: "https://imgur.com/MfnoXfX.png",
+      video: "lMaUKLqXt_Q",
+      website: "https://timetravel1.netlify.app/",
+    },
+    {
+      id: 13,
+      title: "Client Portfolio",
+      languages: "HTML + CSS + JavaScript",
+      description: "A static website for a portfolio with responsive design.",
+      image: "https://imgur.com/4pADS3u.png",
+      video: "quzclXC6k9Q",
+      website: "https://sahithimorampudiportfolio.netlify.app/",
+    },
+    {
+      id: 14,
+      title: " Client Portfolio",
+      languages: "HTML + CSS",
+      description: "A web application built using React for managing tasks.",
+      image: "https://imgur.com/qewg0mX.png",
+      video: "",
+      website: "https://muteesportfolio.netlify.app/",
+    },
     {
       id: 1,
+      title: "CYBER JUNGLE",
+      languages: "HTML + Bootstrap",
+      description: "An Android app for fitness tracking.",
+      image: "https://imgur.com/8l7CBm4.png",
+      video: "Srjrm8rpq0o",
+      website: "https://cyberjunglessk.netlify.app",
+    },
+  
+    {
+      id: 16,
+      title: "1950-2050",
+      languages: "HTML + CSS + JavaScript",
+      description: "An enterprise application for managing inventory.",
+      image: "https://imgur.com/KvBzTel.png",
+      video: "FMCN35s9wi0",
+      website: "https://1950-2050.netlify.app/",
+    },
+        {
+      id: 10,
+      title: "WILDLIFE",
+      languages: "HTML + CSS",
+      description: "A high-performance web server for handling requests.",
+      image: "https://imgur.com/etjs1HV.png",
+      video: "-oqwdIdGhdY",
+      website: "https://wildlifessk.netlify.app",
+    },
+    {
+      id: 9,
       title: "PRO HEALTH",
       languages: "HTML + CSS + JavaScript",
       description: "A backend API built using Flask for data processing.",
@@ -182,6 +242,15 @@ const ProjectsList = () => {
       image: "https://imgur.com/3mV3g4v.png",
       video: "quzclXC6k9Q",
       website: "https://melodypulsessk.netlify.app",
+    },
+      {
+      id: 15,
+      title: "KINGDOM RUSH",
+      languages: "HTML + CSS + JavaScript",
+      description: "A RESTful web service for handling user authentication.",
+      image: "https://imgur.com/faTJCBo.png",
+      video: "Gn2NJeW26Tk",
+      website: "https://kingdom-rush.netlify.app/",
     },
     {
       id: 3,
@@ -237,24 +306,7 @@ const ProjectsList = () => {
       video: "Ehfmu4sBU4U",
       website: "https://gamestoressk.netlify.app",
     },
-    {
-      id: 9,
-      title: "CYBER JUNGLE",
-      languages: "HTML + Bootstrap",
-      description: "An Android app for fitness tracking.",
-      image: "https://imgur.com/8l7CBm4.png",
-      video: "Srjrm8rpq0o",
-      website: "https://cyberjunglessk.netlify.app",
-    },
-    {
-      id: 10,
-      title: "WILDLIFE",
-      languages: "HTML + CSS",
-      description: "A high-performance web server for handling requests.",
-      image: "https://imgur.com/etjs1HV.png",
-      video: "-oqwdIdGhdY",
-      website: "https://wildlifessk.netlify.app",
-    },
+    
     {
       id: 11,
       title: "tech",
@@ -436,6 +488,19 @@ const ProjectsList = () => {
     };
   }, [isTransitioning, changeProject]);
 
+  // Toggle for showing all projects
+  const toggleShowAllFrontend = () => {
+    setShowAllFrontend(!showAllFrontend);
+  };
+
+  const toggleShowAllBackend = () => {
+    setShowAllBackend(!showAllBackend);
+  };
+
+  // Get the visible projects
+  const visibleFrontendProjects = showAllFrontend ? frontendProjects : frontendProjects.slice(0, 4);
+  const visibleBackendProjects = showAllBackend ? backendProjects : backendProjects.slice(0, 2);
+
   return (
     <div className="projects-container">
       <div className="hero-section">
@@ -513,7 +578,7 @@ const ProjectsList = () => {
       <div className="all-projects-section">
         <h2 className="section-title">Frontend Projects</h2>
         <div className="projects-grid">
-          {frontendProjects.map((project) => (
+          {visibleFrontendProjects.map((project) => (
             <Project
               key={project.id}
               title={project.title}
@@ -525,10 +590,20 @@ const ProjectsList = () => {
             />
           ))}
         </div>
+        
+        {/* Show More/Less button for Frontend projects */}
+        <div className="show-more-container">
+          <button 
+            className="show-more-button" 
+            onClick={toggleShowAllFrontend}
+          >
+            {showAllFrontend ? "Show Less" : `Show More (${frontendProjects.length - 4} more projects)`}
+          </button>
+        </div>
 
         <h2 className="section-title">Backend Projects</h2>
         <div className="projects-grid">
-          {backendProjects.map((project) => (
+          {visibleBackendProjects.map((project) => (
             <Project
               key={project.id}
               title={project.title}
@@ -539,6 +614,46 @@ const ProjectsList = () => {
               website={project.website}
             />
           ))}
+        </div>
+        
+        {/* Show More/Less button for Backend projects */}
+        {backendProjects.length > 2 && (
+          <div className="show-more-container">
+            <button 
+              className="show-more-button" 
+              onClick={toggleShowAllBackend}
+            >
+              {showAllBackend ? "Show Less" : `Show More (${backendProjects.length - 2} more projects)`}
+            </button>
+          </div>
+        )}
+        
+        {/* Social Media Buttons Section */}
+        <div className="social-media-container">
+          <h3 className="social-media-title">For More Projects & Collaboration</h3>
+          <p className="social-media-subtitle">Connect with me on social media to see more of my work and discuss potential collaborations</p>
+          
+          <div className="social-buttons">
+            <a 
+              href="https://instagram.com/ss_web_innovations" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-button instagram-button"
+            >
+              <FaInstagram className="social-icon" />
+              <span>Follow on Instagram</span>
+            </a>
+            
+            <a 
+              href="https://t.me/helpme_coder" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-button telegram-button"
+            >
+              <FaTelegram className="social-icon" />
+              <span>Join Telegram Group</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>

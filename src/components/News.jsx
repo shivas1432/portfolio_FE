@@ -16,7 +16,7 @@ function News() {
         if (response.data.articles) setArticles(response.data.articles);
         else throw new Error('No articles found');
       } catch {
-        setError('Failed to fetch news. Please try again later.');
+        setError('API request limit has been reached due to free tier restrictions. Please try again later or check back tomorrow when the limit resets.');
       } finally {
         setLoading(false);
       }
