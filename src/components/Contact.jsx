@@ -94,7 +94,7 @@ const Contact = () => {
                   <span className="icon-tooltip">LinkedIn</span>
                 </div>
               </a>
-              <a href="https://www.instagram.com/ss_web_services" className="icon-item1" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.instagram.com/ss_web_innovations" className="icon-item1" target="_blank" rel="noopener noreferrer">
                 <div className="icon-wrapper">
                   <FaInstagram />
                   <span className="icon-tooltip">Instagram</span>

@@ -139,7 +139,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                               <a href="mailto:shivashanker7337@gmail.com" className="icon-item" aria-label="Email"><FaEnvelope /></a>
                               <a href="https://github.com/shivas1432" className="icon-item" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
                               <a href="https://www.linkedin.com/in/shiva-kanugula-51a512252" className="icon-item" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
-                              <a href="https://www.instagram.com/ss_web_servicess" className="icon-item" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
+                              <a href="https://www.instagram.com/ss_web_innovations" className="icon-item" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
                             </div>
                           )}
                         </>
