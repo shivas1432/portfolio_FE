@@ -105,7 +105,7 @@ function AIChat() {
       <div className={`dashboard-view ${showChat ? 'hidden-mobile' : ''}`}>
         <div className="user-greeting">
           <div className="greeting-text">
-            <span className="greeting">Hi</span>
+            <span className="greeting">Hi there! 👋</span>
             <h2>This is Shiva's Portfolio Assistant</h2>
             <p>How can I assist you today?</p>
           </div>
@@ -122,9 +122,8 @@ function AIChat() {
                 key={chat.id} 
                 className="chat-item" 
                 onClick={() => handlePresetQuestionClick(chat.title)}
-                style={{ cursor: 'pointer' }}
               >
-                <div className="chat-icon">🔆</div>
+                <div className="chat-icon">✨</div>
                 <div className="chat-title">{chat.title}</div>
               </div>
             ))}
@@ -138,8 +137,8 @@ function AIChat() {
             </div>
             
             <div className="features-options">
-              <a href="/contact" className="feature-option" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <div className="option-icon image-icon">🖼️</div>
+              <a href="/contact" className="feature-option">
+                <div className="option-icon image-icon">👋</div>
                 <div className="option-text">
                   <p><strong>Say Hello to Shiva — One Touch Away!</strong></p>
                 </div>
@@ -169,8 +168,10 @@ function AIChat() {
                   alt={chat.type} 
                 />
               </div>
-              <div className="ai-chat-text">{chat.message}</div>
-              <div className="message-timestamp">{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+              <div className="chat-message-content">
+                <div className="ai-chat-text">{chat.message}</div>
+                <div className="message-timestamp">{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+              </div>
             </div>
           ))}
           {loadingChat && 
@@ -204,7 +205,7 @@ function AIChat() {
               >
                 {loadingChat ? 
                   <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 
-                  <i className="send-icon">send</i>
+                  <i className="send-icon">➤</i>
                 }
               </button>
             </div>
