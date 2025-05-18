@@ -19,7 +19,10 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
       }
     }
 
-    if (download) {
+    // Check if the link is an external URL
+    if (link.startsWith('http://') || link.startsWith('https://')) {
+      window.open(link, '_blank');
+    } else if (download) {
       window.open(link, '_blank');
     } else {
       navigate(link);
@@ -37,7 +40,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
   const menuItems = [
     { className: 'div1', link: '/projects', video: 'background', label: 'Projects', icon: <FaProjectDiagram /> },
     { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
-    { className: 'div3', link: '', label: '', icon: <FaTools /> },
+    { className: 'div3', link: '/services', label: 'SERVICES', icon: <FaTools /> },
     { 
       className: 'div4', link: '/contact', label: 'Get in Touch', icon: <FaEnvelope />, icons: true 
     },

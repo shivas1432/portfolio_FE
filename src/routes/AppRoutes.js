@@ -16,6 +16,7 @@ import WeatherPage from '../components/WeatherSection';
 import SkillsPage from '../components/skills'; 
 import Blogs from '../components/Blogs'; 
 import Uc from '../components/uc'; 
+import Services from '../components/services';
 
 const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAccessGranted, handleError }) => (
   <Routes>
@@ -34,6 +35,7 @@ const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAcce
     <Route path="/edit-reference/:id" element={<EditReference />} />
     <Route path="/news" element={<News />} />
     <Route path="/ai-chat" element={<AIChat />} />
+    <Route path="/services" element={<Services />} />
     <Route path="/weather" element={<WeatherPage />} />
     <Route path="/skills" element={<SkillsPage />} />
     <Route path="/blogs" element={<Blogs />} />
