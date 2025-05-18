@@ -18,13 +18,6 @@
   font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-body {
-  background-color: var(--dark-bg);
-  color: var(--text-light);
-  margin-left: 120px;
-  margin-right: 120px;
-}
-
 .aivo-app-container {
   display: flex;
   height: 100vh;
