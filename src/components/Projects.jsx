@@ -71,17 +71,18 @@ const FeaturedProject = ({ title, description, technologies, image, githubLink, 
       <div className="featured-content">
         <h2 className="featured-title">{title}</h2>
         <p className="featured-description">{description}</p>
-
+<div className="project-links">
+          <a href={liveLink} target="_blank" rel="noopener noreferrer" className="button primary-button">Live view</a>
+          <a href={githubLink} target="_blank" rel="noopener noreferrer" className="button secondary-button">Github Code</a>
+        </div>
+        
         <div className="tech-stack">
           {technologies.map((tech, index) => (
             <span key={index} className="tech-tag">{tech}</span>
           ))}
         </div>
 
-        <div className="project-links">
-          <a href={liveLink} target="_blank" rel="noopener noreferrer" className="button primary-button">Live view</a>
-          <a href={githubLink} target="_blank" rel="noopener noreferrer" className="button secondary-button">Github Code</a>
-        </div>
+        
       </div>
 
       <div className="featured-preview">
