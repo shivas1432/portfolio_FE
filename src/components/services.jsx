@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Services.css';
-import { FaLaptopCode, FaChartLine, FaShoppingCart, FaPaintBrush, FaCode, FaTools } from 'react-icons/fa';
+import { FaLaptopCode, FaChartLine, FaShoppingCart, FaPaintBrush, FaCode, FaTools, FaStar, FaQuoteLeft } from 'react-icons/fa';
 
 const Services = () => {
   const navigate = useNavigate();
 
   const handleNavigateToContact = () => {
     navigate('/contact');
+  };
+
+  const handleNavigateToReviews = () => {
+    navigate('/reviewss');
   };
 
   useEffect(() => {
@@ -107,8 +111,10 @@ const Services = () => {
               <h1 className="hero-title2">Professional <span>Web Development</span> Services</h1>
               <p className="hero-subtitle2">We provide a complete solution for all your online website needs.</p>
               <div className="hero-buttons2">
-                
-               
+                <button onClick={handleNavigateToReviews} className="btn2 btn-reviews2">
+                  <FaStar />
+                  <span>Training Reviews</span>
+                </button>
               </div>
             </div>
             
@@ -268,6 +274,85 @@ const Services = () => {
               <h3 className="service-title2">Website Maintenance and Support</h3>
               <p className="service-description2">Ongoing technical support and maintenance to keep your website running smoothly and securely.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Training Programs Testimonials Section */}
+      <section className="training-testimonials2 fade-up2">
+        <div className="container2">
+          <div className="section-heading2">
+            <h2 className="section-title2">Training Programs Success Stories</h2>
+            <p className="section-subtitle2">See what our students say about Stack360, Career360, and Core360 programs</p>
+          </div>
+          
+          <div className="testimonials-grid2">
+            <div className="testimonial-card2 fade-up2">
+              <div className="testimonial-header2">
+                <div className="program-badge2">Stack360</div>
+                <div className="stars2">
+                  <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                </div>
+              </div>
+              <FaQuoteLeft className="quote-icon2" />
+              <p className="testimonial-text2">
+                "Shiva's Stack360 program transformed my understanding of full-stack development. His ability to explain complex concepts clearly made all the difference in my learning journey."
+              </p>
+              <div className="testimonial-author2">
+                <div className="author-avatar2">SJ</div>
+                <div className="author-info2">
+                  <h4>Sarah Johnson</h4>
+                  <p>Frontend Developer at Meta</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="testimonial-card2 fade-up2 stagger-delay-12">
+              <div className="testimonial-header2">
+                <div className="program-badge2 career">Career360</div>
+                <div className="stars2">
+                  <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                </div>
+              </div>
+              <FaQuoteLeft className="quote-icon2" />
+              <p className="testimonial-text2">
+                "The career preparation was exactly what I needed. Shiva's interview prep sessions and portfolio guidance helped me ace my Google interview."
+              </p>
+              <div className="testimonial-author2">
+                <div className="author-avatar2">LT</div>
+                <div className="author-info2">
+                  <h4>Lisa Thompson</h4>
+                  <p>Junior Developer at Google</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="testimonial-card2 fade-up2 stagger-delay-22">
+              <div className="testimonial-header2">
+                <div className="program-badge2 core">Core360</div>
+                <div className="stars2">
+                  <FaStar /><FaStar /><FaStar /><FaStar /><FaStar />
+                </div>
+              </div>
+              <FaQuoteLeft className="quote-icon2" />
+              <p className="testimonial-text2">
+                "The most comprehensive technical program I've ever attended. Shiva's deep dive into system architecture prepared me for senior-level challenges."
+              </p>
+              <div className="testimonial-author2">
+                <div className="author-avatar2">MB</div>
+                <div className="author-info2">
+                  <h4>Michael Brown</h4>
+                  <p>Senior Developer at Microsoft</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="view-all-reviews2">
+            <button onClick={handleNavigateToReviews} className="btn2 btn-secondary2">
+              <FaStar />
+              <span>View All Reviews & Success Stories</span>
+            </button>
           </div>
         </div>
       </section>

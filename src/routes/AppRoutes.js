@@ -13,10 +13,11 @@ import News from '../components/News';
 import AIChat from '../components/AIChat';
 import EditReference from '../components/EditReference';
 import WeatherPage from '../components/WeatherSection';
-import SkillsPage from '../components/skills'; 
-import Blogs from '../components/Blogs'; 
-import Uc from '../components/uc'; 
+import SkillsPage from '../components/skills';
+import Blogs from '../components/Blogs';
+import Uc from '../components/uc';
 import Services from '../components/services';
+import Reviews from '../components/reviews';
 
 const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAccessGranted, handleError }) => (
   <Routes>
@@ -36,6 +37,7 @@ const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAcce
     <Route path="/news" element={<News />} />
     <Route path="/ai-chat" element={<AIChat />} />
     <Route path="/services" element={<Services />} />
+    <Route path="/reviews" element={<Reviews />} />
     <Route path="/weather" element={<WeatherPage />} />
     <Route path="/skills" element={<SkillsPage />} />
     <Route path="/blogs" element={<Blogs />} />

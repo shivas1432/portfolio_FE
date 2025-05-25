@@ -627,3 +627,437 @@
         padding: 20px;
     }
 }
+/* Additional CSS for Services.css - Add these styles to your existing Services.css file */
+
+/* Reviews Button in Hero Section */
+.hero-buttons2 {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btn-reviews2 {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #333;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.btn-reviews2::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 300%;
+  height: 300%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.btn-reviews2:hover::before {
+  top: -50%;
+  left: -50%;
+}
+
+.btn-reviews2:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+/* Training Testimonials Section */
+.training-testimonials2 {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.training-testimonials2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="testimonial-pattern" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23testimonial-pattern)"/></svg>');
+  pointer-events: none;
+  z-index: 1;
+}
+
+.training-testimonials2 .container2 {
+  position: relative;
+  z-index: 2;
+}
+
+.training-testimonials2 .section-heading2 {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.training-testimonials2 .section-title2 {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #fff, #f0f8ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.training-testimonials2 .section-subtitle2 {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.testimonials-grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.testimonial-card2 {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+  padding: 35px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+}
+
+.testimonial-card2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.testimonial-card2:hover::before {
+  opacity: 1;
+}
+
+.testimonial-card2:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+.testimonial-header2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.program-badge2 {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.program-badge2.career {
+  background: linear-gradient(45deg, #ff6b6b, #ffa726);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.program-badge2.core {
+  background: linear-gradient(45deg, #4ecdc4, #44a08d);
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);
+}
+
+.stars2 {
+  display: flex;
+  gap: 4px;
+}
+
+.stars2 svg {
+  color: #FFD700;
+  font-size: 1.2rem;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+}
+
+.quote-icon2 {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2.5rem;
+  color: rgba(79, 172, 254, 0.2);
+  z-index: 1;
+}
+
+.testimonial-text2 {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 25px;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+  padding-left: 20px;
+  border-left: 3px solid rgba(79, 172, 254, 0.3);
+}
+
+.testimonial-author2 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.author-avatar2 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: white;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+}
+
+.author-info2 h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.author-info2 p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* View All Reviews Button */
+.view-all-reviews2 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-secondary2 {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary2:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(255, 255, 255, 0.2);
+}
+
+/* Animation delays for staggered effect */
+.stagger-delay-12 {
+  animation-delay: 0.2s;
+}
+
+.stagger-delay-22 {
+  animation-delay: 0.4s;
+}
+
+.stagger-delay-32 {
+  animation-delay: 0.6s;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .training-testimonials2 .section-title2 {
+    font-size: 2.5rem;
+  }
+  
+  .testimonials-grid2 {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+  }
+  
+  .testimonial-card2 {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn-reviews2 {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-buttons2 {
+    justify-content: flex-start;
+  }
+  
+  .training-testimonials2 {
+    padding: 80px 0;
+  }
+  
+  .training-testimonials2 .section-title2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+  }
+  
+  .training-testimonials2 .section-subtitle2 {
+    font-size: 1.1rem;
+  }
+  
+  .testimonials-grid2 {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+  }
+  
+  .testimonial-card2 {
+    padding: 25px;
+  }
+  
+  .testimonial-header2 {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .program-badge2 {
+    font-size: 0.8rem;
+    padding: 6px 16px;
+  }
+  
+  .testimonial-text2 {
+    font-size: 1rem;
+    padding-left: 15px;
+  }
+  
+  .author-avatar2 {
+    width: 50px;
+    height: 50px;
+    font-size: 1.1rem;
+  }
+  
+  .author-info2 h4 {
+    font-size: 1.1rem;
+  }
+  
+  .author-info2 p {
+    font-size: 0.9rem;
+  }
+  
+  .btn-secondary2 {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-buttons2 {
+    justify-content: center;
+    margin-top: 25px;
+  }
+  
+  .btn-reviews2 {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .training-testimonials2 {
+    padding: 60px 0;
+  }
+  
+  .training-testimonials2 .section-title2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+  
+  .training-testimonials2 .section-subtitle2 {
+    font-size: 1rem;
+  }
+  
+  .testimonial-card2 {
+    padding: 20px;
+  }
+  
+  .quote-icon2 {
+    font-size: 2rem;
+    top: 15px;
+    right: 20px;
+  }
+  
+  .testimonial-text2 {
+    font-size: 0.95rem;
+    padding-left: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .author-avatar2 {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  
+  .author-info2 h4 {
+    font-size: 1rem;
+  }
+  
+  .author-info2 p {
+    font-size: 0.85rem;
+  }
+  
+  .btn-secondary2 {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+  
+  .view-all-reviews2 {
+    margin-top: 40px;
+  }
+}
