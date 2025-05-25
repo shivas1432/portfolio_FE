@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
   const menuItems = [
     { className: 'div1', link: '/projects', label: 'Projects', icon: <FaProjectDiagram /> },
     { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
-    { className: 'div3', link: '/services', label: 'Services', icon: <FaTools /> },
+    { className: 'div3', link: '/services', label: 'Services & Reviews', icon: <FaTools /> },
     { 
       className: 'div4', link: '/contact', label: 'Get in Touch', icon: <FaEnvelope />, icons: true 
     },
