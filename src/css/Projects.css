@@ -141,10 +141,10 @@
 
 /* Featured Projects Section */
 .featured-projects-container {
-  margin: 6rem 0;
-  padding: 2rem;
+  margin: 3rem 0;
+  padding: 1rem;
   position: relative;
-  min-height: 700px;
+  min-height: 800px;
   overflow: hidden;
   max-width: 1200px;
   width: 100%;
@@ -157,7 +157,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .featured-projects-title h2 {
@@ -272,7 +272,7 @@
 
 .featured-projects {
   position: relative;
-  height: 600px;
+  height: 700px;
   overflow: hidden;
   border-radius: 16px;
   background: rgba(35, 38, 54, 0.7);
