@@ -189,6 +189,20 @@ function AIChat() {
     { id: 7, title: "What kind of frontend frameworks has he worked with?" }
   ];
 
+  // Function to get the correct avatar image
+  const getAvatarImage = (messageType) => {
+    switch (messageType) {
+      case 'user':
+        return '/images/user.avif';
+      case 'ai':
+        return '/images/avatar.png';
+      case 'error':
+        return '/images/avatar.png'; // fallback to AI avatar for errors
+      default:
+        return '/images/avatar.png';
+    }
+  };
+
   return (
     <div className="aivo-app-container">
       <div className="mobile-chat-toggle" onClick={toggleChat}>
@@ -257,8 +271,17 @@ function AIChat() {
             <div key={index} className={`ai-chat-message ${chat.type}`}>
               <div className="ai-chat-avatar">
                 <img 
-                  src={`/images/${chat.type === 'user' ? 'user' : chat.type === 'ai' ? 'ai' : 'error'}-avatar.png`} 
+                  src={getAvatarImage(chat.type)}
                   alt={chat.type} 
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = chat.type === 'user' ? '👤' : '🤖';
+                    e.target.parentElement.style.display = 'flex';
+                    e.target.parentElement.style.alignItems = 'center';
+                    e.target.parentElement.style.justifyContent = 'center';
+                    e.target.parentElement.style.fontSize = '20px';
+                  }}
                 />
               </div>
               <div className="chat-message-content">
