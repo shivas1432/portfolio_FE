@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   FaPhoneAlt, FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin,
-  FaDownload, FaTimes, FaProjectDiagram, FaRobot, FaTools, FaAddressCard,
-  FaFilePdf, FaUserTie, FaBlog
+  FaDownload, FaTimes, FaProjectDiagram, FaRobot,  FaAddressCard,
+  FaFilePdf, FaUserTie, FaBlog, FaStar, FaCog
 } from 'react-icons/fa';
 import '../css/Sidebar.css';
 
@@ -30,6 +30,15 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     }
   };
 
+  const handleServicesReviews = (type) => {
+    if (type === 'services') {
+      navigate('/services');
+    } else if (type === 'reviews') {
+      navigate('/reviews');
+    }
+    toggleSidebar();
+  };
+
   useEffect(() => {
     if (isOpen) {
       const videos = document.querySelectorAll('.background-video');
@@ -40,7 +49,12 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
   const menuItems = [
     { className: 'div1', link: '/projects', label: 'Projects', icon: <FaProjectDiagram /> },
     { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
-    { className: 'div3', link: '/services', label: 'Services & Reviews', icon: <FaTools /> },
+    { 
+      className: 'div3', 
+      label: '', 
+      
+      splitButtons: true 
+    },
     { 
       className: 'div4', link: '/contact', label: 'Get in Touch', icon: <FaEnvelope />, icons: true 
     },
@@ -109,8 +123,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                 {menuItems.map((item, index) => (
                   <div
                     key={index}
-                    className={`${item.className} clickable-container`}
-                    onClick={() => handleNavigation(item.link, item.download, item.requireCode)}
+                    className={`${item.className} clickable-container ${item.splitButtons ? 'split-container' : ''}`}
+                    onClick={item.splitButtons ? undefined : () => handleNavigation(item.link, item.download, item.requireCode)}
                   >
                     {item.video && (item.className === 'div1' || item.className === 'div5' || item.className === 'div7') ? (
                       <div className="background-video-container">
@@ -132,6 +146,32 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                             <FaDownload />
                           </div>
                         </button>
+                      ) : item.splitButtons ? (
+                        <>
+                          <h2>{item.icon} {item.label}</h2>
+                          <div className="split-buttons">
+                            <button 
+                              className="split-btn services-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleServicesReviews('services');
+                              }}
+                            >
+                              <FaCog />
+                              <span>Services</span>
+                            </button>
+                            <button 
+                              className="split-btn reviews-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleServicesReviews('reviews');
+                              }}
+                            >
+                              <FaStar />
+                              <span>Reviews</span>
+                            </button>
+                          </div>
+                        </>
                       ) : (
                         <>
                           <h2>{item.icon} {item.label}</h2>

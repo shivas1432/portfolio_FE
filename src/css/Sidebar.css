@@ -761,3 +761,77 @@
     min-height: 30px;
   }
 }
+/* Add these styles to your existing Sidebar.css file */
+
+.split-container {
+  cursor: default !important;
+}
+
+.split-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.split-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  background: rgba(15, 15, 15, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgb(20, 20, 20);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.split-btn:hover {
+  background: rgba(22, 22, 22, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.split-btn svg {
+  font-size: 28px;
+}
+
+.services-btn:hover {
+  background: rgba(74, 144, 226, 0.3);
+  border-color: rgba(74, 144, 226, 0.5);
+}
+
+.reviews-btn:hover {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+.split-btn span {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .split-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .split-btn {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .split-btn span {
+    font-size: 14px;
+  }
+}
