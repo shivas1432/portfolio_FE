@@ -4,7 +4,7 @@
 /* Portfolio Popup */
 .portfolio-popup {
   position: fixed;
-  top: 20%; 
+  top: 5%; 
   left: 0; 
   right: 0; 
   bottom: 0;
@@ -238,6 +238,8 @@
   cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  /* Updated animation delay to 0.5s */
+  animation-delay: 0.5s;
 }
 
 .parent > div:hover {
@@ -282,7 +284,28 @@
   height: 100%;
   color: #fff;
   transition: transform 0.3s ease;
+  /* Faster animation for container content */
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
 }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animation for different containers */
+.div1 .container-content { animation-delay: 0.1s; }
+.div2 .container-content { animation-delay: 0.2s; }
+.div3 .container-content { animation-delay: 0.3s; }
+.div4 .container-content { animation-delay: 0.4s; }
+.div5 .container-content { animation-delay: 0.5s; }
+.div6 .container-content { animation-delay: 0.6s; }
+.div7 .container-content { animation-delay: 0.7s; }
+.div8 .container-content { animation-delay: 0.8s; }
 
 .container-content h2 {
   font-size: 1.5rem;
@@ -458,6 +481,116 @@
   background: linear-gradient(135deg, #f06595, #ff6b6b);
 }
 
+/* Split Container Styles */
+.split-container {
+  cursor: default !important;
+}
+
+.split-buttons {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.split-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 15, 15, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgb(20, 20, 20);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.split-btn:hover {
+  background: rgba(22, 22, 22, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.split-btn svg {
+  font-size: 28px;
+}
+
+.services-btn:hover {
+  background: rgba(74, 144, 226, 0.3);
+  border-color: rgba(74, 144, 226, 0.5);
+}
+
+.reviews-btn:hover {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+.split-btn span {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Blog Container Styles */
+.blog-container {
+  cursor: default !important;
+}
+
+.blog-buttons {
+  display: flex;
+  gap: 8px;
+  
+  width: 100%;
+}
+
+.blog-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 8px;
+  background: rgba(15, 15, 15, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgb(20, 20, 20);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.blog-btn:hover {
+  background: rgba(22, 22, 22, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.blog-btn svg {
+  font-size: 28px;
+}
+
+.medium-btn:hover {
+  background: rgba(0, 171, 85, 0.3);
+  border-color: rgba(0, 171, 85, 0.5);
+}
+
+.devto-btn:hover {
+  background: rgba(9, 25, 51, 0.3);
+  border-color: rgba(9, 25, 51, 0.5);
+}
+
+.blog-btn span {
+  font-size: 12px;
+  text-align: center;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
   .dashboard-container {
@@ -599,6 +732,21 @@
   .download-button {
     padding: 8px 15px;
     font-size: 0.9rem;
+  }
+  
+  .split-buttons, .blog-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .split-btn, .blog-btn {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .split-btn span, .blog-btn span {
+    font-size: 14px;
   }
 }
 
@@ -759,79 +907,5 @@
     padding: 4px 8px;
     font-size: 0.7rem;
     min-height: 30px;
-  }
-}
-/* Add these styles to your existing Sidebar.css file */
-
-.split-container {
-  cursor: default !important;
-}
-
-.split-buttons {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.split-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 8px;
-  background: rgba(15, 15, 15, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: rgb(20, 20, 20);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.split-btn:hover {
-  background: rgba(22, 22, 22, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.split-btn svg {
-  font-size: 28px;
-}
-
-.services-btn:hover {
-  background: rgba(74, 144, 226, 0.3);
-  border-color: rgba(74, 144, 226, 0.5);
-}
-
-.reviews-btn:hover {
-  background: rgba(255, 193, 7, 0.3);
-  border-color: rgba(255, 193, 7, 0.5);
-}
-
-.split-btn span {
-  font-size: 12px;
-  text-align: center;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .split-buttons {
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .split-btn {
-    flex-direction: row;
-    justify-content: center;
-    padding: 10px;
-  }
-  
-  .split-btn span {
-    font-size: 14px;
   }
 }

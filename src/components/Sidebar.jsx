@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
   FaPhoneAlt, FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin,
   FaDownload, FaTimes, FaProjectDiagram, FaRobot,  FaAddressCard,
-  FaFilePdf, FaUserTie, FaBlog, FaStar, FaCog
+  FaFilePdf, FaUserTie, FaMedium, FaDev, FaStar, FaCog
 } from 'react-icons/fa';
 import '../css/Sidebar.css';
 
@@ -39,6 +39,14 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     toggleSidebar();
   };
 
+  const handleBlogPlatforms = (platform) => {
+    if (platform === 'medium') {
+      window.open('https://medium.com/@shivashanker7337', '_blank');
+    } else if (platform === 'devto') {
+      window.open('https://dev.to/shiva_shanker_dec82951917', '_blank');
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       const videos = document.querySelectorAll('.background-video');
@@ -52,7 +60,6 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     { 
       className: 'div3', 
       label: '', 
-      
       splitButtons: true 
     },
     { 
@@ -63,7 +70,11 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     { 
       className: 'div7', link: '/references', label: 'References', icon: <FaUserTie />, requireCode: true 
     },
-    { className: 'div6', link: '/blogs', label: 'Blogs', icon: <FaBlog /> }
+    { 
+      className: 'div6', 
+      label: 'Articles', 
+      blogButtons: true 
+    }
   ];
 
   return (
@@ -123,8 +134,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                 {menuItems.map((item, index) => (
                   <div
                     key={index}
-                    className={`${item.className} clickable-container ${item.splitButtons ? 'split-container' : ''}`}
-                    onClick={item.splitButtons ? undefined : () => handleNavigation(item.link, item.download, item.requireCode)}
+                    className={`${item.className} clickable-container ${item.splitButtons ? 'split-container' : ''} ${item.blogButtons ? 'blog-container' : ''}`}
+                    onClick={item.splitButtons || item.blogButtons ? undefined : () => handleNavigation(item.link, item.download, item.requireCode)}
                   >
                     {item.video && (item.className === 'div1' || item.className === 'div5' || item.className === 'div7') ? (
                       <div className="background-video-container">
@@ -169,6 +180,32 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                             >
                               <FaStar />
                               <span>Reviews</span>
+                            </button>
+                          </div>
+                        </>
+                      ) : item.blogButtons ? (
+                        <>
+                          <h2>{item.label}</h2>
+                          <div className="blog-buttons">
+                            <button 
+                              className="blog-btn medium-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleBlogPlatforms('medium');
+                              }}
+                            >
+                              <FaMedium />
+                              <span>Medium</span>
+                            </button>
+                            <button 
+                              className="blog-btn devto-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleBlogPlatforms('devto');
+                              }}
+                            >
+                              <FaDev />
+                              <span>Dev.to</span>
                             </button>
                           </div>
                         </>
