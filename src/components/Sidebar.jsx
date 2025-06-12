@@ -45,7 +45,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     } else if (type === 'devto') {
       window.open('https://dev.to/shiva_shanker_dec82951917', '_blank');
     } else if (type === 'blog') {
-      window.open('https://www.blogger.com/blog/posts/1184667849338450476', '_blank');
+      window.open('https://shivawhispers.blogspot.com/', '_blank');
     }
   };
 
