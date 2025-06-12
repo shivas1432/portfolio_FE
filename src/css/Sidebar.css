@@ -212,11 +212,11 @@
   padding: 20px;
 }
 
-/* Parent Grid Layout */
+/* Parent Grid Layout - Updated for 7 containers */
 .parent {
   display: grid;
   grid-template-columns: repeat(2, 1fr) 2fr repeat(2, 1.2fr);
-  grid-template-rows: 1fr 4fr 1fr 4fr 5fr;
+  grid-template-rows: 1fr 4fr 1fr 4fr 4fr;
   grid-column-gap: 5px;
   grid-row-gap: 10px;
 }
@@ -226,9 +226,8 @@
 .div3 { grid-area: 3 / 3 / 5 / 4; }
 .div4 { grid-area: 1 / 4 / 3 / 6; }
 .div5 { grid-area: 3 / 4 / 5 / 6; }
-.div6 { grid-area: 5 / 1 / 6 / 3; }
-.div7 { grid-area: 5 / 3 / 6 / 5; }
-.div8 { grid-area: 5 / 5 / 6 / 6; }
+.div6 { grid-area: 5 / 1 / 6 / 4; }
+.div7 { grid-area: 5 / 4 / 6 / 6; }
 
 .parent > div {
   background: #fafcfdcb;
@@ -305,7 +304,6 @@
 .div5 .container-content { animation-delay: 0.5s; }
 .div6 .container-content { animation-delay: 0.6s; }
 .div7 .container-content { animation-delay: 0.7s; }
-.div8 .container-content { animation-delay: 0.8s; }
 
 .container-content h2 {
   font-size: 1.5rem;
@@ -498,6 +496,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  padding: 12px 8px;
   background: rgba(15, 15, 15, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
@@ -535,19 +534,81 @@
   text-align: center;
 }
 
-/* Blog Container Styles */
-.blog-container {
+/* Article Blog Container Styles */
+.article-blog-container {
   cursor: default !important;
 }
 
-.blog-buttons {
+.article-blog-buttons {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.article-blog-btn {
+  flex: 1;
+  min-width: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 6px;
+  background: rgba(15, 15, 15, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: rgb(20, 20, 20);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.article-blog-btn:hover {
+  background: rgba(22, 22, 22, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.article-blog-btn svg {
+  font-size: 24px;
+}
+
+.article-blog-btn.medium-btn:hover {
+  background: rgba(0, 171, 85, 0.3);
+  border-color: rgba(0, 171, 85, 0.5);
+}
+
+.article-blog-btn.devto-btn:hover {
+  background: rgba(9, 25, 51, 0.3);
+  border-color: rgba(9, 25, 51, 0.5);
+}
+
+.article-blog-btn.blog-btn:hover {
+  background: rgba(255, 95, 39, 0.3);
+  border-color: rgba(255, 95, 39, 0.5);
+}
+
+.article-blog-btn span {
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Reference Resume Container Styles */
+.reference-resume-container {
+  cursor: default !important;
+}
+
+.reference-resume-buttons {
   display: flex;
   gap: 8px;
-  
   width: 100%;
 }
 
-.blog-btn {
+.reference-resume-btn {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -565,28 +626,28 @@
   backdrop-filter: blur(10px);
 }
 
-.blog-btn:hover {
+.reference-resume-btn:hover {
   background: rgba(22, 22, 22, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.blog-btn svg {
+.reference-resume-btn svg {
   font-size: 28px;
 }
 
-.medium-btn:hover {
-  background: rgba(0, 171, 85, 0.3);
-  border-color: rgba(0, 171, 85, 0.5);
+.reference-resume-btn.references-btn:hover {
+  background: rgba(147, 51, 234, 0.3);
+  border-color: rgba(147, 51, 234, 0.5);
 }
 
-.devto-btn:hover {
-  background: rgba(9, 25, 51, 0.3);
-  border-color: rgba(9, 25, 51, 0.5);
+.reference-resume-btn.resume-btn:hover {
+  background: rgba(220, 38, 127, 0.3);
+  border-color: rgba(220, 38, 127, 0.5);
 }
 
-.blog-btn span {
+.reference-resume-btn span {
   font-size: 12px;
   text-align: center;
 }
@@ -605,7 +666,7 @@
   
   .parent {
     grid-template-columns: repeat(2, 1fr) 1.5fr repeat(2, 1fr);
-    grid-template-rows: 0.8fr 3fr 0.8fr 3fr 4fr;
+    grid-template-rows: 0.8fr 3fr 0.8fr 3fr 3fr;
     grid-column-gap: 4px;
     grid-row-gap: 8px;
   }
@@ -643,6 +704,15 @@
     animation: slideInMobile 0.5s ease forwards;
     transform: none;
   }
+  .article-blog-btn {
+    max-width:280px ;
+    margin-left: 70px;
+  }
+  .reference-resume-btn {
+     max-width:280px ;
+    margin-left: 70px;
+  }
+
   
   @keyframes slideInMobile {
     from {
@@ -691,7 +761,7 @@
   
   .parent {
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 0.6fr 2.5fr 0.6fr 2.5fr 3fr;
+    grid-template-rows: 0.6fr 2.5fr 0.6fr 2.5fr 2.5fr;
     grid-column-gap: 3px;
     grid-row-gap: 6px;
   }
@@ -701,9 +771,8 @@
   .div3 { grid-area: 3 / 2 / 5 / 3; }
   .div4 { grid-area: 1 / 3 / 3 / 4; }
   .div5 { grid-area: 3 / 3 / 5 / 4; }
-  .div6 { grid-area: 5 / 1 / 6 / 2; }
-  .div7 { grid-area: 5 / 2 / 6 / 3; }
-  .div8 { grid-area: 5 / 3 / 6 / 4; }
+  .div6 { grid-area: 5 / 1 / 6 / 3; }
+  .div7 { grid-area: 5 / 3 / 6 / 4; }
   
   .container-content {
     padding: 10px;
@@ -734,19 +803,19 @@
     font-size: 0.9rem;
   }
   
-  .split-buttons, .blog-buttons {
+  .split-buttons, .article-blog-buttons, .reference-resume-buttons {
     flex-direction: column;
     gap: 4px;
   }
   
-  .split-btn, .blog-btn {
+  .split-btn, .article-blog-btn, .reference-resume-btn {
     flex-direction: row;
     justify-content: center;
-    padding: 10px;
+    padding: 8px;
   }
   
-  .split-btn span, .blog-btn span {
-    font-size: 14px;
+  .split-btn span, .article-blog-btn span, .reference-resume-btn span {
+    font-size: 12px;
   }
 }
 
@@ -770,7 +839,7 @@
   .parent {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto auto auto;
     grid-column-gap: 3px;
     grid-row-gap: 5px;
     min-height: auto;
@@ -797,16 +866,12 @@
     min-height: 80px;
   }
   .div6 { 
-    grid-area: 5 / 1 / 6 / 2;
+    grid-area: 5 / 1 / 6 / 3;
     min-height: 80px;
   }
   .div7 { 
-    grid-area: 5 / 2 / 6 / 3;
-    min-height: 80px;
-  }
-  .div8 { 
     grid-area: 6 / 1 / 7 / 3;
-    min-height: 70px;
+    min-height: 80px;
   }
   
   .container-content {
@@ -869,7 +934,7 @@
     grid-row-gap: 3px;
   }
   
-  .div1, .div8 { 
+  .div1 { 
     min-height: 70px;
   }
   .div2, .div3, .div5, .div6, .div7 { 

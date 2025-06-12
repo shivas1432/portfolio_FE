@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
   FaPhoneAlt, FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin,
   FaDownload, FaTimes, FaProjectDiagram, FaRobot,  FaAddressCard,
-  FaFilePdf, FaUserTie, FaMedium, FaDev, FaStar, FaCog
+  FaFilePdf, FaUserTie, FaMedium, FaDev, FaStar, FaCog, FaBlog
 } from 'react-icons/fa';
 import '../css/Sidebar.css';
 
@@ -39,11 +39,27 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
     toggleSidebar();
   };
 
-  const handleBlogPlatforms = (platform) => {
-    if (platform === 'medium') {
+  const handleArticleBlogButtons = (type) => {
+    if (type === 'medium') {
       window.open('https://medium.com/@shivashanker7337', '_blank');
-    } else if (platform === 'devto') {
+    } else if (type === 'devto') {
       window.open('https://dev.to/shiva_shanker_dec82951917', '_blank');
+    } else if (type === 'blog') {
+      window.open('https://www.blogger.com/blog/posts/1184667849338450476', '_blank');
+    }
+  };
+
+  const handleReferenceResumeButtons = (type) => {
+    if (type === 'references') {
+      const inputCode = prompt('Enter access code to view References:');
+      if (inputCode !== '733754') {
+        alert('Incorrect code. Access denied.');
+        return;
+      }
+      navigate('/references');
+      toggleSidebar();
+    } else if (type === 'resume') {
+      window.open('/cv.pdf', '_blank');
     }
   };
 
@@ -66,14 +82,15 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
       className: 'div4', link: '/contact', label: 'Get in Touch', icon: <FaEnvelope />, icons: true 
     },
     { className: 'div5', link: '/about', label: 'About Me', icon: <FaAddressCard /> },
-    { className: 'div8', link: '/cv.pdf', label: 'Resume', icon: <FaFilePdf />, download: true },
-    { 
-      className: 'div7', link: '/references', label: 'References', icon: <FaUserTie />, requireCode: true 
-    },
     { 
       className: 'div6', 
-      label: 'Articles', 
-      blogButtons: true 
+      label: 'Articles & Blogs', 
+      articleBlogButtons: true 
+    },
+    { 
+      className: 'div7', 
+      label: 'References & Resume', 
+      referenceResumeButtons: true 
     }
   ];
 
@@ -134,8 +151,8 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                 {menuItems.map((item, index) => (
                   <div
                     key={index}
-                    className={`${item.className} clickable-container ${item.splitButtons ? 'split-container' : ''} ${item.blogButtons ? 'blog-container' : ''}`}
-                    onClick={item.splitButtons || item.blogButtons ? undefined : () => handleNavigation(item.link, item.download, item.requireCode)}
+                    className={`${item.className} clickable-container ${item.splitButtons ? 'split-container' : ''} ${item.articleBlogButtons ? 'article-blog-container' : ''} ${item.referenceResumeButtons ? 'reference-resume-container' : ''}`}
+                    onClick={item.splitButtons || item.articleBlogButtons || item.referenceResumeButtons ? undefined : () => handleNavigation(item.link, item.download, item.requireCode)}
                   >
                     {item.video && (item.className === 'div1' || item.className === 'div5' || item.className === 'div7') ? (
                       <div className="background-video-container">
@@ -183,29 +200,65 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
                             </button>
                           </div>
                         </>
-                      ) : item.blogButtons ? (
+                      ) : item.articleBlogButtons ? (
                         <>
                           <h2>{item.label}</h2>
-                          <div className="blog-buttons">
+                          <div className="article-blog-buttons">
                             <button 
-                              className="blog-btn medium-btn"
+                              className="article-blog-btn medium-btn"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleBlogPlatforms('medium');
+                                handleArticleBlogButtons('medium');
                               }}
                             >
                               <FaMedium />
                               <span>Medium</span>
                             </button>
                             <button 
-                              className="blog-btn devto-btn"
+                              className="article-blog-btn devto-btn"
                               onClick={(e) => {
                                 e.stopPropagation();
-                                handleBlogPlatforms('devto');
+                                handleArticleBlogButtons('devto');
                               }}
                             >
                               <FaDev />
                               <span>Dev.to</span>
+                            </button>
+                            <button 
+                              className="article-blog-btn blog-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleArticleBlogButtons('blog');
+                              }}
+                            >
+                              <FaBlog />
+                              <span>Blog</span>
+                            </button>
+                          </div>
+                        </>
+                      ) : item.referenceResumeButtons ? (
+                        <>
+                          <h2>{item.label}</h2>
+                          <div className="reference-resume-buttons">
+                            <button 
+                              className="reference-resume-btn references-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleReferenceResumeButtons('references');
+                              }}
+                            >
+                              <FaUserTie />
+                              <span>References</span>
+                            </button>
+                            <button 
+                              className="reference-resume-btn resume-btn"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleReferenceResumeButtons('resume');
+                              }}
+                            >
+                              <FaFilePdf />
+                              <span>Resume</span>
                             </button>
                           </div>
                         </>
