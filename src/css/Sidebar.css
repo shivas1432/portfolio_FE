@@ -873,7 +873,14 @@
     grid-area: 6 / 1 / 7 / 3;
     min-height: 80px;
   }
-  
+   .article-blog-btn {
+    max-width:220px ;
+    margin-left: 35px;
+  }
+  .reference-resume-btn {
+     max-width:220px ;
+    margin-left: 35px;
+  }
   .container-content {
     padding: 6px;
     min-height: 100%;
