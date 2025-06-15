@@ -517,8 +517,6 @@ const ProjectsList = () => {
         {/* Social Media Section at Top */}
         <div className="social-media-container">
 
-          <h3 className="social-media-title">Let's Connect & Build Together</h3>
-          <p className="social-media-subtitle">Join my community of 125K+ developers and creators. Follow my coding journey, get exclusive tutorials, and let's collaborate on amazing projects!</p>
           
           <div className="social-buttons">
             <a 
