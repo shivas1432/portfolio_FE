@@ -1,4 +1,4 @@
-/* Projects.css - Part 1 */
+/* Projects.css - Complete Updated Version */
 
 :root {
   --primary-color: #ff3366;
@@ -440,7 +440,6 @@
   display: block;
   transition: transform 0.5s ease;
 }
-/* Projects.css - Part 2 */
 
 .featured-project:hover .featured-image {
   transform: scale(1.03);
@@ -628,72 +627,146 @@
   color: white;
 }
 
-/* Social Media Section Styles */
+/* ===== SOCIAL MEDIA SECTION STYLES ===== */
 .social-media-container {
-  margin-top: 60px;
-  padding: 40px 20px;
-  text-align: center;
-  background-color: rgba(35, 38, 54, 0.5);
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin: 40px 0 !important;
+  padding: 40px 20px !important;
+  text-align: center !important;
+  background: rgba(35, 38, 54, 0.8) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  z-index: 2 !important;
+  position: relative !important;
 }
 
 .social-media-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: white;
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 15px !important;
+  background: linear-gradient(45deg, #ff3366, #8a2be2) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
 }
 
 .social-media-subtitle {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 30px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.1rem !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  margin-bottom: 35px !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.5 !important;
 }
 
 .social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 20px !important;
+  flex-wrap: wrap !important;
 }
 
+/* ===== SOCIAL BUTTON STYLES ===== */
 .social-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 15px 30px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  color: white;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  min-width: 200px;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  padding: 15px 25px !important;
+  border-radius: 50px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: white !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+  min-width: 220px !important;
+  border: none !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .social-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+  text-decoration: none !important;
 }
 
+.social-button:active {
+  transform: translateY(-1px) !important;
+}
+
+.social-button:visited {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.social-button:focus {
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+/* ===== SOCIAL ICON STYLES ===== */
+.social-icon {
+  font-size: 20px !important;
+  margin-right: 10px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  width: 20px !important;
+  height: 20px !important;
+  color: white !important;
+  flex-shrink: 0 !important;
+}
+
+.social-button svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important;
+  color: white !important;
+  margin-right: 8px !important;
+  flex-shrink: 0 !important;
+}
+
+.social-button span {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  white-space: nowrap !important;
+}
+
+/* ===== PLATFORM SPECIFIC BUTTON STYLES ===== */
 .instagram-button {
-  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+}
+
+.instagram-button:hover {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+  filter: brightness(1.1) !important;
 }
 
 .telegram-button {
-  background-color: #0088cc;
+  background: linear-gradient(45deg, #0088cc, #229ED9) !important;
 }
 
-.social-icon {
-  font-size: 24px;
+.telegram-button:hover {
+  background: linear-gradient(45deg, #0088cc, #229ED9) !important;
+  filter: brightness(1.1) !important;
 }
 
-/* MOBILE OPTIMIZATION */
+.github-button {
+  background: linear-gradient(45deg, #333, #555) !important;
+}
+
+.github-button:hover {
+  background: linear-gradient(45deg, #333, #555) !important;
+  filter: brightness(1.2) !important;
+}
+
+/* ===== MOBILE OPTIMIZATION ===== */
 
 /* Large Screens */
 @media (max-width: 1200px) {
@@ -842,13 +915,25 @@
     padding: 1rem;
   }
   
+  /* Mobile Social Media Styles */
   .social-buttons {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 15px !important;
   }
   
   .social-button {
-    width: 80%;
+    width: 90% !important;
+    max-width: 280px !important;
+    min-width: unset !important;
+  }
+  
+  .social-media-title {
+    font-size: 1.8rem !important;
+  }
+  
+  .social-media-subtitle {
+    font-size: 1rem !important;
   }
 }
 
@@ -912,6 +997,26 @@
     width: 32px;
     height: 32px;
     font-size: 1rem;
+  }
+  
+  /* Small Mobile Social Styles */
+  .social-button {
+    width: 95% !important;
+    padding: 12px 20px !important;
+    font-size: 14px !important;
+  }
+  
+  .social-icon {
+    font-size: 18px !important;
+  }
+  
+  .social-button span {
+    font-size: 14px !important;
+  }
+  
+  .social-button svg {
+    width: 18px !important;
+    height: 18px !important;
   }
 }
 
@@ -987,5 +1092,119 @@
   .button {
     padding: 0.4rem 0.7rem;
     font-size: 0.7rem;
+  }
+  
+  /* Extra Small Social Styles */
+  .social-button {
+    width: 98% !important;
+    padding: 10px 15px !important;
+    font-size: 13px !important;
+    min-width: unset !important;
+  }
+  
+  .social-icon {
+    font-size: 16px !important;
+    margin-right: 6px !important;
+  }
+  
+  .social-button svg {
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 6px !important;
+  }
+  
+  .social-button span {
+    font-size: 13px !important;
+  }
+  
+  .social-media-container {
+    padding: 30px 15px !important;
+    margin: 30px 0 !important;
+  }
+  
+  .social-media-title {
+    font-size: 1.5rem !important;
+  }
+  
+  .social-media-subtitle {
+    font-size: 0.9rem !important;
+    margin-bottom: 25px !important;
+  }
+}
+
+/* ===== ADDITIONAL FIXES FOR ICONS AND BUTTONS ===== */
+
+/* Ensure icons are always visible */
+.social-button .social-icon,
+.social-button svg {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 10 !important;
+}
+
+/* Fix for any CSS conflicts */
+.social-button * {
+  pointer-events: none !important;
+}
+
+.social-button {
+  pointer-events: all !important;
+}
+
+/* Ensure gradients work on all browsers */
+.instagram-button {
+  background: -webkit-linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+  background: -moz-linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+}
+
+.telegram-button {
+  background: -webkit-linear-gradient(45deg, #0088cc, #229ED9) !important;
+  background: -moz-linear-gradient(45deg, #0088cc, #229ED9) !important;
+  background: linear-gradient(45deg, #0088cc, #229ED9) !important;
+}
+
+.github-button {
+  background: -webkit-linear-gradient(45deg, #333, #555) !important;
+  background: -moz-linear-gradient(45deg, #333, #555) !important;
+  background: linear-gradient(45deg, #333, #555) !important;
+}
+
+/* Fix for button text color inheritance */
+.social-button,
+.social-button:hover,
+.social-button:focus,
+.social-button:active,
+.social-button:visited {
+  color: white !important;
+}
+
+.social-button span,
+.social-button:hover span,
+.social-button:focus span,
+.social-button:active span,
+.social-button:visited span {
+  color: white !important;
+}
+
+/* Prevent text selection on buttons */
+.social-button {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Loading state for icons */
+.social-icon {
+  animation: fadeIn 0.3s ease-in !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

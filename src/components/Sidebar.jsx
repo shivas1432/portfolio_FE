@@ -71,7 +71,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
   }, [isOpen]);
 
   const menuItems = [
-    { className: 'div1', link: '/projects', label: 'Projects', icon: <FaProjectDiagram /> },
+    { className: 'div1', link: '/projects', label: 'My Work', icon: <FaProjectDiagram /> },
     { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
     { 
       className: 'div3', 

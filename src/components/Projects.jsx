@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import "../css/Projects.css";
-import { FaInstagram, FaTelegram } from 'react-icons/fa'; // Import the icons
+import { FaInstagram, FaTelegram, FaGithub } from 'react-icons/fa'; // Import the icons
 
 const Project = ({ title, languages, description, image, video, website }) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -512,13 +512,53 @@ const ProjectsList = () => {
           <div className="particle"></div>
           <div className="particle"></div>
         </div>
-        <h1 className="hero-title">My Projects</h1>
+         <h1 className="hero-title">My Work</h1>
         <p className="hero-subtitle">A collection of my work and experiments</p>
+        {/* Social Media Section at Top */}
+        <div className="social-media-container">
+
+          <h3 className="social-media-title">Let's Connect & Build Together</h3>
+          <p className="social-media-subtitle">Join my community of 125K+ developers and creators. Follow my coding journey, get exclusive tutorials, and let's collaborate on amazing projects!</p>
+          
+          <div className="social-buttons">
+            <a 
+              href="https://www.instagram.com/ss_web_innovations/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-button instagram-button"
+            >
+              <FaInstagram style={{ fontSize: '20px', marginRight: '8px', color: 'white' }} />
+              <span>Follow on Instagram (100K+)</span>
+            </a>
+            
+            <a 
+              href="https://t.me/helpme_coder" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-button telegram-button"
+            >
+              <FaTelegram style={{ fontSize: '20px', marginRight: '8px', color: 'white' }} />
+              <span>Join Telegram Group (25K+)</span>
+            </a>
+            
+            <a 
+              href="https://github.com/shivas1432?tab=repositories" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="social-button github-button"
+            >
+              <FaGithub style={{ fontSize: '20px', marginRight: '8px', color: 'white' }} />
+              <span>View GitHub Repositories</span>
+            </a>
+          </div>
+        </div>
+        
+       
       </div>
 
       <div className="featured-projects-container" ref={featuredSectionRef}>
         <div className="featured-projects-title">
-          <h2>Clients Projects</h2>
+          <h2>Ongoing Projects</h2>
           <div className="project-navigation">
             <button 
               className="nav-button prev" 
@@ -624,38 +664,12 @@ const ProjectsList = () => {
               className="show-more-button" 
               onClick={toggleShowAllBackend}
             >
-              {showAllBackend ? "Show Less" : `Show More (${backendProjects.length - 2} more projects)`}
+              {showAllBackend ? "Show More" : `Show More (${backendProjects.length - 2} more projects)`}
             </button>
           </div>
         )}
         
-        {/* Social Media Buttons Section */}
-        <div className="social-media-container">
-          <h3 className="social-media-title">For More Projects & Collaboration</h3>
-          <p className="social-media-subtitle">Connect with me on social media to see more of my work and discuss potential collaborations</p>
-          
-          <div className="social-buttons">
-            <a 
-              href="https://instagram.com/ss_web_innovations" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-button instagram-button"
-            >
-              <FaInstagram className="social-icon" />
-              <span>Follow on Instagram</span>
-            </a>
-            
-            <a 
-              href="https://t.me/helpme_coder" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-button telegram-button"
-            >
-              <FaTelegram className="social-icon" />
-              <span>Join Telegram Group</span>
-            </a>
-          </div>
-        </div>
+
       </div>
     </div>
   );
