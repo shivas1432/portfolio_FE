@@ -290,7 +290,7 @@ const WeatherSection = ({ user }) => {
           <h2 className="app-title">WeatherToday</h2>
           
           <div className="status-section">
-            <h3>Status</h3>
+            
             <div className="status-graph">
               <div className="percentage">+3.8%</div>
               <div className="graph-indicator">
@@ -302,7 +302,7 @@ const WeatherSection = ({ user }) => {
               <span>Dangerous</span>
               <div className="danger-meter"></div>
             </div>
-            <button className="see-more">See More details</button>
+            
           </div>
           
           <div className="location-selector">
