@@ -59,7 +59,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
       navigate('/references');
       toggleSidebar();
     } else if (type === 'resume') {
-      window.open('/cv.pdf', '_blank');
+      window.open('/cv1.pdf', '_blank');
     }
   };
 
