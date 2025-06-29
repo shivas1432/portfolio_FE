@@ -13,7 +13,7 @@
   transform: translateY(20px);
   pointer-events: none;
   transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 100;
+  z-index: 10000;
   overflow-y: auto;
 }
 
@@ -698,7 +698,7 @@
   .side-menu-btn1 {
     flex-direction: row;
     left: 0;
-    top: 30%;
+    top: 5%;
     border-radius: 0 0 12px 0;
     padding: 15px;
     animation: slideInMobile 0.5s ease forwards;
