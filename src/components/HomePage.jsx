@@ -256,7 +256,7 @@ const HomePage = ({ onLogout }) => {
         
         .widget-container-section {
           position: absolute;
-          bottom: 40px;
+          bottom: 10px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 500;
@@ -518,7 +518,7 @@ const HomePage = ({ onLogout }) => {
           
           .widget-wrapper {
             gap: 10px;
-            margin-top: 40px;
+            margin-top: 10px;
             position: relative;
             
           }
@@ -606,10 +606,10 @@ const HomePage = ({ onLogout }) => {
 
           /* Image Section - Takes 70% of screen */
           .hero-flex {
-            flex: 0 0 70%;
+            flex: 0 0 63%;
             justify-content: center;
             align-items: center;
-            margin: 60px 0 0 0;
+            margin: 40px 0 0 0;
             padding: 0;
             position: relative;
             z-index: 10;
