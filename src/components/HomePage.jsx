@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = ({ onLogout }) => {
+  const navigate = useNavigate();
   // Theme state
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
@@ -108,6 +110,14 @@ const HomePage = ({ onLogout }) => {
     if (currentHour < 12) return '☀️ Good Morning!';
     if (currentHour < 17) return '🌞 Good Afternoon!';
     return '🌃 Good Evening!';
+  };
+
+  const handleNavigateToNews = () => {
+    navigate('/news');
+  };
+
+  const handleNavigateToWeather = () => {
+    navigate('/weather');
   };
 
   const handleSignOut = () => {
@@ -256,7 +266,7 @@ const HomePage = ({ onLogout }) => {
         
         .widget-container-section {
           position: absolute;
-          bottom: 10px;
+          bottom: 40px;
           left: 50%;
           transform: translateX(-50%);
           z-index: 500;
@@ -518,7 +528,7 @@ const HomePage = ({ onLogout }) => {
           
           .widget-wrapper {
             gap: 10px;
-            margin-top: 10px;
+            margin-top: 40px;
             position: relative;
             
           }
@@ -606,10 +616,10 @@ const HomePage = ({ onLogout }) => {
 
           /* Image Section - Takes 70% of screen */
           .hero-flex {
-            flex: 0 0 63%;
+            flex: 0 0 70%;
             justify-content: center;
             align-items: center;
-            margin: 40px 0 0 0;
+            margin: 60px 0 0 0;
             padding: 0;
             position: relative;
             z-index: 10;
@@ -841,17 +851,16 @@ const HomePage = ({ onLogout }) => {
               Sign Out
             </button>
 
-
             {/* Widgets moved to bottom center of the container */}
             <div className="widget-container-section">
               <div className="widget-wrapper">
-                <div className="widget-item" onClick={() => console.log('Navigate to news')}>
+                <div className="widget-item" onClick={handleNavigateToNews}>
                   <div className="widget-icon">📰</div>
                   <div className="widget-label">NEWS</div>
                   <div className="widget-subtitle">Fresh News</div>
                 </div>
 
-                <div className="widget-item" onClick={() => console.log('Navigate to weather')}>
+                <div className="widget-item" onClick={handleNavigateToWeather}>
                   <div className="widget-icon">🌤️</div>
                   <div className="widget-label">Weather</div>
                   <div className="widget-subtitle">Live Weather</div>
