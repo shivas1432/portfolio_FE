@@ -185,7 +185,7 @@ const HomePage = ({ onLogout }) => {
         
         .hero-section {
           width: 100vw;
-          height: 100vh;
+          height: 100%;
           max-width: 100vw;
           overflow-x: hidden;
           position: relative;
@@ -813,10 +813,6 @@ const HomePage = ({ onLogout }) => {
               Sign Out
             </button>
 
-            {/* Service note */}
-            <div className="service-note">
-              <p>please use desktop mode for better UI experience</p>
-            </div>
 
             {/* Widgets moved to bottom center of the container */}
             <div className="widget-container-section">
