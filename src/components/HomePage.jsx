@@ -163,16 +163,19 @@ const HomePage = ({ onLogout }) => {
         }
         
         .typing-container {
-          font-size: clamp(1.2rem, 3vw, 2rem);
+          font-size: clamp(1.5rem, 4vw, 3rem);
           font-weight: 500;
           color: #667eea;
-          min-height: 2.5rem;
-          margin-left: -50px;
+          min-height: 3rem;
+          margin: 1rem 0;
           position: relative;
+          text-align: center;
         }
         
         .hero-text {
-          font-size: clamp(3rem, 10vw, 9rem) !important;
+          font-size: clamp(4rem, 12vw, 10rem) !important;
+          margin-bottom: 1rem;
+          text-align: center;
         }
         
         body {
@@ -181,28 +184,34 @@ const HomePage = ({ onLogout }) => {
         }
         
         .hero-section {
-          width: 100%;
+          width: 100vw;
+          height: 100vh;
           max-width: 100vw;
           overflow-x: hidden;
           position: relative;
           z-index: 1;
           transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          margin: 0;
+          padding: 0;
         }
         
         .hero-container {
-          max-width: 100%;
-          width: 100%;
+          max-width: 100vw;
+          width: 100vw;
+          height: 100vh;
           overflow-x: hidden;
           position: relative;
           z-index: 1;
+          margin: 0;
+          padding: 0;
         }
 
         .w-container {
-          max-width: 100% !important;
-          padding-left: 0 !important;
-          padding-right: 0 !important;
-          margin-left: 0 !important;
-          margin-right: 0 !important;
+          max-width: 100vw !important;
+          width: 100vw !important;
+          height: 100vh !important;
+          padding: 0 !important;
+          margin: 0 !important;
         }
         
         .cursor {
@@ -211,18 +220,18 @@ const HomePage = ({ onLogout }) => {
         }
         
         .signout-button {
-          position: absolute;
-          top: 10px;
+          position: fixed;
+          top: 20px;
           right: 20px;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           border: none;
-          padding: 5px 14px;
+          padding: 8px 16px;
           border-radius: 25px;
           color: white;
           font-weight: 500;
           cursor: pointer;
           transition: all 0.3s ease;
-          font-size: 0.9rem;
+          font-size: 1rem;
           z-index: 500;
         }
         
@@ -253,7 +262,7 @@ const HomePage = ({ onLogout }) => {
           z-index: 500;
           width: 100%;
           max-width: 800px;
-          padding: 0 2px;
+          padding: 0 10px;
         }
         
         .widget-wrapper {
@@ -343,14 +352,14 @@ const HomePage = ({ onLogout }) => {
         }
         
         .service-note {
-          position: absolute;
-          top: 50px;
+          position: fixed;
+          top: 70px;
           right: 20px;
           background: rgba(255, 255, 255, 0.1);
           backdrop-filter: blur(10px);
-          padding: 5px 10px;
+          padding: 8px 12px;
           border-radius: 20px;
-          font-size: 0.4rem;
+          font-size: 0.8rem;
           color: rgba(255, 255, 255, 0.7);
           z-index: 500;
         }
@@ -387,7 +396,7 @@ const HomePage = ({ onLogout }) => {
         }
         
         .hero-trigger-flex {
-          position: absolute;
+          position: fixed;
           bottom: 40px;
           right: 40px;
           display: flex;
@@ -411,14 +420,53 @@ const HomePage = ({ onLogout }) => {
         
         /* Main hero images positioning */
         .hero-image-01, .hero-image-02, .hero-image-03 {
-          position: absolute;
+          position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          width: 100vw;
+          height: 100vh;
           object-fit: cover;
           z-index: -2;
           transition: opacity 0.5s ease;
+        }
+        
+        /* Hide problematic decorative elements globally */
+        .curve, .hero-side-cut, .corner-lines, .absolute-left, .absolute-right,
+        .transition, .blur-wrapper, .background {
+          display: none !important;
+        }
+        
+        /* Desktop image switcher - positioned in top-left */
+        .desktop-image-switcher {
+          display: flex;
+          position: fixed;
+          top: 190px;
+          left: 20px;
+          gap: 12px;
+          z-index: 100;
+          flex-direction: column;
+        }
+        
+        .desktop-thumb {
+          width: 80px;
+          height: 80px;
+          border-radius: 12px;
+          object-fit: cover;
+          cursor: pointer;
+          border: 3px solid transparent;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .desktop-thumb.active {
+          border: 3px solid #667eea;
+          transform: scale(1.05);
+          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .desktop-thumb:hover {
+          transform: scale(1.03);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
         
         .mobile-image-switcher {
@@ -477,13 +525,17 @@ const HomePage = ({ onLogout }) => {
           }
           
           .hero-text {
-            font-size: clamp(3rem, 10vw, 4rem) !important;
+            font-size: clamp(3rem, 10vw, 6rem) !important;
             bottom: 100px;
           }
         }
 
         /* NEW MOBILE LAYOUT - ONLY for screens ≤500px */
         @media (max-width: 500px) {
+          .desktop-image-switcher {
+            display: none !important;
+          }
+          
           * {
             margin: 0;
             padding: 0;
@@ -529,7 +581,7 @@ const HomePage = ({ onLogout }) => {
             flex: 0 0 70%;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 0 0;
+            margin: 60px 0 0 0;
             padding: 0;
             position: relative;
             z-index: 10;
@@ -546,7 +598,7 @@ const HomePage = ({ onLogout }) => {
             width: 100vw;
             max-width: none;
             margin: 0;
-            padding: 10px 0;
+            padding: 20px 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -560,7 +612,7 @@ const HomePage = ({ onLogout }) => {
             gap: 8px;
             width: 100%;
             max-width: none;
-            padding: 0 10px;
+            padding: 0 15px;
             margin: 0;
           }
           
@@ -631,10 +683,11 @@ const HomePage = ({ onLogout }) => {
             padding: 0 !important;
           }
 
-          /* Hide desktop thumbnail elements on small mobile */
+          /* Hide desktop thumbnail elements and decorative elements */
           .hero-trigger-flex, .hero-image-wrapper, .hero-thumb-wrapper, 
           .curve, .hero-side-cut, .socials-wrapper, .corner-lines,
-          .transition, .blur-wrapper {
+          .transition, .blur-wrapper, .absolute-left, .absolute-right,
+          .background {
             display: none !important;
           }
           
@@ -674,6 +727,19 @@ const HomePage = ({ onLogout }) => {
         <div className="w-layout-blockcontainer hero-container w-container">
           <div className="hero-wrapper">
             
+            {/* Desktop image switcher - visible on larger screens */}
+            <div className="desktop-image-switcher">
+              {heroImages.map((image, index) => (
+                <img 
+                  key={index}
+                  src={image} 
+                  alt={`Switch to view ${index + 1}`}
+                  className={`desktop-thumb ${currentImageIndex === index ? 'active' : ''}`}
+                  onClick={() => handleImageClick(index)}
+                />
+              ))}
+            </div>
+            
             {/* Mobile image switcher - only visible on small screens */}
             <div className="mobile-image-switcher">
               {heroImages.map((image, index) => (
@@ -701,104 +767,6 @@ const HomePage = ({ onLogout }) => {
                 {text}<span className="cursor">|</span>
               </div>
             </div>
-            
-            {/* Blur elements */}
-            <div className="transition _01" style={{}}>
-              <div className="blur-wrapper">
-                <div className="blur _01a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _02a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _03a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _04a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _05a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _06a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _07a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _08a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _09a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _10a" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-            </div>
-            
-            <div className="transition _02" style={{}}>
-              <div className="blur-wrapper">
-                <div className="blur _01b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _02b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _03b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _04b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _05b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _06b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _07b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _08b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _09b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-              <div className="blur-wrapper">
-                <div className="blur _10b" style={{transform: 'translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(90deg) rotateZ(0deg) skew(0deg, 0deg)', transformStyle: 'preserve-3d'}}></div>
-              </div>
-            </div>
-            
-            {/* Clickable thumbnail images */}
-            <div className="hero-trigger-flex">
-              <div className="hero-image-wrapper _01">
-                <div className="background _01" style={{}}></div>
-                <div className="hero-thumb-wrapper _01" style={{}} onClick={() => handleImageClick(0)}>
-                  <img src={heroImages[0]} loading="lazy" alt="woman with full bangs" className="hero-thumb _01" />
-                </div>
-                <div data-w-id="29f51d0b-3ffd-ad73-c2d1-e82884fce932" className="hero-trigger _02-to-01" style={{}}></div>
-                <div data-w-id="88a50228-4bb2-8ee4-57e1-d8b2ab521584" className="hero-trigger _03-to-01" style={{}}></div>
-              </div>
-              <div className="hero-image-wrapper _02">
-                <div className="background _02" style={{}}></div>
-                <div className="hero-thumb-wrapper _02" style={{}} onClick={() => handleImageClick(1)}>
-                  <img src={heroImages[1]} loading="lazy" alt="man on a black background" className="hero-thumb _02" />
-                </div>
-                <div data-w-id="5acee1f5-3d7b-940a-2ad6-ab9866fd2dc6" className="hero-trigger _01-to-02" style={{}}></div>
-                <div data-w-id="6df87dfd-d3e9-e59c-d7c7-23f004f6697e" className="hero-trigger _03-to-02" style={{}}></div>
-              </div>
-              <div className="hero-image-wrapper _03">
-                <div className="background _03" style={{}}></div>
-                <div className="hero-thumb-wrapper _03" style={{}} onClick={() => handleImageClick(2)}>
-                  <img src={heroImages[2]} loading="lazy" alt="man on pink sweater" className="hero-thumb _03" />
-                </div>
-                <div data-w-id="4f91ebac-af9d-4ca3-11b4-9e1271ac86b0" className="hero-trigger _01-to-03" style={{}}></div>
-                <div data-w-id="078532e9-81b8-e616-c052-f3ff199dadcf" className="hero-trigger _02-to-03" style={{}}></div>
-              </div>
-              <img width="Auto" height="Auto" alt="" src="https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/67de676f1c598cfa54564ce8_Curve-LightGray.png" loading="lazy" className="curve absolute-left" />
-            </div>
-            
-            <img width="Auto" height="Auto" alt="" src="https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/67de676f1c598cfa54564ce8_Curve-LightGray.png" loading="lazy" className="curve absolute-right" />
             
             {/* Main hero backgrounds - changes based on currentImageIndex */}
             <img 
@@ -835,16 +803,20 @@ const HomePage = ({ onLogout }) => {
               }} 
             />
             
-            <img loading="eager" src="https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/6816082703b8cabc97aef253_SideCutout.svg" alt="hexagon" className="hero-side-cut" />
+            <img loading="eager" src="https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/6816082703b8cabc97aef253_SideCutout.svg" alt="hexagon" className="hero-side-cut" style={{display: 'none'}} />
           
             
-            <div className="corner-lines absolute"></div>
+            <div className="corner-lines absolute" style={{display: 'none'}}></div>
 
             {/* Sign out button in corner */}
             <button onClick={handleSignOut} className="signout-button">
               Sign Out
             </button>
 
+            {/* Service note */}
+            <div className="service-note">
+              <p>please use desktop mode for better UI experience</p>
+            </div>
 
             {/* Widgets moved to bottom center of the container */}
             <div className="widget-container-section">
