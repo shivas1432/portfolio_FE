@@ -27,11 +27,11 @@ const HomePage = ({ onLogout }) => {
     "UI/UX developer"
   ], []);
 
-  // Hero images
+  // Hero images - Updated to use local images
   const heroImages = [
-    "https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/6810b0301bbea2e6c06fea54_Hero5.webp",
-    "https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/6810b9a96e755b2b9918ae97_Hero7.webp",
-    "https://cdn.prod.website-files.com/67de676f1c598cfa54564c7a/6810b4edfc88c3b3f52c1761_Hero6.webp"
+    "/1.jpg",
+    "/2.jpg",
+    "/3.jpg"
   ];
 
   // Battery and time effects
@@ -800,7 +800,7 @@ const HomePage = ({ onLogout }) => {
             <img 
               src={heroImages[0]} 
               loading="lazy" 
-              alt="woman with full bangs" 
+              alt="Hero image 1" 
               sizes="(max-width: 479px) 100vw, (max-width: 767px) 456px, 100vw" 
               className="hero-image-01" 
               style={{
@@ -811,7 +811,7 @@ const HomePage = ({ onLogout }) => {
             <img 
               src={heroImages[1]} 
               loading="lazy" 
-              alt="man on a black background" 
+              alt="Hero image 2" 
               sizes="(max-width: 479px) 100vw, (max-width: 767px) 456px, 100vw" 
               className="hero-image-02" 
               style={{
@@ -822,7 +822,7 @@ const HomePage = ({ onLogout }) => {
             <img 
               src={heroImages[2]} 
               loading="lazy" 
-              alt="man on pink sweater" 
+              alt="Hero image 3" 
               sizes="(max-width: 479px) 100vw, (max-width: 767px) 456px, 100vw" 
               className="hero-image-03" 
               style={{
