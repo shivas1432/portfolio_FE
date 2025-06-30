@@ -173,7 +173,7 @@ const HomePage = ({ onLogout }) => {
         }
         
         .hero-text {
-          font-size: clamp(4rem, 12vw, 10rem) !important;
+          font-size: clamp(4rem, 12vw, 12rem) !important;
           margin-bottom: 1rem;
           text-align: center;
         }
@@ -185,7 +185,7 @@ const HomePage = ({ onLogout }) => {
         
         .hero-section {
           width: 100vw;
-          height: 100%;
+          height: 100vh;
           max-width: 100vw;
           overflow-x: hidden;
           position: relative;
@@ -436,37 +436,65 @@ const HomePage = ({ onLogout }) => {
           display: none !important;
         }
         
-        /* Desktop image switcher - positioned in top-left */
+        /* Desktop image switcher - positioned in top-center for better mobile compatibility */
         .desktop-image-switcher {
           display: flex;
           position: fixed;
-          top: 190px;
-          left: 20px;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
           gap: 12px;
           z-index: 100;
-          flex-direction: column;
+          flex-direction: row;
         }
         
         .desktop-thumb {
-          width: 80px;
-          height: 80px;
-          border-radius: 12px;
+          width: 70px;
+          height: 70px;
+          border-radius: 10px;
           object-fit: cover;
           cursor: pointer;
-          border: 3px solid transparent;
+          border: 2px solid transparent;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
         }
         
         .desktop-thumb.active {
-          border: 3px solid #667eea;
+          border: 2px solid #667eea;
           transform: scale(1.05);
-          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+          box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
         
         .desktop-thumb:hover {
           transform: scale(1.03);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* For very small screens in desktop mode */
+        @media (max-width: 600px) {
+          .desktop-image-switcher {
+            top: 15px;
+            gap: 8px;
+          }
+          
+          .desktop-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+          }
+        }
+        
+        /* For medium screens in desktop mode */
+        @media (min-width: 601px) and (max-width: 1024px) {
+          .desktop-image-switcher {
+            top: 18px;
+            gap: 10px;
+          }
+          
+          .desktop-thumb {
+            width: 60px;
+            height: 60px;
+          }
         }
         
         .mobile-image-switcher {
@@ -525,7 +553,7 @@ const HomePage = ({ onLogout }) => {
           }
           
           .hero-text {
-            font-size: clamp(3rem, 10vw, 6rem) !important;
+            font-size: clamp(3rem, 10vw, 4rem) !important;
             bottom: 100px;
           }
         }
@@ -813,6 +841,10 @@ const HomePage = ({ onLogout }) => {
               Sign Out
             </button>
 
+            {/* Service note */}
+            <div className="service-note">
+              <p>please use desktop mode for better UI experience</p>
+            </div>
 
             {/* Widgets moved to bottom center of the container */}
             <div className="widget-container-section">
