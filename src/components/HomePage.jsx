@@ -616,7 +616,7 @@ const HomePage = ({ onLogout }) => {
 
           /* Image Section - Takes 70% of screen */
           .hero-flex {
-            flex: 0 0 70%;
+            flex: 0 0 64%;
             justify-content: center;
             align-items: center;
             margin: 60px 0 0 0;
@@ -636,7 +636,7 @@ const HomePage = ({ onLogout }) => {
             width: 100vw;
             max-width: none;
             margin: 0;
-            padding: 20px 0;
+            padding: 10px 0;
             display: flex;
             align-items: center;
             justify-content: center;
