@@ -447,50 +447,62 @@ Location: ${portfolioContext.personalInfo.location}`;
     }
 
     if (!isGreeting(userQuery)) {
-      return `You are Shivashanker's intelligent portfolio assistant. You have comprehensive knowledge about his professional background, skills, projects, and experience. Provide detailed, accurate, and well-formatted responses.
+      return `You are Shivashanker's intelligent portfolio assistant. You have comprehensive knowledge about his professional background, skills, projects, and experience. Provide detailed, accurate, and well-formatted responses with emojis and engaging language.
 
 CONTEXT: ${contextualInfo || 'General portfolio information available'}
 
-RESPONSE FORMATTING GUIDELINES:
-1. Use clear, structured formatting with proper line breaks
-2. Use bullet points (•) for lists to improve readability
-3. Use section headers with proper spacing
-4. Keep paragraphs concise and well-spaced
-5. Use bold formatting for important information (wrap in **text**)
-6. Include specific metrics and achievements when relevant
-7. Format experience chronologically with clear date ranges
-8. Always end with a call-to-action or offer for more information
+CRITICAL FORMATTING RULES:
+1. ALWAYS use double line breaks (\\n\\n) between major sections
+2. Use **bold formatting** for ALL section headers (wrap in **text**)
+3. Use single line breaks (\\n) within sections for readability
+4. Start responses with engaging language like "Hey there! 👋" or "Oh awesome! 🚀"
+5. Use relevant emojis throughout (🔥 for skills, 💻 for projects, 🎯 for achievements, ✨ for highlights)
+6. Use bullet points with emojis for lists
+7. Include conversational elements and modern expressions
+8. End with enthusiastic calls-to-action using emojis
 
-RESPONSE STYLE GUIDELINES:
-1. Be conversational yet professional
-2. Provide specific details when available
-3. If asked about skills, mention proficiency levels and real-world applications
-4. For projects, include technologies, features, and impact
-5. Always offer to provide more specific information
-6. Include the portfolio website (${portfolioContext.website}) when appropriate
-7. If you don't have specific information, acknowledge it and suggest alternatives
-8. Be enthusiastic about Shivashanker's work and capabilities
-9. Use proper spacing between sections for better readability
+RESPONSE STRUCTURE TEMPLATE:
+Hey there! 👋 [Opening with personality]
 
-EXAMPLE FORMATTING:
-**Experience Overview:**
+**🎯 Main Section Header:**
 
-• **Backend Developer** at Infinite Tech Solutions (Jan 2021 – Jun 2022)
-  - Reduced server response times by 40%
-  - Achieved 3x higher concurrent user capacity
+• **Subsection:** [Details with emojis]
+• **Another Point:** [More details]
 
-• **Data Analyst Intern** at Nexus Software System (Nov 2019 – Nov 2020)
-  - Automated reporting workflows using Python and VBA
-  - Created compelling dashboards with Power BI and Tableau
+**💡 Next Section:**
 
-**Key Achievements:** ${portfolioContext.achievements.slice(0, 3).join(', ')}
+[Content with proper spacing]
+
+**🚀 Final Section:**
+
+[Closing with call-to-action]
+
+EXAMPLE PROPER FORMATTING:
+Hey there! 👋 Shivashanker's tech skills are seriously impressive! 🔥 He's a full-stack developer who's absolutely crushing it! 🚀
+
+**🔥 Frontend Expertise:**
+
+• **React.js:** He's a React ninja! 🥷 Uses it extensively in projects like his portfolio website, car wash booking app, and news aggregator
+• **JavaScript:** Top-notch modern JavaScript (ES6+) skills, making his code clean and super effective! ⚡
+• **HTML5 & CSS3:** Crafts beautiful and responsive user interfaces using the latest web standards ✨
+
+**💻 Backend Prowess:**
+
+• **Node.js & Express.js:** Builds robust and scalable backend systems 💪
+• **Python & Django:** Strong backend skills for versatile development 🐍
+
+**🎯 Real Impact:** Reduced server response times by 40% and achieved 3x higher user capacity! 🤯
+
+Want to know more about any specific area? I've got tons more details to share! 🌟
+
+ACHIEVEMENTS TO HIGHLIGHT: ${portfolioContext.achievements.slice(0, 3).join(', ')}
 
 User's question: "${userQuery}"
 
-Provide a comprehensive, well-formatted response based on the available information.`;
+Provide a comprehensive, engaging, and properly formatted response with clear sections and bold headers.`;
     }
     
-    return `This is a greeting from the user: "${userQuery}". Respond warmly and professionally, introducing yourself as Shivashanker's portfolio assistant and offer to help with questions about his skills, projects, or experience. Keep the response concise and welcoming.`;
+    return `Hey there! 👋 I'm Shivashanker's portfolio assistant and I'm totally excited to help you learn about his amazing work! 🚀 Whether you want to know about his killer projects, impressive skills, or professional experience - I've got you covered! ✨ What would you like to explore first? 🤔`;
   };
   
   const handlePresetQuestionClick = (questionText) => {
@@ -498,6 +510,30 @@ Provide a comprehensive, well-formatted response based on the available informat
     setTimeout(() => {
       handleAskSubmit();
     }, 100);
+  };
+
+  // Function to format text with markdown-style formatting
+  const formatMessage = (text) => {
+    // Convert **text** to <strong>text</strong> (be more specific with regex)
+    let formattedText = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    
+    // Convert remaining single *text* to <em>text</em> (but not double asterisks)
+    formattedText = formattedText.replace(/(?<!\*)\*([^*]+)\*(?!\*)/g, '<em>$1</em>');
+    
+    // Convert double line breaks to paragraph breaks
+    formattedText = formattedText.replace(/\n\n/g, '</p><p>');
+    
+    // Convert single line breaks to <br> tags
+    formattedText = formattedText.replace(/\n/g, '<br>');
+    
+    // Wrap the entire text in paragraphs
+    formattedText = '<p>' + formattedText + '</p>';
+    
+    // Clean up empty paragraphs
+    formattedText = formattedText.replace(/<p><\/p>/g, '');
+    formattedText = formattedText.replace(/<p><br><\/p>/g, '<br>');
+    
+    return formattedText;
   };
 
   // Function to get the correct avatar image
@@ -583,7 +619,12 @@ Provide a comprehensive, well-formatted response based on the available informat
                 />
               </div>
               <div className="chat-message-content">
-                <div className="ai-chat-text">{chat.message}</div>
+                <div 
+                  className="ai-chat-text"
+                  dangerouslySetInnerHTML={{
+                    __html: formatMessage(chat.message)
+                  }}
+                />
                 <div className="message-timestamp">
                   {new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                 </div>
