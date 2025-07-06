@@ -11,70 +11,312 @@ function AIChat() {
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://portfolio-be-sad5.onrender.com';
   
   const portfolioContext = React.useMemo(() => ({
-    name: "Shivashanker",
-    website: "https://shivashanker.com",
+    name: "Kanugula Shivashanker",
+    website: "https://shivashankerportfolio.netlify.app",
     greeting: "Hello! I'm Shivashanker's portfolio assistant. I can help you learn about his skills, experience, and projects. How can I assist you today?",
-    skills: [
-      "Frontend: React, JavaScript, HTML5, CSS3, Tailwind CSS",
-      "Backend: Node.js, Express.js, Python, Django",
-      "Database: MongoDB, MySQL, PostgreSQL",
-      "Cloud: AWS, Netlify, Render",
-      "Other: Git, REST APIs, Responsive Design, AI Integrations"
-    ],
+    
+    // Real Personal Information
+    personalInfo: {
+      fullName: "Kanugula Shivashanker",
+      title: "Full-Stack Web Developer",
+      location: "Cardiff, UK (CF11 6JE)",
+      experience: "3+ years in web development and data analysis",
+      email: "shivashanker7337@gmail.com",
+      phone: "07867034729",
+      linkedin: "http://www.linkedin.com/in/shiva-kanugula-51a512252",
+      github: "https://github.com/shivas1432",
+      portfolio: "https://shivashankerportfolio.netlify.app",
+      instagram: "https://www.instagram.com/ss_web_servicess"
+    },
+    
+    // Professional Summary
+    summary: "I'm a full-stack web developer who thrives on building scalable applications with React, Node.js, Express, and MySQL. My expertise lies in creating high-performance solutions that handle real-world demands, with deep experience in API integrations and authentication systems like OAuth 2.0 and JWT. I've deployed projects across various cloud platforms including GCP, AWS, Netlify, and Render, always focusing on optimal performance.",
+    
+    // Real Skills with accurate proficiency levels
+    skills: {
+      frontend: {
+        expert: ["HTML5", "CSS3", "JavaScript (ES6+)", "React.js"],
+        advanced: ["Bootstrap", "jQuery", "SASS", "EJS", "Responsive Design"],
+        intermediate: ["UI/UX Design", "Cross-browser Compatibility"]
+      },
+      backend: {
+        expert: ["Node.js", "Express.js", "RESTful APIs"],
+        advanced: ["Python", "Django", "Flask"],
+        intermediate: ["API Integration", "Server Optimization"]
+      },
+      database: {
+        expert: ["MySQL", "MongoDB"],
+        advanced: ["Database Architecture", "Query Optimization"],
+        intermediate: ["PostgreSQL", "Firebase", "Cloud SQL"]
+      },
+      cloud: {
+        expert: ["Google Cloud Platform (GCP)", "Netlify"],
+        advanced: ["AWS (EC2)", "Render", "Vercel"],
+        intermediate: ["Heroku", "InfinityFree", "Firebase Hosting"]
+      },
+      security: {
+        expert: ["Passport.js", "JSON Web Tokens (JWT)", "OAuth 2.0"],
+        advanced: ["bcrypt", "Authentication Systems"],
+        intermediate: ["Cybersecurity Fundamentals"]
+      },
+      tools: {
+        expert: ["Git", "GitHub", "Visual Studio Code", "NPM"],
+        advanced: ["Postman", "Power BI", "Tableau"],
+        intermediate: ["Excel", "SQL", "Python (Pandas, NumPy)"]
+      },
+      programming: {
+        expert: ["JavaScript", "Python"],
+        advanced: ["SQL", "VBA"],
+        intermediate: ["Java", "C/C++"]
+      }
+    },
+    
+    // Real Project Portfolio
     projects: [
       {
-        name: "Portfolio Website",
-        description: "Personal portfolio website with AI assistance for visitors to showcase skills and projects",
-        technologies: "React, Node.js, Express, Gemini API, Netlify"
+        name: "Real-Time Car Wash Booking Web Application",
+        description: "Full-stack car wash platform with manual and Google login, secure payment, and real-time booking capabilities.",
+        technologies: ["React", "Node.js", "Express.js", "Firebase Hosting", "Cloud SQL", "CSS", "OAuth 2.0", "Google APIs"],
+        features: [
+          "Manual and Google authentication",
+          "User profiles with multiple vehicle management",
+          "Real-time booking system with date/time/service selection",
+          "AI-powered assistance for service info and support",
+          "Booking history tracking and review system",
+          "Multi-channel help center",
+          "Responsive UI across all devices"
+        ],
+        liveUrl: "Available on request",
+        githubUrl: "https://github.com/shivas1432",
+        status: "Completed",
+        duration: "4 months",
+        challenges: "Implementing real-time booking system, AI integration, secure payment processing",
+        keyLearnings: "Advanced React patterns, real-time data handling, AI integration, payment systems"
       },
       {
-        name: "Weather App",
-        description: "Real-time weather application with location-based forecasts and interactive maps",
-        technologies: "React, Weather API, JavaScript, CSS3"
+        name: "Personal Portfolio & Interactive Resume",
+        description: "Dynamic, self-updating portfolio showcasing skills and projects with real-time customization and admin dashboard.",
+        technologies: ["React", "Node.js", "Express.js", "SQL", "CSS", "OAuth 2.0", "Google APIs", "News APIs", "AI Integration"],
+        features: [
+          "Self-updating portfolio with admin dashboard",
+          "Light/dark mode and time-based greetings",
+          "Live weather updates",
+          "AI-powered chatbot for visitor support",
+          "Google OAuth and manual registration",
+          "Live news feed integration",
+          "Background customization",
+          "Full CRUD operations"
+        ],
+        liveUrl: "https://shivashankerportfolio.netlify.app",
+        githubUrl: "https://github.com/shivas1432",
+        status: "Live",
+        duration: "3 months",
+        challenges: "AI chatbot integration, real-time data updates, responsive design",
+        keyLearnings: "AI integration, advanced React hooks, real-time features, API optimization"
       },
       {
-        name: "News Aggregator",
-        description: "Personalized news platform that collects and categorizes articles from various sources",
-        technologies: "React, Node.js, News API, MongoDB"
+        name: "Vapeshop Offlicence",
+        description: "E-commerce platform for vape products with modern UI and secure payment integration.",
+        technologies: ["React", "Node.js", "Express.js", "Firebase Hosting", "Render", "CSS", "OAuth 2.0", "Google APIs"],
+        features: ["Product catalog", "Shopping cart", "User authentication", "Payment integration", "Order management"],
+        liveUrl: "In development",
+        githubUrl: "https://github.com/shivas1432",
+        status: "Ongoing",
+        duration: "2 months (ongoing)",
+        challenges: "E-commerce functionality, payment gateway integration",
+        keyLearnings: "E-commerce development, payment systems, inventory management"
       },
       {
-        name: "Blog Platform",
-        description: "Content management system for creating and publishing blog posts with user authentication",
-        technologies: "React, Express, MongoDB, JWT Authentication"
+        name: "Polyhouse Market",
+        description: "Agricultural marketplace platform connecting farmers with buyers for greenhouse products.",
+        technologies: ["React", "Node.js", "Express.js", "Firebase Hosting", "Render", "CSS", "OAuth 2.0", "Google APIs"],
+        features: ["Marketplace functionality", "Farmer/buyer profiles", "Product listings", "Communication system"],
+        liveUrl: "In development",
+        githubUrl: "https://github.com/shivas1432",
+        status: "Ongoing",
+        duration: "2 months (ongoing)",
+        challenges: "Marketplace dynamics, user matching, agricultural domain knowledge",
+        keyLearnings: "Marketplace development, agricultural technology, user experience design"
+      },
+      {
+        name: "Frontend Development Showcase",
+        description: "Collection of 20+ interactive UI projects focusing on responsive design, animations, and user experience.",
+        technologies: ["HTML", "CSS", "JavaScript", "Bootstrap", "SCSS", "EJS"],
+        features: [
+          "20+ interactive UI projects",
+          "Modern landing pages with smooth animations",
+          "Cross-browser compatibility",
+          "Dynamic dashboards with real-time data visualization",
+          "Advanced form validation",
+          "Responsive design principles"
+        ],
+        liveUrl: "Multiple demos available",
+        githubUrl: "https://github.com/shivas1432",
+        status: "Completed",
+        duration: "6 months",
+        challenges: "Cross-browser compatibility, animation performance, responsive design",
+        keyLearnings: "Advanced CSS, JavaScript animations, responsive design patterns"
       }
+    ],
+    
+    // Real Education
+    education: {
+      masters: {
+        degree: "Master of Science in Advanced Computer Science",
+        university: "Cardiff Metropolitan University",
+        period: "Sept 2022 – Jan 2024",
+        percentage: "65%",
+        credits: "180/180"
+      },
+      bachelors: {
+        degree: "Bachelor of Technology in Computer Science and Engineering",
+        university: "Vaagdevi Engineering College",
+        period: "Aug 2016 – Dec 2020",
+        cgpa: "6.7/10"
+      },
+      intermediate: {
+        school: "SR Junior College",
+        year: "2016",
+        percentage: "94%"
+      },
+      secondary: {
+        school: "Little Soldier Concept School",
+        year: "2014",
+        cgpa: "9.5/10"
+      }
+    },
+    
+    // Real Professional Experience
+    experience: [
+      {
+        company: "Infinite Tech Solutions, Pune",
+        position: "Backend Developer",
+        duration: "Jan 2021 – Jun 2022",
+        responsibilities: [
+          "Architected robust backend systems using Node.js, Express.js, and Python frameworks (Django, Flask)",
+          "Implemented performance optimizations that reduced server response times by 40% and enabled 3x higher concurrent user capacity",
+          "Designed and integrated RESTful APIs connecting web and mobile platforms seamlessly, driving a 25% increase in user engagement metrics",
+          "Led MySQL database architecture initiatives with focus on optimization strategies, achieving 60% improvement in query performance",
+          "Partnered with cross-functional teams to deliver end-to-end solutions, conducting comprehensive testing and troubleshooting that decreased system downtime by 35%"
+        ]
+      },
+      {
+        company: "Nexus Software System, Pune",
+        position: "Data Analyst Intern",
+        duration: "Nov 2019 – Nov 2020",
+        responsibilities: [
+          "Transformed complex datasets into actionable insights using Excel, SQL, and Python (Pandas, NumPy)",
+          "Crafted compelling visual narratives through Power BI and Tableau dashboards",
+          "Architected sophisticated SQL queries to uncover hidden patterns while building Python and VBA automation workflows",
+          "Bridged the gap between technical analysis and business strategy, collaborating with cross-functional teams to deliver data-driven recommendations"
+        ]
+      }
+    ],
+    
+    // Real Certifications
+    certifications: [
+      "Full-Stack Web Development (Udemy) – Mar 2024",
+      "Cybersecurity Fundamentals & Network Defense – Cisco Certified (Jan 2023)",
+      "TCS iON Career Edge - Young Professional | Tata Consultancy Services (TCS iON) – Feb 2022"
+    ],
+    
+    // Additional Projects
+    additionalProjects: [
+      "Location Privacy in Mobile Cloud Computing: Developed a privacy-preserving framework for secure task allocation in mobile cloud environments",
+      "Geospatial Analysis: Used Python and ArcGIS for spatial data processing to solve geographic challenges and support data-driven decisions",
+      "End-User Computing Risk Management: Assessed and mitigated IT security risks, strengthening data protection in corporate environments",
+      "Software Development & Project Management: Applied Agile methodologies to optimize workflows and ensure on-time project delivery"
+    ],
+    
+    // Real Achievements
+    achievements: [
+      "Reduced server response times by 40% through backend optimizations",
+      "Achieved 3x higher concurrent user capacity in production systems",
+      "Increased user engagement metrics by 25% through API integrations",
+      "Improved database query performance by 60%",
+      "Decreased system downtime by 35% through comprehensive testing",
+      "Built 20+ interactive UI projects with focus on responsive design",
+      "Successfully deployed projects on multiple cloud platforms (GCP, AWS, Netlify, Render)"
     ]
   }), []);
 
+  const recentChats = [
+    { id: 1, title: "What are Shivashanker's key technical skills?" },
+    { id: 2, title: "How many years of experience does he have in tech?" },
+    { id: 3, title: "What's his experience at Infinite Tech Solutions?" },
+    { id: 4, title: "How can I contact him for freelance work?" }
+  ];
+
   // Enhanced function to check if a message is a greeting
   const isGreeting = (message) => {
-    const greetingWords = ['hi', 'hey', 'hello', 'hai', 'hallo', 'hola', 'greetings', 'yo', 'sup', 'howdy'];
-    const greetingPhrases = ['how are you', 'how r u', 'how r you', 'how you doing', 'how is it going', 'whats up', 'what\'s up'];
+    const greetingWords = ['hi', 'hey', 'hello', 'hai', 'hallo', 'hola', 'greetings', 'yo', 'sup', 'howdy', 'good morning', 'good afternoon', 'good evening'];
+    const greetingPhrases = ['how are you', 'how r u', 'how r you', 'how you doing', 'how is it going', 'whats up', 'what\'s up', 'nice to meet you'];
     
     const normalizedMsg = message.trim().toLowerCase();
     
-    // Check for exact matches with greetings
-    if (greetingWords.some(word => normalizedMsg === word || normalizedMsg.startsWith(word + ' '))) {
+    if (greetingWords.some(word => normalizedMsg === word || normalizedMsg.startsWith(word + ' ') || normalizedMsg.includes(' ' + word + ' ') || normalizedMsg.endsWith(' ' + word))) {
       return true;
     }
     
-    // Check for greeting phrases
     return greetingPhrases.some(phrase => normalizedMsg.includes(phrase));
   };
   
-  // Function to check if a message is about the portfolio
+  // Enhanced function to check if a message is about the portfolio
   const isPortfolioRelated = (message) => {
     const portfolioKeywords = [
-      'portfolio', 'project', 'skill', 'experience', 'resume', 'work', 'shivashanker', 'shiva', 
-      'technology', 'tech stack', 'frontend', 'backend', 'database', 'react', 'node', 'javascript',
-      'python', 'django', 'mongodb', 'mysql', 'postgresql', 'aws', 'netlify', 'render', 'git',
-      'weather app', 'news aggregator', 'blog platform', 'education', 'contact', 'job', 'role'
+      // Personal
+      'portfolio', 'shivashanker', 'shiva', 'resume', 'cv', 'profile', 'about',
+      
+      // Skills & Technologies
+      'skill', 'skills', 'technology', 'tech stack', 'programming', 'coding', 'development',
+      'frontend', 'backend', 'fullstack', 'full stack', 'web development',
+      'react', 'javascript', 'node', 'nodejs', 'express', 'mongodb', 'mysql', 'postgresql',
+      'html', 'css', 'tailwind', 'bootstrap', 'python', 'django', 'aws', 'cloud',
+      
+      // Projects
+      'project', 'projects', 'work', 'application', 'app', 'website', 'platform',
+      'weather app', 'news aggregator', 'blog platform', 'portfolio website',
+      
+      // Experience & Professional
+      'experience', 'job', 'role', 'position', 'company', 'work history', 'career',
+      'education', 'degree', 'certification', 'achievement', 'accomplishment',
+      
+      // Services
+      'hire', 'freelance', 'consultation', 'contact', 'collaboration', 'service',
+      'available', 'rates', 'cost', 'price', 'timeline', 'availability'
     ];
     
     const normalizedMsg = message.trim().toLowerCase();
     
-    return portfolioKeywords.some(keyword => normalizedMsg.includes(keyword));
+    return portfolioKeywords.some(keyword => 
+      normalizedMsg.includes(keyword) || 
+      normalizedMsg.includes(keyword.replace(/\s+/g, ''))
+    );
   };
-  
+
+  // Smart context extraction function
+  const extractContext = (message) => {
+    const contexts = {
+      skills: ['skill', 'technology', 'tech stack', 'programming', 'coding', 'expertise', 'proficiency'],
+      projects: ['project', 'work', 'application', 'app', 'website', 'platform', 'built', 'created'],
+      experience: ['experience', 'job', 'role', 'position', 'company', 'work history', 'career'],
+      education: ['education', 'degree', 'certification', 'learning', 'course', 'training'],
+      contact: ['hire', 'contact', 'email', 'reach', 'collaboration', 'available', 'freelance'],
+      specific_tech: ['react', 'javascript', 'node', 'python', 'mongodb', 'aws', 'html', 'css']
+    };
+
+    const normalizedMsg = message.toLowerCase();
+    const detectedContexts = [];
+
+    for (const [context, keywords] of Object.entries(contexts)) {
+      if (keywords.some(keyword => normalizedMsg.includes(keyword))) {
+        detectedContexts.push(context);
+      }
+    }
+
+    return detectedContexts;
+  };
+
   useEffect(() => {
     if (chatHistory.length === 0) {
       setChatHistory([{ 
@@ -100,7 +342,6 @@ function AIChat() {
     setChatHistory(prev => [...prev, { type: 'user', message: userQuestion }]);
     
     try {
-      // Handle greetings directly in the frontend
       if (isGreeting(userQuestion)) {
         setTimeout(() => {
           setChatHistory(prev => [...prev, { 
@@ -109,11 +350,10 @@ function AIChat() {
           }]);
           setUserQuestion('');
           setLoadingChat(false);
-        }, 500); // Small delay to make it feel natural
+        }, 500);
         return;
       }
       
-      // Check if the question is not portfolio-related
       if (!isPortfolioRelated(userQuestion)) {
         setTimeout(() => {
           setChatHistory(prev => [...prev, { 
@@ -126,7 +366,6 @@ function AIChat() {
         return;
       }
       
-      // Only send portfolio-related messages to the backend
       const enhancedPrompt = createEnhancedPrompt(userQuestion);
       
       const response = await axios.post(`${API_BASE_URL}/api/chat`, { 
@@ -148,24 +387,110 @@ function AIChat() {
   };
   
   const createEnhancedPrompt = (userQuery) => {
-    // If the query is not a greeting but about specific skills/projects, enhance the prompt
+    const detectedContexts = extractContext(userQuery);
+    let contextualInfo = '';
+
+    // Add relevant context based on user query
+    if (detectedContexts.includes('skills') || detectedContexts.includes('specific_tech')) {
+      contextualInfo += `\n\nDETAILED SKILLS INFORMATION:
+Frontend Expert: ${portfolioContext.skills.frontend.expert.join(', ')}
+Frontend Advanced: ${portfolioContext.skills.frontend.advanced.join(', ')}
+Backend Expert: ${portfolioContext.skills.backend.expert.join(', ')}
+Backend Advanced: ${portfolioContext.skills.backend.advanced.join(', ')}
+Database Expert: ${portfolioContext.skills.database.expert.join(', ')}
+Database Advanced: ${portfolioContext.skills.database.advanced.join(', ')}
+Cloud Expert: ${portfolioContext.skills.cloud.expert.join(', ')}
+Cloud Advanced: ${portfolioContext.skills.cloud.advanced.join(', ')}`;
+    }
+
+    if (detectedContexts.includes('projects')) {
+      contextualInfo += `\n\nDETAILED PROJECTS INFORMATION:
+${portfolioContext.projects.map(project => 
+  `${project.name}: ${project.description}
+  Technologies: ${project.technologies.join(', ')}
+  Features: ${project.features.join(', ')}
+  Status: ${project.status}
+  Duration: ${project.duration}
+  Live URL: ${project.liveUrl}
+  GitHub: ${project.githubUrl}
+  Key Challenges: ${project.challenges}
+  Learnings: ${project.keyLearnings}`
+).join('\n\n')}`;
+    }
+
+    if (detectedContexts.includes('experience')) {
+      contextualInfo += `\n\nPROFESSIONAL EXPERIENCE:
+${portfolioContext.experience.map(exp => 
+  `${exp.position} at ${exp.company} (${exp.duration})
+  Responsibilities: ${exp.responsibilities.join(', ')}`
+).join('\n\n')}`;
+    }
+
+    if (detectedContexts.includes('education')) {
+      contextualInfo += `\n\nEDUCATION & CERTIFICATIONS:
+Masters: ${portfolioContext.education.masters.degree} from ${portfolioContext.education.masters.university} (${portfolioContext.education.masters.period})
+Bachelors: ${portfolioContext.education.bachelors.degree} from ${portfolioContext.education.bachelors.university} (${portfolioContext.education.bachelors.period})
+Certifications: ${portfolioContext.certifications.join(', ')}`;
+    }
+
+    if (detectedContexts.includes('contact')) {
+      contextualInfo += `\n\nCONTACT INFORMATION:
+Name: ${portfolioContext.personalInfo.fullName}
+Title: ${portfolioContext.personalInfo.title}
+Experience: ${portfolioContext.personalInfo.experience}
+Email: ${portfolioContext.personalInfo.email}
+Phone: ${portfolioContext.personalInfo.phone}
+LinkedIn: ${portfolioContext.personalInfo.linkedin}
+GitHub: ${portfolioContext.personalInfo.github}
+Portfolio: ${portfolioContext.personalInfo.portfolio}
+Location: ${portfolioContext.personalInfo.location}`;
+    }
+
     if (!isGreeting(userQuery)) {
-      return `You are an AI assistant for Shivashanker's portfolio website (${portfolioContext.website}). 
-      You help visitors learn about Shivashanker's skills, experience, and projects.
-      
-      IMPORTANT RULES:
-      1. Provide detailed information about Shivashanker's portfolio, resume, skills, and experience
-      2. For general greetings, respond politely but briefly
-      3. If you don't have specific information about Shivashanker, provide what you know and suggest visiting his website
-      4. Include specific details from his portfolio when available
-      5. Always include the portfolio website link with your answers
-      6. IF THE QUERY IS NOT ABOUT SHIVASHANKER'S PORTFOLIO, SKILLS, PROJECTS, OR EXPERIENCE, politely explain you can only answer questions about Shivashanker's work and portfolio
-      
-      User's question: ${userQuery}`;
+      return `You are Shivashanker's intelligent portfolio assistant. You have comprehensive knowledge about his professional background, skills, projects, and experience. Provide detailed, accurate, and well-formatted responses.
+
+CONTEXT: ${contextualInfo || 'General portfolio information available'}
+
+RESPONSE FORMATTING GUIDELINES:
+1. Use clear, structured formatting with proper line breaks
+2. Use bullet points (•) for lists to improve readability
+3. Use section headers with proper spacing
+4. Keep paragraphs concise and well-spaced
+5. Use bold formatting for important information (wrap in **text**)
+6. Include specific metrics and achievements when relevant
+7. Format experience chronologically with clear date ranges
+8. Always end with a call-to-action or offer for more information
+
+RESPONSE STYLE GUIDELINES:
+1. Be conversational yet professional
+2. Provide specific details when available
+3. If asked about skills, mention proficiency levels and real-world applications
+4. For projects, include technologies, features, and impact
+5. Always offer to provide more specific information
+6. Include the portfolio website (${portfolioContext.website}) when appropriate
+7. If you don't have specific information, acknowledge it and suggest alternatives
+8. Be enthusiastic about Shivashanker's work and capabilities
+9. Use proper spacing between sections for better readability
+
+EXAMPLE FORMATTING:
+**Experience Overview:**
+
+• **Backend Developer** at Infinite Tech Solutions (Jan 2021 – Jun 2022)
+  - Reduced server response times by 40%
+  - Achieved 3x higher concurrent user capacity
+
+• **Data Analyst Intern** at Nexus Software System (Nov 2019 – Nov 2020)
+  - Automated reporting workflows using Python and VBA
+  - Created compelling dashboards with Power BI and Tableau
+
+**Key Achievements:** ${portfolioContext.achievements.slice(0, 3).join(', ')}
+
+User's question: "${userQuery}"
+
+Provide a comprehensive, well-formatted response based on the available information.`;
     }
     
-    // For greetings, return a simple prompt that won't trigger detailed portfolio info
-    return `This is a casual greeting from the user: "${userQuery}". Respond conversationally without listing portfolio details.`;
+    return `This is a greeting from the user: "${userQuery}". Respond warmly and professionally, introducing yourself as Shivashanker's portfolio assistant and offer to help with questions about his skills, projects, or experience. Keep the response concise and welcoming.`;
   };
   
   const handlePresetQuestionClick = (questionText) => {
@@ -174,20 +499,6 @@ function AIChat() {
       handleAskSubmit();
     }, 100);
   };
-  
-  const toggleChat = () => {
-    setShowChat(!showChat);
-  };
-  
-  const recentChats = [
-    { id: 1, title: "Show me Shivashanker's recent projects" },
-    { id: 2, title: "What tech stack does he specialize in?" },
-    { id: 3, title: "Tell me about the AI assistance in his portfolio" },
-    { id: 4, title: "What backend technologies has he used?" },
-    { id: 5, title: "Does he have any experience with cloud platforms?" },
-    { id: 6, title: "Give a quick overview of Shivashanker's skills" },
-    { id: 7, title: "What kind of frontend frameworks has he worked with?" }
-  ];
 
   // Function to get the correct avatar image
   const getAvatarImage = (messageType) => {
@@ -197,75 +508,63 @@ function AIChat() {
       case 'ai':
         return '/images/avatar.png';
       case 'error':
-        return '/images/avatar.png'; // fallback to AI avatar for errors
+        return '/images/avatar.png';
       default:
         return '/images/avatar.png';
     }
   };
 
+  const hasMessages = chatHistory.length > 1; // More than just the initial greeting
+
   return (
     <div className="aivo-app-container">
-      <div className="mobile-chat-toggle" onClick={toggleChat}>
-        <i className="chat-icon">💬</i>
-      </div>
-      
-      <div className={`dashboard-view ${showChat ? 'hidden-mobile' : ''}`}>
-        <div className="user-greeting">
-          <div className="greeting-text">
-            <span className="greeting">Hi there! 👋</span>
-            <h2>This is Shiva's Portfolio Assistant</h2>
-            <p>How can I assist you today?</p>
+      {/* Header */}
+      <div className="chat-header">
+        <div className="header-left">
+          <div className="logo-icon">
+            <img 
+              src="/ai.png" 
+              alt="AI Assistant Logo" 
+              className="logo-image"
+              onError={(e) => {
+                // Fallback to emoji if image fails to load
+                e.target.style.display = 'none';
+                e.target.parentElement.innerHTML = '🤖';
+                e.target.parentElement.style.fontSize = '24px';
+                e.target.parentElement.style.display = 'flex';
+                e.target.parentElement.style.alignItems = 'center';
+                e.target.parentElement.style.justifyContent = 'center';
+              }}
+            />
+          </div>
+          <div className="header-title">
+            <h3>SHIVA'S Portfolio Assistant</h3>
+            <p>General assistance and conversation</p>
           </div>
         </div>
-        
-        <div className="recent-chats-section">
-          <div className="section-header">
-            <h3>Frequent questions</h3>
-          </div>
-          
-          <div className="chats-list">
-            {recentChats.map(chat => (
-              <div 
-                key={chat.id} 
-                className="chat-item" 
-                onClick={() => handlePresetQuestionClick(chat.title)}
-              >
-                <div className="chat-icon">✨</div>
-                <div className="chat-title">{chat.title}</div>
-              </div>
-            ))}
-          </div>
-          <div className="features-section">
-            <div className="feature-card power-up">
-              <div className="feature-content">
-                <div className="sparkle-icon">✨</div>
-                <h4>Power Up Your AI Conversations</h4>
-              </div>
-            </div>
+      </div>
+      
+      {/* Main Content */}
+      {!hasMessages ? (
+        <div className="main-content">
+          <div className="welcome-content">
+            <h1>What can I help you with today?</h1>
+            <p>I'm Shivashanker's portfolio assistant. Ask me anything about his skills, projects, and experience.</p>
             
-            <div className="features-options">
-              <a href="/contact" className="feature-option">
-                <div className="option-icon image-icon">👋</div>
-                <div className="option-text">
-                  <p><strong>Say Hello to Shiva — One Touch Away!</strong></p>
-                </div>
-                <div className="option-arrow">→</div>
-              </a>
+            <div className="quick-actions">
+              {recentChats.slice(0, 4).map(chat => (
+                <button 
+                  key={chat.id}
+                  className="quick-action-btn"
+                  onClick={() => handlePresetQuestionClick(chat.title)}
+                >
+                  {chat.title}
+                </button>
+              ))}
             </div>
           </div>
         </div>
-      </div>
-      
-      <div className={`chat-view ${!showChat ? 'hidden-mobile' : ''}`}>
-        <div className="chat-header">
-          <div className="back-button" onClick={toggleChat}>
-            <i className="back-icon">←</i>
-          </div>
-          <div className="chat-title">
-            <h3>Resume and Portfolio Assistant</h3>
-          </div>
-        </div>
-        
+      ) : (
         <div className="ai-chat-history" ref={chatBoxRef} aria-live="polite">
           {chatHistory.map((chat, index) => (
             <div key={index} className={`ai-chat-message ${chat.type}`}>
@@ -274,7 +573,6 @@ function AIChat() {
                   src={getAvatarImage(chat.type)}
                   alt={chat.type} 
                   onError={(e) => {
-                    // Fallback if image fails to load
                     e.target.style.display = 'none';
                     e.target.parentElement.innerHTML = chat.type === 'user' ? '👤' : '🤖';
                     e.target.parentElement.style.display = 'flex';
@@ -286,45 +584,49 @@ function AIChat() {
               </div>
               <div className="chat-message-content">
                 <div className="ai-chat-text">{chat.message}</div>
-                <div className="message-timestamp">{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                <div className="message-timestamp">
+                  {new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                </div>
               </div>
             </div>
           ))}
           {loadingChat && 
             <div className="ai-chat-loading">
-              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Thinking...
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 
+              Thinking...
             </div>
           }
         </div>
-        
-        <div className="chat-input-area">
-          <div className="input-container">
-            <textarea 
-              className="ai-chat-textarea" 
-              value={userQuestion} 
-              onChange={(e) => setUserQuestion(e.target.value)} 
-              placeholder="Ask me about Shiva's skills, projects, or experience!" 
-              rows={1} 
-              disabled={loadingChat}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  handleAskSubmit();
-                }
-              }}
-            />
-            <div className="input-buttons">
-              <button 
-                className={`send-button ${userQuestion.trim() ? 'active' : ''}`} 
-                onClick={handleAskSubmit} 
-                disabled={loadingChat || !userQuestion.trim()}
-              >
-                {loadingChat ? 
-                  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 
-                  <i className="send-icon">➤</i>
-                }
-              </button>
-            </div>
+      )}
+      
+      {/* Input Area */}
+      <div className="chat-input-area">
+        <div className="input-container">
+          <textarea 
+            className="ai-chat-textarea" 
+            value={userQuestion} 
+            onChange={(e) => setUserQuestion(e.target.value)} 
+            placeholder="Ask me about Shiva's skills, projects, or experience!" 
+            rows={1} 
+            disabled={loadingChat}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleAskSubmit();
+              }
+            }}
+          />
+          <div className="input-buttons">
+            <button 
+              className={`send-button ${userQuestion.trim() ? 'active' : ''}`} 
+              onClick={handleAskSubmit} 
+              disabled={loadingChat || !userQuestion.trim()}
+            >
+              {loadingChat ? 
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 
+                <i className="send-icon">↗</i>
+              }
+            </button>
           </div>
         </div>
       </div>
