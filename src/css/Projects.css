@@ -19,6 +19,9 @@
   margin: 0 auto;
   padding: 0 20px;
   overflow-x: hidden;
+  background-color: #0a0e1a;
+  min-height: 100vh;
+  color: #f5f5f7;
 }
 
 .hero-section {
@@ -141,7 +144,6 @@
 
 /* Featured Projects Section */
 .featured-projects-container {
-  
   padding: 1rem;
   position: relative;
   min-height: 800px;
@@ -447,9 +449,7 @@
 
 .all-projects-section {
   padding: 4rem 2rem;
-  background-color: var(--secondary-color);
-  border-radius: 20px;
-  margin: 4rem 0;
+  margin: 1rem 0;
   position: relative;
 }
 
@@ -476,9 +476,9 @@
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  margin-bottom: 4rem;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .project-card {
@@ -505,28 +505,12 @@
   margin-top: 0;
   margin-bottom: 1rem;
   font-weight: 700;
-  color: white;
-}
-
-.project-languages {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.language-tag {
-  background-color: rgba(255, 51, 102, 0.2);
-  color: var(--primary-color);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-weight: 600;
+  color: rgb(90, 76, 76);
 }
 
 .project-media {
   position: relative;
-  height: 180px;
+  height: 250px;
   overflow: hidden;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -535,7 +519,8 @@
 .project-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #f8f9fa;
   transition: transform 0.5s ease;
 }
 
@@ -575,7 +560,7 @@
 }
 
 .project-description {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(22, 21, 21, 0.8);
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
@@ -601,7 +586,7 @@
 }
 
 .project-card.show-video .project-media {
-  height: 250px;
+  height: 300px;
 }
 
 .show-more-container {
@@ -1044,11 +1029,11 @@
   }
   
   .project-media {
-    height: 160px;
+    height: 200px;
   }
   
   .project-card.show-video .project-media {
-    height: 200px;
+    height: 250px;
   }
 
   .featured-projects {
@@ -1206,5 +1191,157 @@
   }
   to {
     opacity: 1;
+  }
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.project-card:hover .video-overlay {
+  opacity: 1;
+}
+
+/* Play icon styles */
+.play-icon {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 51, 102, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+
+.play-icon svg {
+  margin-left: 3px; /* Center the play triangle */
+}
+
+.project-card:hover .play-icon {
+  transform: scale(1.1);
+  background-color: rgba(255, 51, 102, 1);
+}
+
+/* Pulse animation for play icon */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 51, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 51, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 51, 102, 0);
+  }
+}
+
+/* Smooth transition for project cards */
+.project-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Video container improvements */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container iframe {
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none; /* Disable clicking on video */
+}
+
+/* Hide YouTube branding and controls completely */
+.video-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Improve video quality on hover */
+.project-card.show-video .project-media {
+  height: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Hide play overlay when video is playing */
+.project-card.show-video .video-overlay {
+  display: none;
+}
+
+/* Add a subtle glow effect on hover for cards with videos */
+.project-card[data-has-video="true"]:hover {
+  box-shadow: 0 15px 30px rgba(255, 51, 102, 0.1), 
+              0 0 20px rgba(255, 51, 102, 0.1);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .play-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .video-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  /* On mobile, show overlay by default for better UX */
+  .video-overlay {
+    opacity: 1;
+  }
+  
+  .project-card:hover {
+    transform: none; /* Disable transform on mobile for better performance */
+  }
+}
+
+@media (max-width: 480px) {
+  .play-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .play-icon svg {
+    width: 20px;
+    height: 20px;
   }
 }
