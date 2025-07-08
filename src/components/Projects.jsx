@@ -564,7 +564,7 @@ const ProjectsList = () => {
           {visibleTemplatesProjects.map((project) => (
             <Project
               key={project.id}
-              title={project.title}
+            
               languages={project.languages}
               description={project.description}
               image={project.image}
