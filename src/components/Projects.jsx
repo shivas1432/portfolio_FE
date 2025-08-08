@@ -42,11 +42,14 @@ const Project = ({ title, image, website }) => {
   );
 };
 
-const RepoCard = ({ name, description, repoLink, language }) => {
+const RepoCard = ({ name, description, repoLink, language, isPrivate }) => {
   return (
     <div className="repo-card" data-language={language}>
       <div className="repo-header">
-        <h3 className="repo-name">{name}</h3>
+        <h3 className="repo-name">
+          {name}
+          {isPrivate && <span className="private-badge">Private</span>}
+        </h3>
       </div>
       <p className="repo-description">{description}</p>
       {language && <span className="repo-language">{language}</span>}
@@ -77,8 +80,9 @@ const ProjectsList = () => {
 
   const visibleTemplatesProjects = showAllTemplates ? templatesProjects : templatesProjects.slice(0, 6);
 
-  // Popular GitHub repositories data
+  // Popular GitHub repositories data - Reorganized per your request
   const popularRepos = [
+    // First Three: UK & NHS Projects
     {
       id: 1,
       name: "UK-Grocery-Price-Comparison-App",
@@ -100,13 +104,7 @@ const ProjectsList = () => {
       repoLink: "https://github.com/shivas1432/UK-NutriHealth-AI",
       language: "AI/Python"
     },
-    {
-      id: 9,
-      name: "120+ python-projects",
-      description: "Collection of featuring 120+ Python projects ranging from beginner to advanced levels. This repository serves as a practical learning platform where students can explore diverse Python applications.",
-      repoLink: "https://github.com/shivas1432/python-projects",
-      language: "Python"
-    },
+    // Collections: 600+ then 120+ then Website Templates
     {
       id: 4,
       name: "600+ Animated-Designs",
@@ -116,56 +114,94 @@ const ProjectsList = () => {
     },
     {
       id: 5,
+      name: "120+ python-projects",
+      description: "Collection of featuring 120+ Python projects ranging from beginner to advanced levels. This repository serves as a practical learning platform where students can explore diverse Python applications.",
+      repoLink: "https://github.com/shivas1432/python-projects",
+      language: "Python"
+    },
+    {
+      id: 6,
       name: "Website_Templates",
       description: "100+ responsive website templates - business, portfolio, e-commerce & more. HTML5/CSS3/JS. Mobile-first & ready to deploy.",
       repoLink: "https://github.com/shivas1432/Website_Templates",
       language: "HTML"
     },
+    // New Projects Added
     {
-      id: 6,
+      id: 7,
+      name: "boilerplate-codes",
+      description: "🚀 Ultimate collection of production-ready boilerplate codes for 50+ programming languages and frameworks. Save hours of setup time with battle-tested templates including React, Node.js, Python, Go, Flutter, and more.",
+      repoLink: "https://github.com/shivas1432/boilerplate-codes",
+      language: "Multi-Language"
+    },
+    {
+      id: 8,
+      name: "Studymate_AI",
+      description: "AI-powered study companion that generates personalized study plans, quizzes, and tracks progress using OpenAI — built with React, Vite, Tailwind, and Node.js.",
+      repoLink: "https://github.com/shivas1432/Studymate_AI",
+      language: "AI/React",
+      isPrivate: true
+    },
+    {
+      id: 9,
+      name: "AIBuddy",
+      description: "AIBuddy is a modern web application built with Next.js that allows users to chat with AI models through a user-friendly interface.",
+      repoLink: "https://github.com/shivas1432/AIBuddy",
+      language: "Next.js"
+    },
+    {
+      id: 10,
+      name: "Resources-Every-Developer-Need",
+      description: "A comprehensive collection of design resources, tools, and assets for developers and designers. Everything you need to create stunning digital experiences.",
+      repoLink: "https://github.com/shivas1432/Resources-Every-Developer-Need",
+      language: "Resources"
+    },
+    {
+      id: 11,
+      name: "Sign_Gesture_Speak",
+      description: "Real-time ASL gesture recognition web app that converts sign language to text and speech. Built with React, TypeScript, MediaPipe, and TensorFlow.js for accessible communication.",
+      repoLink: "https://github.com/shivas1432/Sign_Gesture_Speak",
+      language: "AI/TypeScript"
+    },
+    // Remaining Projects
+    {
+      id: 12,
+      name: "AI_VoiceCoach",
+      description: "Advanced AI English tutor providing immersive conversation practice with real-time pronunciation analysis, grammar corrections, and adaptive learning pathways and also submitted in World's Largest competition.",
+      repoLink: "https://github.com/shivas1432/AI_VoiceCoach",
+      language: "AI/Python"
+    },
+    {
+      id: 13,
       name: "Interactive-3D-Website-Templates",
       description: "40+ Premium collection of interactive 3D website templates built with Three.js and modern web technologies. Features responsive designs for portfolios, businesses, gaming, and creative projects.",
       repoLink: "https://github.com/shivas1432/Interactive-3D-Website-Templates",
       language: "Three.js"
     },
     {
-      id: 7,
-      name: "car_wash_booking_system_FE",
-      description: "A React-based car wash booking application with user authentication, booking management, profile handling, and an admin dashboard. Integrates with Google OAuth and Firebase for enhanced features.",
-      repoLink: "https://github.com/shivas1432/car_wash_booking_system_FE",
-      language: "React"
-    },
-    {
-      id: 8,
-      name: "AI_VoiceCoach",
-      description: "Advanced AI English tutor providing immersive conversation practice with real-time pronunciation analysis, grammar corrections, and adaptive learning pathways and also submitted in World's Largest competition.",
-      repoLink: "https://github.com/shivas1432/AI_VoiceCoach",
-      language: "AI/Python"
-    },
-    
-    {
-      id: 10,
+      id: 14,
       name: "Amezon_Replica",
       description: "A comprehensive e-commerce web application built with the MERN stack, featuring modern React patterns, secure authentication, payment processing, and admin functionality.",
       repoLink: "https://github.com/shivas1432/Amezon_Replica",
       language: "MERN"
     },
+    // Replicas (moved to end as requested)
     {
-      id: 11,
+      id: 15,
       name: "netflix-replica",
       description: "Advanced Netflix replica with modern React architecture and premium features.",
       repoLink: "https://github.com/shivas1432/netflix-replica",
       language: "React"
     },
     {
-      id: 12,
+      id: 16,
       name: "gemini-replica",
       description: "A modern, responsive Gemini AI interface built with React and Vite. This project demonstrates my full-stack development skills with a focus on AI integration and user experience.",
       repoLink: "https://github.com/shivas1432/gemini-replica",
       language: "React"
     },
     {
-      id: 13,
+      id: 17,
       name: "terminal-replica",
       description: "A minimalist web-based terminal interface with a glowing blue border aesthetic. Simulates basic terminal commands and interaction, built entirely with HTML, CSS, and JavaScript.",
       repoLink: "https://github.com/shivas1432/terminal-replica",
@@ -220,9 +256,9 @@ const ProjectsList = () => {
             <div className="social-card">
               <h3 className="social-card-title">GitHub Repositories</h3>
               <p className="social-card-description">
-                Explore <span className="highlight-number">70+</span> <span className="highlight-term">repositories</span> featuring <span className="highlight-number">40+</span> <span className="highlight-term">full-stack projects</span>, <span className="highlight-number">500+</span> <span className="highlight-term">animation design files</span>, 
-                <span className="highlight-number">200+</span> <span className="highlight-term">websites</span>, <span className="highlight-number">50+</span> <span className="highlight-term">3D interactive experiences</span>, and <span className="highlight-number">120+</span> <span className="highlight-term">Python projects Repo</span>. 
-                 & <span className="highlight-term">open-source  </span>development opportunity.
+                Explore <span className="highlight-number">75+</span> <span className="highlight-term">repositories</span> featuring <span className="highlight-number">50+</span> <span className="highlight-term">full-stack projects</span>, <span className="highlight-number">500+</span> <span className="highlight-term">animation design files</span>, 
+                <span className="highlight-number">200+</span> <span className="highlight-term">websites</span>, <span className="highlight-number">50+</span> <span className="highlight-term">3D interactive experiences</span>, <span className="highlight-number">120+</span> <span className="highlight-term">Python projects</span>, 
+                and <span className="highlight-number">50+</span> <span className="highlight-term">boilerplate codes</span>. & <span className="highlight-term">open-source</span> development opportunity.
               </p>
               <a 
                 href="https://github.com/shivas1432?tab=repositories" 
@@ -238,11 +274,59 @@ const ProjectsList = () => {
         </div>
       </div>
 
+      {/* Achievements Section */}
+      <div className="popular-repos-section">
+        <div className="achievements-container">
+          <h2 className="section-title">Professional Achievements</h2>
+          <p className="section-subtitle">
+            Building impactful solutions and empowering the next generation of developers through mentorship and education
+          </p>
+          
+          <div className="achievements-grid">
+            <div className="repo-card achievement-card">
+              <div className="achievement-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" strokeWidth="2"/>
+                  <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" strokeWidth="2"/>
+                </svg>
+              </div>
+              <div className="achievement-content">
+                <h3 className="achievement-number">500+</h3>
+                <p className="achievement-label">Students Mentored</p>
+                <p className="repo-description">Successfully guided aspiring developers through their coding journey with personalized mentorship and hands-on learning experiences</p>
+              </div>
+            </div>
+            
+            <div className="repo-card achievement-card reviews-card">
+              <div className="achievement-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.48 3.499C11.728 2.85 12.272 2.85 12.52 3.499L14.344 8.093C14.456 8.381 14.728 8.579 15.04 8.619L20.092 9.363C20.784 9.462 21.067 10.33 20.569 10.81L16.978 14.289C16.748 14.511 16.644 14.835 16.704 15.146L17.602 20.173C17.735 20.861 17.01 21.387 16.399 21.06L11.941 18.951C11.668 18.806 11.332 18.806 11.059 18.951L6.60102 21.06C5.99002 21.387 5.26502 20.861 5.39802 20.173L6.29602 15.146C6.35602 14.835 6.25202 14.511 6.02202 14.289L2.43102 10.81C1.93302 10.33 2.21602 9.462 2.90802 9.363L7.96002 8.619C8.27202 8.579 8.54402 8.381 8.65602 8.093L10.48 3.499Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div className="achievement-content">
+                <h3 className="achievement-number">4.9★</h3>
+                <p className="achievement-label">Student Reviews</p>
+                <p className="repo-description">Exceptional feedback and testimonials from students worldwide who have transformed their careers through my mentorship</p>
+                <a 
+                  href="/reviews" 
+                  className="repo-link-button reviews-button"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.48 3.499C11.728 2.85 12.272 2.85 12.52 3.499L14.344 8.093C14.456 8.381 14.728 8.579 15.04 8.619L20.092 9.363C20.784 9.462 21.067 10.33 20.569 10.81L16.978 14.289C16.748 14.511 16.644 14.835 16.704 15.146L17.602 20.173C17.735 20.861 17.01 21.387 16.399 21.06L11.941 18.951C11.668 18.806 11.332 18.806 11.059 18.951L6.60102 21.06C5.99002 21.387 5.26502 20.861 5.39802 20.173L6.29602 15.146C6.35602 14.835 6.25202 14.511 6.02202 14.289L2.43102 10.81C1.93302 10.33 2.21602 9.462 2.90802 9.363L7.96002 8.619C8.27202 8.579 8.54402 8.381 8.65602 8.093L10.48 3.499Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>See Reviews</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Popular GitHub Repositories Section */}
       <div className="popular-repos-section">
         <h2 className="section-title">Popular GitHub Repositories</h2>
         <p className="section-subtitle">
-          Explore my top and favorite repos out of 70+ repositories that showcase different aspects of web development. 
+          Explore my top and favorite repos out of 75+ repositories that showcase different aspects of web development. 
           Look at{' '}
           <a 
             href="https://github.com/shivas1432?tab=repositories" 
@@ -262,6 +346,7 @@ const ProjectsList = () => {
               description={repo.description}
               repoLink={repo.repoLink}
               language={repo.language}
+              isPrivate={repo.isPrivate}
             />
           ))}
         </div>
