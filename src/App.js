@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Layout from './components/Layout'; 
-import { ThemeProvider } from './components/ThemeContext';
+import Layout from './components/Layout';
+import { ThemeProvider, useTheme } from './components/ThemeContext';
 import './css/App.css';
-import AppRoutes from './routes/AppRoutes'; // Import the extracted AppRoutes
-import HeroSection from './components/HeroSection'; // Import HeroSection
+import './css/themes.css'; // Import the new theme CSS file
+import AppRoutes from './routes/AppRoutes';
+import HeroSection from './components/HeroSection';
 
-function App() {
+// Create a wrapper component to access theme context
+function AppContent() {
+  const { isDarkMode } = useTheme();
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [guestName, setGuestName] = useState(null);
@@ -41,28 +44,34 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <Router>
-        <div className="App">
-          {error && <div className="alert alert-danger">{error}</div>}
+    <Router>
+      <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+        {error && <div className="alert alert-danger">{error}</div>}
+        
+        {/* Show HeroSection if no user or guestName */}
+        {!user && !guestName ? (
+          <HeroSection onSuccess={handleGuestAccessGranted} />
+        ) : (
+          <Layout user={user || guestName} onLogout={handleLogout}>
+            <AppRoutes
+              user={user}
+              guestName={guestName}
+              handleLogout={handleLogout}
+              handleLogin={handleLogin}
+              handleGuestAccessGranted={handleGuestAccessGranted}
+              handleError={handleError}
+            />
+          </Layout>
+        )}
+      </div>
+    </Router>
+  );
+}
 
-          {/* 👉 Show HeroSection if no user or guestName */}
-          {!user && !guestName ? (
-            <HeroSection onSuccess={handleGuestAccessGranted} />
-          ) : (
-            <Layout user={user || guestName} onLogout={handleLogout}>
-              <AppRoutes
-                user={user}
-                guestName={guestName}
-                handleLogout={handleLogout}
-                handleLogin={handleLogin}
-                handleGuestAccessGranted={handleGuestAccessGranted}
-                handleError={handleError}
-              />
-            </Layout>
-          )}
-        </div>
-      </Router>
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }

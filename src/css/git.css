@@ -1,13 +1,50 @@
-/* Popular GitHub Repositories Section */
+/* Popular GitHub Repositories Section - Dark/Light Mode Compatible */
+
+/* Light Theme Variables for GitHub Section */
+.light-theme {
+  --github-section-bg: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --github-section-border: #e2e8f0;
+  --github-card-bg: #ffffff;
+  --github-card-border: #e2e8f0;
+  --github-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --github-card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --github-title-color: #1e293b;
+  --github-subtitle-color: #64748b;
+  --github-text-primary: #1e293b;
+  --github-text-secondary: #64748b;
+  --github-button-bg: linear-gradient(135deg, #1e293b, #334155);
+  --github-button-hover: linear-gradient(135deg, #0f172a, #1e293b);
+  --github-button-text: #ffffff;
+}
+
+/* Dark Theme Variables for GitHub Section */
+.dark-theme {
+  --github-section-bg: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+  --github-section-border: #30363d;
+  --github-card-bg: linear-gradient(135deg, #21262d 0%, #30363d 100%);
+  --github-card-border: #30363d;
+  --github-card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
+  --github-card-hover-shadow: 0 8px 25px rgba(88, 166, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.4);
+  --github-title-color: #f0f6fc;
+  --github-subtitle-color: #8b949e;
+  --github-text-primary: #f0f6fc;
+  --github-text-secondary: #8b949e;
+  --github-button-bg: linear-gradient(135deg, #238636, #2ea043);
+  --github-button-hover: linear-gradient(135deg, #2ea043, #238636);
+  --github-button-text: #ffffff;
+}
+
 .popular-repos-section {
-  padding: 20px 20px;
+  padding: 4rem 2rem;
   max-width: 1600px;
-  margin: 0 auto;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  margin: 2rem auto;
+  background: var(--github-section-bg);
   border-radius: 20px;
   margin-bottom: 60px;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--github-section-border);
+  transition: all 0.3s ease;
 }
 
 .popular-repos-section::before {
@@ -21,13 +58,20 @@
   border-radius: 20px 20px 0 0;
 }
 
+/* Dark theme top border effect */
+.dark-theme .popular-repos-section::before {
+  background: linear-gradient(90deg, #58a6ff, #a5a6ff, #58a6ff);
+  height: 2px;
+}
+
 .popular-repos-section .section-title {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1e293b;
+  color: var(--github-title-color);
   margin-bottom: 1rem;
   position: relative;
+  transition: color 0.3s ease;
 }
 
 .popular-repos-section .section-title::after {
@@ -40,36 +84,62 @@
   height: 4px;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   border-radius: 2px;
+  transition: background 0.3s ease;
+}
+
+/* Dark theme title underline */
+.dark-theme .popular-repos-section .section-title::after {
+  background: linear-gradient(90deg, #58a6ff, #a5a6ff);
 }
 
 .section-subtitle {
   text-align: center;
   font-size: 1.1rem;
-  color: #64748b;
+  color: var(--github-subtitle-color);
   margin-bottom: 3rem;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.section-subtitle a {
+  color: #6366f1 !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.dark-theme .section-subtitle a {
+  color: #58a6ff !important;
+}
+
+.section-subtitle a:hover {
+  text-decoration: underline;
+}
+
+.dark-theme .section-subtitle a:hover {
+  color: #79c0ff !important;
 }
 
 .repos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 2rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .repo-card {
-  background: white;
+  background: var(--github-card-bg);
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--github-card-shadow);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--github-card-border);
 }
 
 .repo-card::before {
@@ -84,9 +154,20 @@
   transition: opacity 0.3s ease;
 }
 
+/* Dark theme card top border */
+.dark-theme .repo-card::before {
+  background: linear-gradient(90deg, #58a6ff, #a5a6ff, #58a6ff);
+  height: 2px;
+}
+
 .repo-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--github-card-hover-shadow);
+  border-color: var(--github-text-secondary);
+}
+
+.dark-theme .repo-card:hover {
+  border-color: #58a6ff;
 }
 
 .repo-card:hover::before {
@@ -104,10 +185,12 @@
 .repo-name {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--github-text-primary);
   margin: 0;
   line-height: 1.4;
   flex: 1;
+  transition: color 0.3s ease;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .repo-stats {
@@ -122,14 +205,16 @@
   align-items: center;
   gap: 0.25rem;
   font-size: 0.875rem;
-  color: #64748b;
+  color: var(--github-text-secondary);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .stat-icon {
   width: 14px;
   height: 14px;
   color: #f59e0b;
+  transition: color 0.3s ease;
 }
 
 .repo-stat:first-child .stat-icon {
@@ -140,24 +225,32 @@
   color: #6366f1; /* Fork icon color */
 }
 
+.dark-theme .repo-stat:last-child .stat-icon {
+  color: #58a6ff;
+}
+
 .repo-description {
-  color: #64748b;
+  color: var(--github-text-secondary);
   line-height: 1.6;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  min-height: 3.2rem;
+  transition: color 0.3s ease;
 }
 
 .repo-language {
   display: inline-block;
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
   font-size: 0.75rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.3s ease;
 }
 
 .repo-link-button {
@@ -165,8 +258,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #1e293b, #334155);
-  color: white;
+  background: var(--github-button-bg);
+  color: var(--github-button-text);
   text-decoration: none;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;
@@ -174,20 +267,28 @@
   transition: all 0.3s ease;
   width: 100%;
   font-size: 0.9rem;
+  border: 1px solid transparent;
 }
 
 .repo-link-button:hover {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: var(--github-button-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: var(--github-button-text);
+}
+
+.dark-theme .repo-link-button:hover {
+  box-shadow: 0 4px 12px rgba(46, 160, 67, 0.3);
 }
 
 .repo-link-button svg {
   width: 18px;
   height: 18px;
+  fill: currentColor;
 }
 
-/* Language-specific colors */
+/* Language-specific colors - Enhanced for both themes */
 .repo-card[data-language="JavaScript"] .repo-language {
   background: linear-gradient(135deg, #f7df1e, #f0db4f);
   color: #323330;
@@ -208,10 +309,75 @@
   color: #2b2b2b;
 }
 
+.repo-card[data-language="TypeScript"] .repo-language {
+  background: linear-gradient(135deg, #007acc, #3178c6);
+  color: white;
+}
+
+.repo-card[data-language="HTML"] .repo-language {
+  background: linear-gradient(135deg, #e34c26, #f06529);
+  color: white;
+}
+
+.repo-card[data-language="MERN"] .repo-language {
+  background: linear-gradient(135deg, #47a248, #68217a);
+  color: white;
+}
+
+.repo-card[data-language="AI/Python"] .repo-language {
+  background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+  color: white;
+}
+
+/* Show More Button Styling */
+.popular-repos-section .show-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.popular-repos-section .show-more-button {
+  background: transparent;
+  color: #6366f1;
+  border: 2px solid #6366f1;
+  padding: 0.8rem 2rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.popular-repos-section .show-more-button:hover {
+  background: #6366f1;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Dark theme show more button */
+.dark-theme .popular-repos-section .show-more-button {
+  color: #58a6ff;
+  border-color: #58a6ff;
+}
+
+.dark-theme .popular-repos-section .show-more-button:hover {
+  background: #58a6ff;
+  color: #0d1117;
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.3);
+}
+
 /* Responsive Design */
+@media (max-width: 991px) {
+  .repos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .popular-repos-section {
-    padding: 60px 20px;
+    padding: 3rem 1.5rem;
     margin-bottom: 40px;
     border-radius: 16px;
   }
@@ -243,13 +409,23 @@
   .repo-stats {
     gap: 1.5rem;
   }
+  
+  .repo-name {
+    font-size: 1.1rem;
+  }
+  
+  .repo-description {
+    min-height: auto;
+    font-size: 0.9rem;
+  }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .popular-repos-section {
-    padding: 40px 15px;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding: 2rem 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    border-radius: 12px;
   }
   
   .popular-repos-section .section-title {
@@ -261,11 +437,44 @@
   }
   
   .repo-name {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   
   .repo-link-button {
     padding: 0.625rem 1.25rem;
     font-size: 0.85rem;
+  }
+  
+  .repo-description {
+    font-size: 0.85rem;
+  }
+  
+  .repos-grid {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .popular-repos-section {
+    padding: 1.5rem 0.75rem;
+    margin: 1rem 0.25rem;
+  }
+  
+  .popular-repos-section .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+  }
+  
+  .repo-card {
+    padding: 1rem;
+  }
+  
+  .repo-language {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.6rem;
   }
 }

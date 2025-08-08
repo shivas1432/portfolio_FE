@@ -44,12 +44,25 @@ const WeatherSection = ({ user }) => {
     { city: 'Liverpool, UK', temp: '16°', condition: 'Light Clouds' },
     { city: 'Palermo, Italy', temp: '-2°', condition: 'Light Snow' }
   ]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(false);
 
   // Backend API base URL
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://portfolio-be-sad5.onrender.com';
 
   // Use a ref to track if this is the initial render
   const isInitialRender = React.useRef(true);
+
+  // Check if screen is mobile size
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // Weather quotes based on different conditions
   const weatherQuotes = {
@@ -225,6 +238,10 @@ const WeatherSection = ({ user }) => {
     if (selected) {
       setSelectedCity(selected.city);
       fetchWeatherData(selected.lat, selected.lng);
+      // Close sidebar on mobile after selection
+      if (isMobile) {
+        setSidebarExpanded(false);
+      }
     } else {
       setWeatherData(null);
       setForecastData(null);
@@ -273,6 +290,10 @@ const WeatherSection = ({ user }) => {
     `;
   };
 
+  const toggleSidebar = () => {
+    setSidebarExpanded(!sidebarExpanded);
+  };
+
   return (
     <div className="weather-page">
       {/* Top Edge Animation */}
@@ -286,11 +307,34 @@ const WeatherSection = ({ user }) => {
       </div>
       
       <div className="weather-container">
-        <div className="sidebar">
+        {/* Mobile City Selector Header */}
+        {isMobile && (
+          <div className="mobile-header">
+            <div className="mobile-city-selector">
+              <div className="mobile-selector-wrapper">
+                <select value={selectedCity} onChange={handleCitySelect} disabled={loadingCities}>
+                  <option value="">Select a city</option>
+                  {ukCities.map((city, index) => (
+                    <option key={index} value={city.city}>{city.city}</option>
+                  ))}
+                </select>
+              </div>
+              <button 
+                className={`sidebar-toggle ${sidebarExpanded ? 'expanded' : ''}`}
+                onClick={toggleSidebar}
+              >
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className={`sidebar ${isMobile ? (sidebarExpanded ? 'mobile-expanded' : 'mobile-collapsed') : ''}`}>
           <h2 className="app-title">WeatherToday</h2>
           
           <div className="status-section">
-            
             <div className="status-graph">
               <div className="percentage">+3.8%</div>
               <div className="graph-indicator">
@@ -302,7 +346,6 @@ const WeatherSection = ({ user }) => {
               <span>Dangerous</span>
               <div className="danger-meter"></div>
             </div>
-            
           </div>
           
           <div className="location-selector">

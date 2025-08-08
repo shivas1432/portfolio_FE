@@ -698,7 +698,7 @@
   .side-menu-btn1 {
     flex-direction: row;
     left: 0;
-    top: 15%;
+    top: 25%;
     border-radius: 0 0 12px 0;
     padding: 15px;
     animation: slideInMobile 0.5s ease forwards;

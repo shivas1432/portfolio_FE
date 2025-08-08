@@ -1,0 +1,309 @@
+/* src/css/themes.css - Global Theme Styles */
+
+/* Light Theme Variables (Default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-accent: #007bff;
+  --border-color: #dee2e6;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --navbar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+  --button-bg: #007bff;
+  --button-text: #ffffff;
+  --weather-bg: linear-gradient(rgba(63, 81, 116, 0.9), rgba(39, 43, 51, 0.9));
+  --sidebar-bg: rgba(42, 45, 53, 0.3);
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-accent: #4dabf7;
+  --border-color: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --navbar-bg: #2d2d2d;
+  --card-bg: #2d2d2d;
+  --input-bg: #404040;
+  --button-bg: #4dabf7;
+  --button-text: #ffffff;
+  --weather-bg: linear-gradient(rgba(20, 20, 30, 0.95), rgba(10, 10, 20, 0.95));
+  --sidebar-bg: rgba(20, 20, 30, 0.95);
+}
+
+/* Global Body Styles */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* App Container */
+.App {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+}
+
+/* Navigation Styles */
+.navbar, .nav, .navigation {
+  background-color: var(--navbar-bg) !important;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.navbar .nav-link, 
+.nav-link, 
+.navbar-nav .nav-link {
+  color: var(--text-primary) !important;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover, 
+.nav-link:hover {
+  color: var(--text-accent) !important;
+}
+
+.navbar-brand {
+  color: var(--text-primary) !important;
+}
+
+/* Cards and Containers */
+.card, 
+.container, 
+.content-wrapper,
+.main-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.card-body,
+.card-header,
+.card-footer {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Forms and Inputs */
+.form-control, 
+input, 
+textarea, 
+select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, 
+input:focus, 
+textarea:focus, 
+select:focus {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--text-accent) !important;
+  box-shadow: 0 0 0 0.2rem rgba(74, 171, 247, 0.25) !important;
+}
+
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--button-bg) !important;
+  border-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--text-accent) !important;
+  border-color: var(--text-accent) !important;
+}
+
+.btn-secondary {
+  background-color: var(--bg-tertiary) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-outline-primary {
+  color: var(--text-accent) !important;
+  border-color: var(--text-accent) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--text-accent) !important;
+  color: var(--button-text) !important;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+}
+
+p, span, div, li, a {
+  color: var(--text-primary);
+}
+
+.text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.text-primary {
+  color: var(--text-accent) !important;
+}
+
+/* Weather Page Specific */
+.weather-page {
+  background: var(--weather-bg) !important;
+}
+
+.weather-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.sidebar {
+  background-color: var(--sidebar-bg) !important;
+}
+
+.mobile-header {
+  background-color: var(--sidebar-bg) !important;
+}
+
+.mobile-selector-wrapper select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Tables */
+.table {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.table th {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.table td {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--bg-secondary);
+}
+
+/* Modals */
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+.modal-title {
+  color: var(--text-primary);
+}
+
+/* Alerts */
+.alert {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.1);
+  border-color: #28a745;
+  color: var(--text-primary);
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.1);
+  border-color: #dc3545;
+  color: var(--text-primary);
+}
+
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.1);
+  border-color: #ffc107;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--navbar-bg);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Dropdowns */
+.dropdown-menu {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.dropdown-item {
+  color: var(--text-primary);
+}
+
+.dropdown-item:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Lists */
+.list-group-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Badges */
+.badge {
+  background-color: var(--text-accent);
+  color: var(--button-text);
+}
+
+/* Progress bars */
+.progress {
+  background-color: var(--bg-secondary);
+}
+
+.progress-bar {
+  background-color: var(--text-accent);
+}
+
+/* Smooth transitions for all theme changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

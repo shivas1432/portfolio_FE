@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from './ThemeContext'; // Import the theme context
 
 const HomePage = ({ onLogout }) => {
   const navigate = useNavigate();
-  // Theme state
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  
+  // Use global theme context instead of local state
+  const { isDarkMode, toggleTheme } = useTheme();
   
   const [batteryPercentage, setBatteryPercentage] = useState(0);
   const [isCharging, setIsCharging] = useState(false);
@@ -65,13 +66,8 @@ const HomePage = ({ onLogout }) => {
     };
   }, []);
 
-  // Apply theme to body
-  useEffect(() => {
-    document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
-    return () => {
-      document.body.className = '';
-    };
-  }, [isDarkMode]);
+  // Remove local theme effect since it's handled globally now
+  // The global ThemeContext already handles body className changes
 
   // Typing animation
   useEffect(() => {
@@ -161,13 +157,15 @@ const HomePage = ({ onLogout }) => {
           outline: none;
         }
         
-        /* Theme Modes */
-        .dark-mode {
+        /* Theme Modes - Updated to work with global theme */
+        .homepage-container.dark-theme,
+        .dark-theme .homepage-container {
           background: linear-gradient(135deg, #121212, #1a1a2e) !important;
           color: #fff !important;
         }
 
-        .light-mode {
+        .homepage-container.light-theme,
+        .light-theme .homepage-container {
           background: linear-gradient(135deg, #f5f7fa, #e4e8f0) !important;
           color: #333 !important;
         }
@@ -245,12 +243,12 @@ const HomePage = ({ onLogout }) => {
           z-index: 500;
         }
         
-        .light-mode .signout-button {
+        .light-theme .signout-button {
           background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .dark-mode .signout-button {
+        .dark-theme .signout-button {
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
@@ -297,13 +295,13 @@ const HomePage = ({ onLogout }) => {
           max-width: 120px;
         }
         
-        .light-mode .widget-item {
+        .light-theme .widget-item {
           background: rgba(255, 255, 255, 0.8);
           border: 1px solid rgba(0, 0, 0, 0.1);
           color: #333;
         }
         
-        .dark-mode .widget-item {
+        .dark-theme .widget-item {
           background: rgba(255, 255, 255, 0.1);
           border: 1px solid rgba(255, 255, 255, 0.2);
           color: #fff;
@@ -314,12 +312,12 @@ const HomePage = ({ onLogout }) => {
           transform: translateY(-3px);
         }
         
-        .light-mode .widget-item:hover {
+        .light-theme .widget-item:hover {
           background: rgba(102, 126, 234, 0.3);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        .dark-mode .widget-item:hover {
+        .dark-theme .widget-item:hover {
           background: rgba(102, 126, 234, 0.2);
           box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
         }
@@ -339,11 +337,11 @@ const HomePage = ({ onLogout }) => {
           margin-bottom: 4px;
         }
         
-        .light-mode .widget-label {
+        .light-theme .widget-label {
           color: #333;
         }
         
-        .dark-mode .widget-label {
+        .dark-theme .widget-label {
           color: white;
         }
         
@@ -353,11 +351,11 @@ const HomePage = ({ onLogout }) => {
           line-height: 1.2;
         }
         
-        .light-mode .widget-subtitle {
+        .light-theme .widget-subtitle {
           color: rgba(0, 0, 0, 0.6);
         }
         
-        .dark-mode .widget-subtitle {
+        .dark-theme .widget-subtitle {
           color: rgba(255, 255, 255, 0.7);
         }
         
@@ -374,12 +372,12 @@ const HomePage = ({ onLogout }) => {
           z-index: 500;
         }
         
-        .light-mode .service-note {
+        .light-theme .service-note {
           background: rgba(0, 0, 0, 0.1);
           color: rgba(0, 0, 0, 0.7);
         }
         
-        .dark-mode .service-note {
+        .dark-theme .service-note {
           background: rgba(255, 255, 255, 0.1);
           color: rgba(255, 255, 255, 0.7);
         }
@@ -761,7 +759,7 @@ const HomePage = ({ onLogout }) => {
         }
       `}</style>
 
-      <section className={`hero-section ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+      <section className={`hero-section homepage-container ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
         <div className="w-layout-blockcontainer hero-container w-container">
           <div className="hero-wrapper">
             
