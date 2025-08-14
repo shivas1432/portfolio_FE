@@ -886,7 +886,7 @@
 /* Responsive design - FIXED */
 @media (max-width: 480px) {
   .chat-window {
-    width: 330px;
+    width: 340px;
     height: 650px;
     bottom: 90px;
     right: 3px;

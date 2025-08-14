@@ -407,8 +407,8 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
-                width: '40px',
-                height: '40px',
+                width: '60px',
+                height: '60px',
                 borderRadius: '50%'
               }}>
                 {/* Remove emoji content since we're using background image */}
