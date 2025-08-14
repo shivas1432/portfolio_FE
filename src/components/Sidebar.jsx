@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   FaPhoneAlt, FaEnvelope, FaWhatsapp, FaInstagram, FaGithub, FaLinkedin,
-  FaDownload, FaTimes, FaProjectDiagram, FaRobot,  FaAddressCard,
+  FaDownload, FaTimes, FaProjectDiagram, FaAddressCard,
   FaFilePdf, FaUserTie, FaMedium, FaDev, FaStar, FaCog, FaBlog
 } from 'react-icons/fa';
 import '../css/Sidebar.css';
@@ -72,7 +72,7 @@ const Sidebar = ({ isOpen, toggleSidebar, onLogout }) => {
 
   const menuItems = [
     { className: 'div1', link: '/projects', label: 'My Work', icon: <FaProjectDiagram /> },
-    { className: 'div2', link: '/ai-chat', label: 'AI Assistant', icon: <FaRobot /> },
+    { className: 'div2', link: '/github-projects', label: 'GitHub Projects', icon: <FaGithub /> },
     { 
       className: 'div3', 
       label: '', 

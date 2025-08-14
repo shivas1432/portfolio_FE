@@ -10,7 +10,7 @@ import AddReference from '../components/References';
 import LoginPage from '../components/login';
 import RegisterPage from '../components/register';
 import News from '../components/News';
-import AIChat from '../components/AIChat';
+import GitHubProjects from '../components/GitHubProjects'; // New import
 import EditReference from '../components/EditReference';
 import WeatherPage from '../components/WeatherSection';
 import SkillsPage from '../components/skills';
@@ -27,6 +27,7 @@ const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAcce
     />
     <Route path="/about" element={<AboutMe user={user || guestName} onLogout={handleLogout} />} />
     <Route path="/projects" element={<Projects user={user || guestName} onLogout={handleLogout} />} />
+    <Route path="/github-projects" element={<GitHubProjects user={user || guestName} onLogout={handleLogout} />} />
     <Route path="/contact" element={<Contact user={user || guestName} onLogout={handleLogout} />} />
     <Route path="/resume" element={<Resume user={user || guestName} onLogout={handleLogout} />} />
     <Route path="/references" element={<Reference />} />
@@ -35,7 +36,6 @@ const AppRoutes = ({ user, guestName, handleLogout, handleLogin, handleGuestAcce
     <Route path="/register" element={<RegisterPage onLogin={handleLogin} onError={handleError} />} />
     <Route path="/edit-reference/:id" element={<EditReference />} />
     <Route path="/news" element={<News />} />
-    <Route path="/ai-chat" element={<AIChat />} />
     <Route path="/services" element={<Services />} />
     <Route path="/reviews" element={<Reviews />} />
     <Route path="/weather" element={<WeatherPage />} />

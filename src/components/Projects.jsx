@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../css/Projects.css";
 import "../css/git.css";
-import { FaInstagram, FaTelegram, FaGithub } from 'react-icons/fa';
+import { FaInstagram, FaTelegram, FaGithub, FaArrowRight } from 'react-icons/fa';
 // Import project data from separate file
 import { templatesProjects } from './projectsData.jsx';
 
@@ -42,174 +43,19 @@ const Project = ({ title, image, website }) => {
   );
 };
 
-const RepoCard = ({ name, description, repoLink, language, isPrivate }) => {
-  return (
-    <div className="repo-card" data-language={language}>
-      <div className="repo-header">
-        <h3 className="repo-name">
-          {name}
-          {isPrivate && <span className="private-badge">Private</span>}
-        </h3>
-      </div>
-      <p className="repo-description">{description}</p>
-      {language && <span className="repo-language">{language}</span>}
-      <a
-        href={repoLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="repo-link-button"
-      >
-        <FaGithub />
-        <span>View Repository</span>
-      </a>
-    </div>
-  );
-};
-
 const ProjectsList = () => {
+  const navigate = useNavigate();
   const [showAllTemplates, setShowAllTemplates] = useState(false);
-  const [showAllRepos, setShowAllRepos] = useState(false);
 
   const toggleShowAllTemplates = () => {
     setShowAllTemplates(!showAllTemplates);
   };
 
-  const toggleShowAllRepos = () => {
-    setShowAllRepos(!showAllRepos);
+  const handleGitHubProjectsNavigation = () => {
+    navigate('/github-projects');
   };
 
   const visibleTemplatesProjects = showAllTemplates ? templatesProjects : templatesProjects.slice(0, 6);
-
-  // Popular GitHub repositories data - Reorganized per your request
-  const popularRepos = [
-    // First Three: UK & NHS Projects
-    {
-      id: 1,
-      name: "UK-Grocery-Price-Comparison-App",
-      description: "A comprehensive, production-ready web application for comparing grocery prices across major UK supermarkets including Tesco, ASDA, Sainsbury's, Morrisons, Lidl, and Aldi.",
-      repoLink: "https://github.com/shivas1432/UK-Grocery-Price-Comparison-App",
-      language: "React"
-    },
-    {
-      id: 2,
-      name: "NHS-Appointment-Optimization",
-      description: "This production-ready application showcases advanced React/TypeScript development while solving real-world healthcare challenges. The platform provides intelligent appointment matching, predictive analytics.",
-      repoLink: "https://github.com/shivas1432/NHS-Appointment-Optimization",
-      language: "TypeScript"
-    },
-    {
-      id: 3,
-      name: "UK-NutriHealth-AI",
-      description: "I built an AI-powered platform that predicts vitamin and mineral deficiency risks before symptoms appear, potentially saving the NHS millions while improving the health of 67 million UK residents.",
-      repoLink: "https://github.com/shivas1432/UK-NutriHealth-AI",
-      language: "AI/Python"
-    },
-    // Collections: 600+ then 120+ then Website Templates
-    {
-      id: 4,
-      name: "600+ Animated-Designs",
-      description: "600+ creative collection of HTML, CSS, and JavaScript animations and interactive designs. This repository showcases various web animation techniques and UI components perfect for learning.",
-      repoLink: "https://github.com/shivas1432/Animated-Designs",
-      language: "JavaScript"
-    },
-    {
-      id: 5,
-      name: "120+ python-projects",
-      description: "Collection of featuring 120+ Python projects ranging from beginner to advanced levels. This repository serves as a practical learning platform where students can explore diverse Python applications.",
-      repoLink: "https://github.com/shivas1432/python-projects",
-      language: "Python"
-    },
-    {
-      id: 6,
-      name: "Website_Templates",
-      description: "100+ responsive website templates - business, portfolio, e-commerce & more. HTML5/CSS3/JS. Mobile-first & ready to deploy.",
-      repoLink: "https://github.com/shivas1432/Website_Templates",
-      language: "HTML"
-    },
-    // New Projects Added
-    {
-      id: 7,
-      name: "boilerplate-codes",
-      description: "🚀 Ultimate collection of production-ready boilerplate codes for 50+ programming languages and frameworks. Save hours of setup time with battle-tested templates including React, Node.js, Python, Go, Flutter, and more.",
-      repoLink: "https://github.com/shivas1432/boilerplate-codes",
-      language: "Multi-Language"
-    },
-    {
-      id: 8,
-      name: "Studymate_AI",
-      description: "AI-powered study companion that generates personalized study plans, quizzes, and tracks progress using OpenAI — built with React, Vite, Tailwind, and Node.js.",
-      repoLink: "https://github.com/shivas1432/Studymate_AI",
-      language: "AI/React",
-      isPrivate: true
-    },
-    {
-      id: 9,
-      name: "AIBuddy",
-      description: "AIBuddy is a modern web application built with Next.js that allows users to chat with AI models through a user-friendly interface.",
-      repoLink: "https://github.com/shivas1432/AIBuddy",
-      language: "Next.js"
-    },
-    {
-      id: 10,
-      name: "Resources-Every-Developer-Need",
-      description: "A comprehensive collection of design resources, tools, and assets for developers and designers. Everything you need to create stunning digital experiences.",
-      repoLink: "https://github.com/shivas1432/Resources-Every-Developer-Need",
-      language: "Resources"
-    },
-    {
-      id: 11,
-      name: "Sign_Gesture_Speak",
-      description: "Real-time ASL gesture recognition web app that converts sign language to text and speech. Built with React, TypeScript, MediaPipe, and TensorFlow.js for accessible communication.",
-      repoLink: "https://github.com/shivas1432/Sign_Gesture_Speak",
-      language: "AI/TypeScript"
-    },
-    // Remaining Projects
-    {
-      id: 12,
-      name: "AI_VoiceCoach",
-      description: "Advanced AI English tutor providing immersive conversation practice with real-time pronunciation analysis, grammar corrections, and adaptive learning pathways and also submitted in World's Largest competition.",
-      repoLink: "https://github.com/shivas1432/AI_VoiceCoach",
-      language: "AI/Python"
-    },
-    {
-      id: 13,
-      name: "Interactive-3D-Website-Templates",
-      description: "40+ Premium collection of interactive 3D website templates built with Three.js and modern web technologies. Features responsive designs for portfolios, businesses, gaming, and creative projects.",
-      repoLink: "https://github.com/shivas1432/Interactive-3D-Website-Templates",
-      language: "Three.js"
-    },
-    {
-      id: 14,
-      name: "Amezon_Replica",
-      description: "A comprehensive e-commerce web application built with the MERN stack, featuring modern React patterns, secure authentication, payment processing, and admin functionality.",
-      repoLink: "https://github.com/shivas1432/Amezon_Replica",
-      language: "MERN"
-    },
-    // Replicas (moved to end as requested)
-    {
-      id: 15,
-      name: "netflix-replica",
-      description: "Advanced Netflix replica with modern React architecture and premium features.",
-      repoLink: "https://github.com/shivas1432/netflix-replica",
-      language: "React"
-    },
-    {
-      id: 16,
-      name: "gemini-replica",
-      description: "A modern, responsive Gemini AI interface built with React and Vite. This project demonstrates my full-stack development skills with a focus on AI integration and user experience.",
-      repoLink: "https://github.com/shivas1432/gemini-replica",
-      language: "React"
-    },
-    {
-      id: 17,
-      name: "terminal-replica",
-      description: "A minimalist web-based terminal interface with a glowing blue border aesthetic. Simulates basic terminal commands and interaction, built entirely with HTML, CSS, and JavaScript.",
-      repoLink: "https://github.com/shivas1432/terminal-replica",
-      language: "JavaScript"
-    }
-  ];
-
-  const visibleRepos = showAllRepos ? popularRepos : popularRepos.slice(0, 3);
 
   return (
     <div className="projects-container">
@@ -322,42 +168,25 @@ const ProjectsList = () => {
         </div>
       </div>
 
-      {/* Popular GitHub Repositories Section */}
-      <div className="popular-repos-section">
-        <h2 className="section-title">Popular GitHub Repositories</h2>
-        <p className="section-subtitle">
-          Explore my top and favorite repos out of 75+ repositories that showcase different aspects of web development. 
-          Look at{' '}
-          <a 
-            href="https://github.com/shivas1432?tab=repositories" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ color: '#6366f1', textDecoration: 'none', fontWeight: '600' }}
-          >
-            GitHub
-          </a>
-          {' '}for all full stack application repositories
-        </p>
-        <div className="repos-grid">
-          {visibleRepos.map((repo) => (
-            <RepoCard
-              key={repo.id}
-              name={repo.name}
-              description={repo.description}
-              repoLink={repo.repoLink}
-              language={repo.language}
-              isPrivate={repo.isPrivate}
-            />
-          ))}
-        </div>
-        
-        <div className="show-more-container">
-          <button 
-            className="show-more-button" 
-            onClick={toggleShowAllRepos}
-          >
-            {showAllRepos ? "Show Less" : `Show More (${popularRepos.length - 3} more repositories)`}
-          </button>
+      {/* GitHub Projects Navigation Section */}
+      <div className="github-navigation-section">
+        <div className="github-nav-card">
+          <div className="github-nav-content">
+            <FaGithub className="github-nav-icon" />
+            <div className="github-nav-text">
+              <h2 className="github-nav-title">Explore My GitHub Projects</h2>
+            <p className="github-nav-description">
+  Look at my <span className="highlight-number">19</span> favorite repositories featuring <span className="highlight-term">UK healthcare solutions</span>, <span className="highlight-term">AI applications</span>, and <span className="highlight-term">full-stack projects</span> here.
+</p>
+            </div>
+            <button 
+              className="github-nav-button"
+              onClick={handleGitHubProjectsNavigation}
+            >
+              <span>View GitHub Projects</span>
+              <FaArrowRight className="nav-arrow" />
+            </button>
+          </div>
         </div>
       </div>
 

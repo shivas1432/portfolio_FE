@@ -1,0 +1,313 @@
+/* voice-ui.css - Fixed voice UI styles */
+
+/* Voice Input Container with Beautiful Design */
+.voice-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
+
+.voice-input-container .card {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.voice-input-container .card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.voice-input-container .card:active {
+  transform: scale(0.95);
+}
+
+/* Hidden input - this is correct */
+.voice-input-container .input {
+  display: none;
+}
+
+.voice-input-container .inner-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.voice-input-container .trigger-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-input-container .trigger {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.voice-input-container .mic {
+  width: 20px;
+  height: 20px;
+  color: white;
+  z-index: 5;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.voice-input-container .spectrum {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+.voice-input-container .spectrum b {
+  display: block;
+  width: 2px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 1px;
+  transform-origin: bottom;
+  animation: none;
+}
+
+/* FIXED: Active state when listening - Updated selectors */
+.voice-input-container .input:checked ~ .inner-card .trigger-wrap {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  border-radius: 50%;
+  animation: pulse-listening 1.5s infinite;
+}
+
+.voice-input-container .input:checked ~ .inner-card .mic {
+  opacity: 0.3;
+  transform: scale(0.8);
+}
+
+.voice-input-container .input:checked ~ .inner-card .spectrum {
+  opacity: 1;
+}
+
+.voice-input-container .input:checked ~ .inner-card .spectrum b {
+  animation: spectrum-animation 0.6s infinite ease-in-out;
+  animation-delay: calc(var(--index) * 0.03s);
+}
+
+/* Enhanced listening state */
+.voice-input-container .input:checked ~ .inner-card .card {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+}
+
+@keyframes pulse-listening {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(255, 107, 107, 0);
+  }
+}
+
+@keyframes spectrum-animation {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(2.5);
+    opacity: 1;
+  }
+}
+
+/* Alternative spectrum animation for variety */
+.voice-input-container .spectrum b:nth-child(even) {
+  animation-direction: reverse;
+}
+
+/* Voice button states for different components */
+.voice-input-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.voice-input-btn:hover {
+  background: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.voice-input-btn.listening {
+  background: #ff4757;
+  color: white;
+  animation: pulse 1s infinite;
+}
+
+.voice-input-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Voice controls in header */
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.voice-toggle, .stop-speaking {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  width: 35px;
+  height: 35px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-size: 16px;
+}
+
+.voice-toggle:hover, .stop-speaking:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+.voice-toggle.active {
+  background: rgba(76, 175, 80, 0.3);
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+/* Speak button for AI messages */
+.speak-button {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 6px;
+  width: 25px;
+  height: 25px;
+  margin-left: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.speak-button:hover:not(:disabled) {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+.speak-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Voice not supported warning */
+.voice-not-supported {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.voice-not-supported small {
+  color: #8892d8;
+  font-size: 12px;
+}
+
+/* Enhanced listening indicator */
+.voice-input-container.listening .card {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  animation: pulse-listening 1.5s infinite;
+}
+
+.voice-input-container.listening .mic {
+  opacity: 0.3;
+}
+
+.voice-input-container.listening .spectrum {
+  opacity: 1;
+}
+
+.voice-input-container.listening .spectrum b {
+  animation: spectrum-animation 0.6s infinite ease-in-out;
+  animation-delay: calc(var(--index) * 0.03s);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .voice-input-container .card {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .voice-input-container .mic {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .voice-input-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .voice-toggle, .stop-speaking {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  
+  .voice-input-container .spectrum {
+    width: 25px;
+    height: 16px;
+  }
+}
+
+/* Additional fix for dark theme compatibility */
+.input-wrapper .voice-input-container .card {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+
+.input-wrapper .voice-input-container .card:hover {
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
