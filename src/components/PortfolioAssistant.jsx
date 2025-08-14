@@ -293,7 +293,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     } catch (error) {
       const errorMessage = {
         type: 'ai',
-        content: "I'm having technical difficulties. Please make sure backend is running on port 8081!",
+        content: "FREE API limit reached. Service temporarily unavailable. Please try again shortly. Thank you for your understanding",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
