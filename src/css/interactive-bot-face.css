@@ -886,10 +886,10 @@
 /* Responsive design - FIXED */
 @media (max-width: 480px) {
   .chat-window {
-    width: 380px;
-    height: 750px;
-    bottom: 100px;
-    right: 10px;
+    width: 330px;
+    height: 650px;
+    bottom: 90px;
+    right: 3px;
   }
   
   .portfolio-assistant {
