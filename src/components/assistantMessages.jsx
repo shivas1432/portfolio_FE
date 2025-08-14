@@ -3,7 +3,7 @@
 export const assistantMessages = {
   // Home/Portfolio Page
   portfolio: {
-    greeting: "Welcome to Shiva's world of innovation! 🚀 Ready to explore something amazing?",
+    greeting: "Welcome to Shiva's world of innovation.Ready to explore something amazing?",
     initialMessage: "Hi! I'm Shiva's AI assistant. I'm here to guide you through his incredible portfolio, showcase his expertise, and help you discover why he's the developer you've been looking for!",
     suggestions: [
       "Tell me about Shiva",

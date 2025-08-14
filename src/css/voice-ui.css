@@ -1,4 +1,4 @@
-/* voice-ui.css - Fixed voice UI styles */
+/* voice-ui.css - Fixed voice UI styles for React */
 
 /* Voice Input Container with Beautiful Design */
 .voice-input-container {
@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   margin-left: 8px;
+  position: relative;
 }
 
 .voice-input-container .card {
@@ -31,7 +32,7 @@
   transform: scale(0.95);
 }
 
-/* Hidden input - this is correct */
+/* Hidden input */
 .voice-input-container .input {
   display: none;
 }
@@ -51,6 +52,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .voice-input-container .trigger {
@@ -97,31 +100,61 @@
   animation: none;
 }
 
-/* FIXED: Active state when listening - Updated selectors */
-.voice-input-container .input:checked ~ .inner-card .trigger-wrap {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-  border-radius: 50%;
-  animation: pulse-listening 1.5s infinite;
+/* CRITICAL: High specificity selectors for listening state */
+.voice-input-container.listening .card,
+.voice-input-container .card.recording {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  animation: pulse-listening 1.5s infinite !important;
+  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5) !important;
 }
 
-.voice-input-container .input:checked ~ .inner-card .mic {
-  opacity: 0.3;
-  transform: scale(0.8);
+.voice-input-container.listening .card:hover,
+.voice-input-container .card.recording:hover {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6) !important;
+  transform: scale(1.05) !important;
 }
 
-.voice-input-container .input:checked ~ .inner-card .spectrum {
-  opacity: 1;
+.voice-input-container.listening .mic,
+.voice-input-container .mic.recording {
+  opacity: 0.3 !important;
+  transform: scale(0.8) !important;
 }
 
-.voice-input-container .input:checked ~ .inner-card .spectrum b {
-  animation: spectrum-animation 0.6s infinite ease-in-out;
-  animation-delay: calc(var(--index) * 0.03s);
+.voice-input-container.listening .spectrum,
+.voice-input-container .spectrum.active {
+  opacity: 1 !important;
 }
 
-/* Enhanced listening state */
-.voice-input-container .input:checked ~ .inner-card .card {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
+.voice-input-container.listening .spectrum b,
+.voice-input-container .spectrum.active b {
+  animation: spectrum-animation 0.6s infinite ease-in-out !important;
+  animation-delay: calc(var(--index) * 0.03s) !important;
+}
+
+/* Even higher specificity for input wrapper */
+.input-wrapper .voice-input-container.listening .card,
+.input-wrapper .voice-input-container .card.recording {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  animation: pulse-listening 1.5s infinite !important;
+  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5) !important;
+}
+
+.input-wrapper .voice-input-container.listening .mic,
+.input-wrapper .voice-input-container .mic.recording {
+  opacity: 0.3 !important;
+  transform: scale(0.8) !important;
+}
+
+.input-wrapper .voice-input-container.listening .spectrum,
+.input-wrapper .voice-input-container .spectrum.active {
+  opacity: 1 !important;
+}
+
+.input-wrapper .voice-input-container.listening .spectrum b,
+.input-wrapper .voice-input-container .spectrum.active b {
+  animation: spectrum-animation 0.6s infinite ease-in-out !important;
+  animation-delay: calc(var(--index) * 0.03s) !important;
 }
 
 @keyframes pulse-listening {
@@ -149,6 +182,27 @@
 /* Alternative spectrum animation for variety */
 .voice-input-container .spectrum b:nth-child(even) {
   animation-direction: reverse;
+}
+
+/* Force animation on any element with these classes */
+.card.recording {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  animation: pulse-listening 1.5s infinite !important;
+  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5) !important;
+}
+
+.mic.recording {
+  opacity: 0.3 !important;
+  transform: scale(0.8) !important;
+}
+
+.spectrum.active {
+  opacity: 1 !important;
+}
+
+.spectrum.active b {
+  animation: spectrum-animation 0.6s infinite ease-in-out !important;
+  animation-delay: calc(var(--index) * 0.03s) !important;
 }
 
 /* Voice button states for different components */
@@ -216,6 +270,28 @@
   border-color: rgba(76, 175, 80, 0.5);
 }
 
+/* Enhanced voice toggle for image backgrounds */
+.voice-toggle {
+  background-color: rgba(255,255,255,0.1);
+  background-blend-mode: normal;
+}
+
+.voice-toggle:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.voice-toggle.active {
+  background-color: rgba(76, 175, 80, 0.3);
+  border-color: rgba(76, 175, 80, 0.5);
+}
+
+/* Ensure images are visible on dark backgrounds */
+.voice-toggle img {
+  filter: brightness(0) invert(1); /* Makes images white */
+  width: 20px;
+  height: 20px;
+}
+
 /* Speak button for AI messages */
 .speak-button {
   background: rgba(255,255,255,0.1);
@@ -231,10 +307,12 @@
   font-size: 12px;
   transition: all 0.2s ease;
   color: white;
+  background-color: rgba(255,255,255,0.1);
+  background-blend-mode: normal;
 }
 
 .speak-button:hover:not(:disabled) {
-  background: rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.2);
   transform: scale(1.1);
 }
 
@@ -252,25 +330,6 @@
 .voice-not-supported small {
   color: #8892d8;
   font-size: 12px;
-}
-
-/* Enhanced listening indicator */
-.voice-input-container.listening .card {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
-  animation: pulse-listening 1.5s infinite;
-}
-
-.voice-input-container.listening .mic {
-  opacity: 0.3;
-}
-
-.voice-input-container.listening .spectrum {
-  opacity: 1;
-}
-
-.voice-input-container.listening .spectrum b {
-  animation: spectrum-animation 0.6s infinite ease-in-out;
-  animation-delay: calc(var(--index) * 0.03s);
 }
 
 /* Responsive adjustments */
@@ -303,11 +362,32 @@
   }
 }
 
-/* Additional fix for dark theme compatibility */
-.input-wrapper .voice-input-container .card {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+/* Additional debug styles for testing */
+.debug-listening {
+  outline: 3px solid red !important;
 }
 
-.input-wrapper .voice-input-container .card:hover {
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+.debug-recording {
+  outline: 3px solid orange !important;
+}
+
+/* Alternative direct animation trigger */
+[data-listening="true"] .card {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%) !important;
+  animation: pulse-listening 1.5s infinite !important;
+  box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5) !important;
+}
+
+[data-listening="true"] .mic {
+  opacity: 0.3 !important;
+  transform: scale(0.8) !important;
+}
+
+[data-listening="true"] .spectrum {
+  opacity: 1 !important;
+}
+
+[data-listening="true"] .spectrum b {
+  animation: spectrum-animation 0.6s infinite ease-in-out !important;
+  animation-delay: calc(var(--index) * 0.03s) !important;
 }

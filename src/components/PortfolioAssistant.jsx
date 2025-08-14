@@ -49,12 +49,9 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
       recognitionRef.current.interimResults = false;
       recognitionRef.current.lang = 'en-US';
       
-      recognitionRef.current.onstart = () => {
-        setIsListening(true);
-      };
-      
       recognitionRef.current.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
+        console.log('Speech result:', transcript);
         setInputValue(transcript);
         setIsListening(false);
       };
@@ -65,6 +62,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
       };
       
       recognitionRef.current.onend = () => {
+        console.log('Speech recognition ended');
         setIsListening(false);
       };
       
@@ -195,9 +193,30 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
       try {
+        // Set listening state immediately for visual feedback
+        setIsListening(true);
+        
+        // Add timeout fallback in case recognition doesn't start
+        const timeoutId = setTimeout(() => {
+          if (isListening) {
+            console.log('Speech recognition timeout - resetting state');
+            setIsListening(false);
+          }
+        }, 10000); // 10 second timeout
+        
         recognitionRef.current.start();
+        
+        // Clear timeout if recognition starts successfully
+        recognitionRef.current.onstart = () => {
+          clearTimeout(timeoutId);
+          console.log('Speech recognition started');
+          setIsListening(true);
+        };
+        
       } catch (error) {
         console.error('Error starting speech recognition:', error);
+        // Reset state if error occurs
+        setIsListening(false);
       }
     }
   };
@@ -382,7 +401,18 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
         <div className="chat-window">
           <div className="chat-header">
             <div className="assistant-info">
-              <div className="avatar">🤖</div>
+              <div className="avatar" style={{ 
+                backgroundColor: 'transparent',
+                backgroundImage: 'url(/ai.png)',
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%'
+              }}>
+                {/* Remove emoji content since we're using background image */}
+              </div>
               <div className="info">
                 <h3>Shiva's Assistant</h3>
                 <p>{currentPage.charAt(0).toUpperCase() + currentPage.slice(1)} Helper</p>
@@ -425,13 +455,30 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                     onClick={() => speakMessage(message.content)}
                     disabled={isSpeaking}
                     title="Speak this message"
+                    style={{
+                      backgroundImage: 'url(/sound.png)',
+                      backgroundSize: '12px 12px',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center'
+                    }}
                   >
-                    🔊
+                    {/* Remove emoji content since we're using background image */}
                   </button>
                 )}
               </div>
             ))}
-            {isLoading && <div className="message ai">🤖 Thinking...</div>}
+            {isLoading && <div className="message ai">
+              <div style={{
+                backgroundImage: 'url(/ai.png)',
+                backgroundSize: '16px 16px',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'left center',
+                paddingLeft: '24px',
+                display: 'inline-block'
+              }}>
+                Thinking...
+              </div>
+            </div>}
             <div ref={messagesEndRef} />
           </div>
 
@@ -464,8 +511,11 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
               
               {/* Beautiful Voice Input with Spectrum Animation */}
               {speechSupported && (
-                <div className={`voice-input-container ${isListening ? 'listening' : ''}`}>
-                  <div className="card">
+                <div 
+                  className={`voice-input-container ${isListening ? 'listening' : ''}`}
+                  data-listening={isListening}
+                >
+                  <div className={`card ${isListening ? 'recording' : ''}`}>
                     <input
                       className="input"
                       hidden=""
@@ -474,25 +524,34 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                       name="audio-command"
                       id="audio-command"
                       checked={isListening}
-                      onChange={() => {}} // Controlled by startListening function
+                      readOnly
                     />
                     <div className="inner-card">
-                      <div className="trigger-wrap">
-                        <label 
+                      <div className={`trigger-wrap ${isListening ? 'active' : ''}`}>
+                        <button 
                           className="trigger" 
-                          htmlFor="audio-command"
                           onClick={startListening}
-                          style={{ cursor: 'pointer' }}
-                        ></label>
+                          disabled={isListening}
+                          style={{ 
+                            cursor: isListening ? 'not-allowed' : 'pointer',
+                            background: 'transparent',
+                            border: 'none',
+                            width: '100%',
+                            height: '100%',
+                            borderRadius: '50%'
+                          }}
+                          title={isListening ? 'Listening...' : 'Click to start voice input'}
+                        />
                         <svg
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mic"
+                          className={`mic ${isListening ? 'recording' : ''}`}
                           strokeLinejoin="round"
                           strokeLinecap="round"
                           strokeWidth="2.5"
                           stroke="currentColor"
                           fill="none"
+                          style={{ pointerEvents: 'none' }}
                         >
                           <path d="m19.5,10.89c0,4.44-3.36,8.04-7.5,8.04s-7.5-3.6-7.5-8.04"></path>
                           <line x1="12" y1="22.42" x2="12" y2="18.93"></line>
@@ -505,7 +564,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                             ry="3.62"
                           ></rect>
                         </svg>
-                        <div className="spectrum">
+                        <div className={`spectrum ${isListening ? 'active' : ''}`} style={{ pointerEvents: 'none' }}>
                           {[...Array(12)].map((_, index) => (
                             <b key={index} style={{ '--index': index }}></b>
                           ))}
@@ -513,6 +572,23 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                       </div>
                     </div>
                   </div>
+                  {/* Debug info - remove this in production */}
+                  {process.env.NODE_ENV === 'development' && (
+                    <div style={{ 
+                      position: 'absolute', 
+                      top: '-25px', 
+                      left: '0', 
+                      fontSize: '10px', 
+                      color: isListening ? 'red' : 'green',
+                      background: 'rgba(0,0,0,0.7)',
+                      padding: '2px 4px',
+                      borderRadius: '4px',
+                      whiteSpace: 'nowrap',
+                      zIndex: 1000
+                    }}>
+                      {isListening ? 'LISTENING' : 'READY'}
+                    </div>
+                  )}
                 </div>
               )}
               

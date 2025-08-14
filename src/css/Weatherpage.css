@@ -676,7 +676,7 @@
   color: #fff;
 }
 
-.loading, .no-data {
+.weather-loading, .no-data {
   display: flex;
   justify-content: center;
   align-items: center;

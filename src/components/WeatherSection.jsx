@@ -386,7 +386,7 @@ const WeatherSection = ({ user }) => {
           </div>
           
           {loadingWeather ? (
-            <div className="loading">Loading weather data...</div>
+           <div className="weather-loading">Loading weather data...</div>
           ) : weatherData ? (
             <>
               {/* Weather Quote Animation */}
