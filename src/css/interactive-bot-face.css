@@ -6,7 +6,7 @@
   right: 120px;
   top: 50%;
   transform: translateY(-50%);
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #121314 0%, #0c0c0c 100%);
   border-radius: 25px;
   padding: 15px 25px;
   box-shadow: 
@@ -16,8 +16,8 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   animation: greeting-appear 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   z-index: 1001;
-  max-width: 380px;
-  min-width: 200px;
+  max-width: 480px;
+  min-width: 400px;
 }
 
 .greeting-content {
@@ -660,7 +660,7 @@
 
 /* Suggestion Pills Styles */
 .suggestions-container {
-  padding: 15px 20px;
+  padding: 8px 8px;
   background: #1e2761;
   border-top: 1px solid #2a3284;
   animation: suggestionsAppear 0.5s ease-out;
@@ -686,7 +686,7 @@
   color: #ffffff;
   border: 1px solid #4a52a4;
   border-radius: 20px;
-  padding: 8px 16px;
+  padding: 8px 10px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
@@ -708,7 +708,7 @@
 }
 
 .input-container {
-  padding: 20px;
+  padding: 10px;
   background: #1e2761;
   border-top: 1px solid #2a3284;
   display: flex;
@@ -722,7 +722,7 @@
   align-items: center;
   background: #2a3284;
   border-radius: 25px;
-  padding: 8px 10px;
+  padding: 8px 8px;
   border: 2px solid transparent;
   transition: border-color 0.2s ease;
 }
@@ -738,7 +738,7 @@
   background: none;
   outline: none;
   font-size: 14px;
-  padding: 8px 0;
+  padding: 6px 0;
   color: #ffffff;
 }
 
@@ -760,7 +760,7 @@
   border-radius: 20px;
   background-color: var(--btn-bg);
   box-shadow: 0 0 1px 1px var(--btn-shadow), 0 0 2px 2px var(--btn-shadow), 0 0 4px 4px var(--btn-shadow);
-  width: 70px !important;
+  width: 60px !important;
   height: 35px !important;
   min-width: auto !important;
   padding: 0 !important;
@@ -934,8 +934,8 @@
 
   .greeting-bubble {
     right: 90px;
-    max-width: 220px;
-    min-width: 160px;
+    max-width: 320px;
+    min-width: 250px;
     padding: 12px 20px;
     font-size: 14px;
   }

@@ -1,10 +1,12 @@
 // assistantMessages.js - Professional page-specific content for Portfolio Assistant
+// UPDATED: Added hunger-aware messaging system
 
 export const assistantMessages = {
   // Home/Portfolio Page
   portfolio: {
-    greeting: "Welcome to Shiva's world of innovation.Ready to explore something amazing?",
-    initialMessage: "Hi! I'm Shiva's AI assistant. I'm here to guide you through his incredible portfolio, showcase his expertise, and help you discover why he's the developer you've been looking for!",
+    greeting: "Welcome to Shiva's world of innovation. Ready to explore something amazing?",
+    initialMessage: "Hi! I'm Shiva's AI assistant, here to guide you through his portfolio and showcase his expertise as a developer.",
+    hungerMessage: "I'm feeling a bit hungry! 🥺 Help me collect food by visiting different pages! Start with Projects! 🍎",
     suggestions: [
       "Tell me about Shiva",
       "What makes him special?",
@@ -16,7 +18,8 @@ export const assistantMessages = {
   // About Page
   about: {
     greeting: "Discover the brilliant mind behind the code! 🎯 His journey will inspire you.",
-    initialMessage: "Hi! I'm here to share Shiva's inspiring journey - from his solid educational foundation to becoming a full-stack innovator. Get ready to learn about his background, achievements, and what drives his passion for technology!",
+    initialMessage: "Hi! I'm here to share Shiva's journey from his educational foundation to becoming a full-stack innovator.",
+    foodHint: "Look for a delicious burger 🍔 on this page to feed me!",
     suggestions: [
       "Tell me his educational background",
       "His career journey",
@@ -28,7 +31,8 @@ export const assistantMessages = {
   // Skills Page
   skills: {
     greeting: "Mind-blowing technical expertise ahead! 💡 Prepare to be impressed by his skill arsenal.",
-    initialMessage: "Hi! Ready to explore Shiva's extensive technical toolkit? From cutting-edge frameworks to advanced algorithms, I'll walk you through his diverse skill set that makes him a versatile full-stack developer!",
+    initialMessage: "Hi! Ready to explore Shiva's technical toolkit? I'll walk you through his diverse skill set as a versatile full-stack developer.",
+    foodHint: "There's a sweet cupcake 🧁 here! Click it to make me happy!",
     suggestions: [
       "What are his top skills?",
       "Programming languages",
@@ -40,7 +44,8 @@ export const assistantMessages = {
   // Projects Page
   projects: {
     greeting: "Incredible projects that solve real-world problems! 🎨 Innovation meets execution here.",
-    initialMessage: "Hi! Welcome to Shiva's project showcase! I'm excited to show you his amazing work - from healthcare solutions to AI applications. Each project tells a story of innovation, problem-solving, and technical excellence!",
+    initialMessage: "Hi! Welcome to Shiva's project showcase. I'll show you his innovative work from healthcare solutions to AI applications.",
+    foodHint: "I spy a fresh apple 🍎 here! Please feed it to me!",
     suggestions: [
       "Show me his best projects",
       "Latest work highlights",
@@ -52,7 +57,8 @@ export const assistantMessages = {
   // GitHub Projects Page
   'github-projects': {
     greeting: "Dive deep into his code repositories! 💻 Open-source excellence awaits you.",
-    initialMessage: "Hi! Ready to explore Shiva's GitHub universe? I'll guide you through his favorite repositories, coding patterns, and development practices. See the code quality that makes him stand out!",
+    initialMessage: "Hi! Ready to explore Shiva's GitHub universe? I'll guide you through his repositories and development practices.",
+    foodHint: "Mmm, there's a tasty pizza 🍕 on this page! I'm getting hungry!",
     suggestions: [
       "Favorite repositories",
       "Coding standards",
@@ -64,7 +70,8 @@ export const assistantMessages = {
   // Contact Page
   contact: {
     greeting: "Ready to start something amazing together? 📞 Let's make it happen!",
-    initialMessage: "Hi! I'm here to help you connect with Shiva! Whether you're looking for collaboration, have project ideas, or want to discuss opportunities, I'll guide you through the best ways to get in touch!",
+    initialMessage: "Hi! I'm here to help you connect with Shiva for collaboration, project ideas, or opportunities.",
+    foodHint: "Sweet! There's a strawberry 🍓 here waiting to be collected!",
     suggestions: [
       "How to contact him?",
       "Collaboration opportunities",
@@ -76,7 +83,7 @@ export const assistantMessages = {
   // Services Page
   services: {
     greeting: "Premium development services that deliver results! ⚡ Quality meets efficiency here.",
-    initialMessage: "Hi! Discover Shiva's professional services - from full-stack development to AI solutions. I'll help you understand how his expertise can transform your ideas into powerful digital solutions!",
+    initialMessage: "Hi! Discover Shiva's professional services from full-stack development to AI solutions.",
     suggestions: [
       "Available services",
       "Development packages",
@@ -88,7 +95,7 @@ export const assistantMessages = {
   // Reviews Page
   reviews: {
     greeting: "See what clients say about working with Shiva! ⭐ Excellence speaks for itself.",
-    initialMessage: "Hi! Ready to hear success stories? I'll show you testimonials and reviews from clients who've experienced Shiva's exceptional work. Their feedback speaks volumes about his professionalism and expertise!",
+    initialMessage: "Hi! Ready to hear success stories? I'll show you testimonials from clients who've experienced Shiva's exceptional work.",
     suggestions: [
       "Client testimonials",
       "Project feedback",
@@ -100,7 +107,7 @@ export const assistantMessages = {
   // Resume Page
   resume: {
     greeting: "Professional excellence documented! 📄 A career worth celebrating.",
-    initialMessage: "Hi! Let me walk you through Shiva's professional resume - his career timeline, achievements, and qualifications. See why he's the perfect addition to any team or project!",
+    initialMessage: "Hi! Let me walk you through Shiva's professional resume, career timeline, and achievements.",
     suggestions: [
       "Career highlights",
       "Professional experience",
@@ -112,7 +119,7 @@ export const assistantMessages = {
   // References Page
   references: {
     greeting: "Trusted by industry professionals! 🤝 Credibility through connections.",
-    initialMessage: "Hi! Explore professional references who can vouch for Shiva's exceptional work ethic, technical skills, and collaborative spirit. These endorsements speak to his character and capabilities!",
+    initialMessage: "Hi! Explore professional references who can vouch for Shiva's exceptional work ethic and technical skills.",
     suggestions: [
       "Professional references",
       "Industry endorsements",
@@ -124,7 +131,7 @@ export const assistantMessages = {
   // Skills Page (Alternative name)
   'skills-page': {
     greeting: "Technical mastery at its finest! 🛠️ Skills that solve complex challenges.",
-    initialMessage: "Hi! Dive into Shiva's comprehensive skill portfolio. From frontend artistry to backend architecture, I'll showcase the technical capabilities that make him a complete developer!",
+    initialMessage: "Hi! Dive into Shiva's comprehensive skill portfolio from frontend artistry to backend architecture.",
     suggestions: [
       "Technical expertise",
       "Skill proficiency levels",
@@ -136,7 +143,7 @@ export const assistantMessages = {
   // Blogs Page
   blogs: {
     greeting: "Insights, tutorials, and tech wisdom! 📚 Knowledge sharing at its best.",
-    initialMessage: "Hi! Welcome to Shiva's blog section! I'll guide you through his articles, tutorials, and tech insights. Discover his thought leadership and passion for sharing knowledge with the developer community!",
+    initialMessage: "Hi! Welcome to Shiva's blog section featuring articles, tutorials, and tech insights.",
     suggestions: [
       "Latest blog posts",
       "Technical tutorials",
@@ -148,7 +155,8 @@ export const assistantMessages = {
   // News Page
   news: {
     greeting: "Stay updated with the latest! 📰 Fresh news and exciting updates.",
-    initialMessage: "Hi! Keep up with Shiva's latest activities, project updates, and industry insights. I'll help you stay informed about his recent work and exciting developments!",
+    initialMessage: "Hi! Keep up with Shiva's latest activities, project updates, and industry insights.",
+    foodHint: "Look for a delicious cake 🍰 on this page! I'd love a slice!",
     suggestions: [
       "Latest updates",
       "Recent projects",
@@ -160,7 +168,8 @@ export const assistantMessages = {
   // Weather Page
   weather: {
     greeting: "Smart weather solutions! 🌤️ Technology meets daily utility.",
-    initialMessage: "Hi! Check out Shiva's weather application - a perfect example of practical programming! I'll show you the features, technology stack, and thoughtful design behind this useful tool!",
+    initialMessage: "Hi! Check out Shiva's weather application showcasing practical programming and thoughtful design.",
+    foodHint: "Perfect weather for coffee ☕! There's one here for me!",
     suggestions: [
       "Weather app features",
       "Technology implementation",
@@ -172,7 +181,7 @@ export const assistantMessages = {
   // Under Construction Page
   uc: {
     greeting: "Exciting new features coming soon! 🚧 Innovation never stops.",
-    initialMessage: "Hi! This area is under development - just like Shiva's continuous growth! I'll keep you updated on what's coming and how you can stay connected for the latest updates!",
+    initialMessage: "Hi! This area is under development. I'll keep you updated on what's coming next.",
     suggestions: [
       "What's coming next?",
       "Development timeline",
@@ -184,7 +193,7 @@ export const assistantMessages = {
   // Login Page
   login: {
     greeting: "Welcome back! 🔐 Your personalized experience awaits.",
-    initialMessage: "Hi! Ready to access exclusive content? I'll help you navigate the login process and guide you to the features available for registered users!",
+    initialMessage: "Hi! I'll help you navigate the login process and access exclusive content.",
     suggestions: [
       "Login assistance",
       "Account benefits",
@@ -196,7 +205,7 @@ export const assistantMessages = {
   // Register Page
   register: {
     greeting: "Join the community! 🎉 Exclusive access awaits you.",
-    initialMessage: "Hi! Ready to become part of Shiva's professional network? I'll guide you through the registration process and explain the benefits of creating your account!",
+    initialMessage: "Hi! I'll guide you through registration and explain the benefits of creating your account.",
     suggestions: [
       "Registration benefits",
       "Account features",
@@ -208,7 +217,7 @@ export const assistantMessages = {
   // Add References Page
   'add-references': {
     greeting: "Building professional connections! 🤝 Your input matters.",
-    initialMessage: "Hi! I'm here to help you add professional references. Whether you've worked with Shiva or want to provide a testimonial, I'll guide you through the process!",
+    initialMessage: "Hi! I'm here to help you add professional references or provide testimonials for Shiva.",
     suggestions: [
       "How to add reference",
       "Required information",
@@ -220,7 +229,7 @@ export const assistantMessages = {
   // Edit Reference Page
   'edit-reference': {
     greeting: "Updating professional information! ✏️ Keeping details current.",
-    initialMessage: "Hi! I'll help you edit and update reference information. Let me guide you through the modification process to ensure accuracy and completeness!",
+    initialMessage: "Hi! I'll help you edit and update reference information with accuracy and completeness.",
     suggestions: [
       "Edit guidelines",
       "Update process",

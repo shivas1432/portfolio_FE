@@ -7,6 +7,7 @@ import './css/themes.css';
 import './css/assistant.css'; // Updated assistant CSS
 import './css/interactive-bot-face.css'; // New bot CSS
 import './css/voice-ui.css'; // Updated voice UI CSS
+import './css/bot-hunger-system.css'; // NEW: Hunger system CSS
 import AppRoutes from './routes/AppRoutes';
 import HeroSection from './components/HeroSection';
 import PortfolioAssistant from './components/PortfolioAssistant'; // New bot component
@@ -31,14 +32,12 @@ function AppContent() {
     else if (path === '/github-projects') setCurrentPage('github-projects');
     else if (path === '/contact') setCurrentPage('contact');
     else if (path === '/services') setCurrentPage('services');
-    else if (path === '/reviews') setCurrentPage('reviews');
     else if (path === '/resume') setCurrentPage('resume');
     else if (path === '/references') setCurrentPage('references');
     else if (path === '/add-references') setCurrentPage('add-references');
     else if (path.startsWith('/edit-reference')) setCurrentPage('edit-reference');
     else if (path === '/blogs') setCurrentPage('blogs');
     else if (path === '/news') setCurrentPage('news');
-    else if (path === '/weather') setCurrentPage('weather');
     else if (path === '/uc') setCurrentPage('uc');
     else if (path === '/login') setCurrentPage('login');
     else if (path === '/register') setCurrentPage('register');

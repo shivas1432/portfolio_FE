@@ -1,5 +1,18 @@
+// frontend/src/components/PortfolioAssistant.jsx
+// UPDATED: Added hunger system integration while preserving all existing features
+
 import React, { useState, useRef, useEffect } from 'react';
-import { assistantMessages } from './assistantMessages'; // Import the messages
+import { assistantMessages } from './assistantMessages';
+import FoodIcon from './FoodIcon';
+import { 
+  getHungerLevel, 
+  getHungerState, 
+  getHungerMessage, 
+  getCelebrationMessage,
+  getCollectionGuidanceMessage,
+  checkAutoReset,
+  getHungerStatus
+} from './hungerSystem';
 
 const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,28 +26,49 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
-  // Voice-related state
+  // EXISTING Voice-related state (preserved)
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [speechSupported, setSpeechSupported] = useState(false);
   
-  // Mouse tracking state
+  // EXISTING Mouse tracking state (preserved)
   const [eyePosition, setEyePosition] = useState({ x: 0, y: 0 });
   const [isMouseInArea, setIsMouseInArea] = useState(false);
   
-  // Greeting bubble state
+  // EXISTING Greeting bubble state (preserved)
   const [showGreeting, setShowGreeting] = useState(false);
   const [greetingText, setGreetingText] = useState('');
   
-  // Refs for voice functionality and mouse tracking
+  // NEW: Hunger system state
+  const [hungerLevel, setHungerLevel] = useState(0);
+  const [hungerState, setHungerState] = useState('starving');
+  const [showLoveHearts, setShowLoveHearts] = useState(false);
+  const [showHungerMessage, setShowHungerMessage] = useState(false);
+  const [botFeeding, setBotFeeding] = useState(false);
+  const [hasCollectedAnyFood, setHasCollectedAnyFood] = useState(false);
+  
+  // EXISTING Refs for voice functionality and mouse tracking (preserved)
   const recognitionRef = useRef(null);
   const synthRef = useRef(null);
   const messagesEndRef = useRef(null);
   const botRef = useRef(null);
   const trackingAreaRef = useRef(null);
 
-  // Initialize speech recognition and synthesis
+  // NEW: Initialize hunger system
+  useEffect(() => {
+    checkAutoReset(); // Check if we need to reset after 24 hours
+    const currentHunger = getHungerLevel();
+    const currentState = getHungerState(currentHunger);
+    const status = getHungerStatus();
+    setHungerLevel(currentHunger);
+    setHungerState(currentState);
+    setHasCollectedAnyFood(status.collectedFoods.length > 0);
+    // Show love hearts from first food collection
+    setShowLoveHearts(status.collectedFoods.length > 0);
+  }, []);
+
+  // EXISTING: Initialize speech recognition and synthesis (preserved exactly)
   useEffect(() => {
     // Check for speech recognition support
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -74,14 +108,14 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Greeting animation effect
+  // UPDATED: Greeting animation effect with hunger awareness
   useEffect(() => {
     // Clear any existing greeting state when page changes
     setShowGreeting(false);
     setGreetingText('');
     
     // Clear any existing timers
-    let greetingTimer, typeWriter;
+    let greetingTimer, hungerTimer, typeWriter;
     
     // Show greeting after a short delay when component mounts or page changes
     greetingTimer = setTimeout(() => {
@@ -104,6 +138,17 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
           setTimeout(() => {
             setShowGreeting(false);
             setGreetingText('');
+            
+            // NEW: Show hunger message after greeting (only on homepage if no food collected)
+            if (currentPage === 'portfolio' && !hasCollectedAnyFood) {
+              setTimeout(() => {
+                setShowHungerMessage(true);
+                // Hide hunger message after 8 seconds
+                setTimeout(() => {
+                  setShowHungerMessage(false);
+                }, 8000);
+              }, 2000);
+            }
           }, 6000);
         }
       }, 60);
@@ -112,13 +157,15 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     // Cleanup function to clear timers when page changes
     return () => {
       if (greetingTimer) clearTimeout(greetingTimer);
+      if (hungerTimer) clearTimeout(hungerTimer);
       if (typeWriter) clearInterval(typeWriter);
       setShowGreeting(false);
       setGreetingText('');
+      setShowHungerMessage(false);
     };
-  }, [currentPageContent.greeting]); // Re-run when page changes
+  }, [currentPageContent.greeting, currentPage, hasCollectedAnyFood]);
 
-  // Update messages when page changes
+  // EXISTING: Update messages when page changes (preserved exactly)
   useEffect(() => {
     // Immediately reset messages for new page
     setMessages([
@@ -135,7 +182,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   }, [currentPage, currentPageContent.initialMessage]);
 
-  // Mouse tracking effect
+  // EXISTING: Mouse tracking effect (preserved exactly)
   useEffect(() => {
     const handleMouseMove = (e) => {
       if (!botRef.current || !trackingAreaRef.current) return;
@@ -189,7 +236,57 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     };
   }, []);
 
-  // Voice input function
+  // NEW: Handle food collection
+  const handleFoodCollected = (result) => {
+    if (result.success) {
+      // Update hunger state
+      setHungerLevel(result.newHungerLevel);
+      const newState = getHungerState(result.newHungerLevel);
+      setHungerState(newState);
+      setHasCollectedAnyFood(true);
+
+      // Show feeding animation
+      setBotFeeding(true);
+      setTimeout(() => setBotFeeding(false), 1000);
+
+      // Show love hearts from first food collection
+      setShowLoveHearts(true);
+
+      // Add celebration message to chat
+      const celebrationMsg = getCelebrationMessage(result.food, result.newHungerLevel);
+      const aiMessage = {
+        type: 'ai',
+        content: celebrationMsg,
+        timestamp: new Date(),
+        isHungerMessage: true
+      };
+      setMessages(prev => [...prev, aiMessage]);
+
+      // Add guidance message after 2 seconds
+      setTimeout(() => {
+        const guidanceMsg = getCollectionGuidanceMessage(currentPage, result.totalCollected);
+        const guidanceMessage = {
+          type: 'ai',
+          content: guidanceMsg,
+          timestamp: new Date(),
+          isHungerMessage: true
+        };
+        setMessages(prev => [...prev, guidanceMessage]);
+
+        // Speak guidance if voice enabled
+        if (voiceEnabled) {
+          setTimeout(() => speakMessage(guidanceMsg), 100);
+        }
+      }, 2000);
+
+      // Speak celebration if voice enabled
+      if (voiceEnabled) {
+        setTimeout(() => speakMessage(celebrationMsg), 100);
+      }
+    }
+  };
+
+  // EXISTING: Voice input function (preserved exactly)
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
       try {
@@ -221,7 +318,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   };
 
-  // Voice output function
+  // EXISTING: Voice output function (preserved exactly)
   const speakMessage = (text) => {
     if (synthRef.current && voiceEnabled) {
       // Cancel any ongoing speech
@@ -251,7 +348,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   };
 
-  // Stop speaking
+  // EXISTING: Stop speaking (preserved exactly)
   const stopSpeaking = () => {
     if (synthRef.current) {
       synthRef.current.cancel();
@@ -259,6 +356,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   };
 
+  // EXISTING: Handle send message (preserved exactly)
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
@@ -306,7 +404,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   };
 
-  // Handle suggestion clicks
+  // EXISTING: Handle suggestion clicks (preserved exactly)
   const handleSuggestionClick = (suggestion) => {
     setInputValue(suggestion);
     // Auto-send the suggestion
@@ -315,9 +413,16 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }, 100);
   };
 
+  // NEW: Get eye class based on hunger state
+  const getEyeClass = () => {
+    if (hungerState === 'full') return 'fed';
+    if (hungerState === 'starving' || hungerState === 'hungry') return 'hungry';
+    return '';
+  };
+
   return (
     <div className={`portfolio-assistant ${isOpen ? 'open' : 'closed'}`}>
-      {/* Mouse tracking area - invisible overlay */}
+      {/* EXISTING: Mouse tracking area (preserved) */}
       <div 
         ref={trackingAreaRef}
         className="mouse-tracking-area"
@@ -325,25 +430,61 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
           position: 'fixed',
           bottom: 0,
           right: 0,
-          width: '300px',
-          height: '300px',
+          width: '1100px',
+          height: '1100px',
           pointerEvents: 'none',
           zIndex: 998,
         }}
       />
 
-      {/* Interactive Bot Face Toggle - FIXED: Removed full-screen blocking areas */}
+      {/* NEW: Food Icon Component */}
+      <FoodIcon currentPage={currentPage} onFoodCollected={handleFoodCollected} />
+
+      {/* UPDATED: Interactive Bot Face Toggle with hunger system */}
       <div className="container-ai-input" style={{ position: 'relative', width: '120px', height: '120px' }}>
         <label 
           ref={botRef}
-          className={`container-wrap ${isMouseInArea ? 'mouse-tracking' : ''}`} 
+          className={`container-wrap ${isMouseInArea ? 'mouse-tracking' : ''} ${botFeeding ? 'bot-feeding' : ''}`} 
           onClick={() => setIsOpen(!isOpen)}
         >
-          {/* Greeting Bubble */}
+          {/* NEW: Hunger Progress Bar */}
+          <div className="hunger-progress-container">
+            <div className="hunger-progress-bar">
+              <div 
+                className="hunger-progress-fill" 
+                style={{ width: `${hungerLevel}%` }}
+              ></div>
+            </div>
+            <div className="hunger-percentage">{hungerLevel}% 🍽️</div>
+          </div>
+
+          {/* NEW: Love Hearts for Full State */}
+          {showLoveHearts && (
+            <div className="love-hearts-container">
+              <div className="love-heart">💖</div>
+              <div className="love-heart">💕</div>
+              <div className="love-heart">💗</div>
+              <div className="love-heart">💝</div>
+              <div className="love-heart">💘</div>
+            </div>
+          )}
+
+          {/* EXISTING: Greeting Bubble (preserved) */}
           {showGreeting && !isOpen && (
             <div className={`greeting-bubble ${currentPage}-page`}>
               <div className="greeting-content">
                 <div className="greeting-text">{greetingText}</div>
+                <div className="greeting-cursor">|</div>
+              </div>
+              <div className="greeting-tail"></div>
+            </div>
+          )}
+
+          {/* NEW: Hunger Message Bubble */}
+          {showHungerMessage && !isOpen && (
+            <div className={`greeting-bubble hunger-message ${hungerState}`}>
+              <div className="greeting-content">
+                <div className="greeting-text">{getHungerMessage(currentPage)}</div>
                 <div className="greeting-cursor">|</div>
               </div>
               <div className="greeting-tail"></div>
@@ -361,7 +502,8 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
             </div>
             <div className="content-card">
               <div className="background-blur-card">
-                <div className="eyes">
+                {/* UPDATED: Eyes with hunger state */}
+                <div className={`eyes ${getEyeClass()}`}>
                   <span 
                     className="eye"
                     style={{
@@ -377,6 +519,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                     }}
                   ></span>
                 </div>
+                {/* EXISTING: Happy eyes (preserved) */}
                 <div className="eyes happy">
                   <svg fill="none" viewBox="0 0 24 24">
                     <path
@@ -397,6 +540,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
         </label>
       </div>
 
+      {/* EXISTING: Chat Window (preserved exactly) */}
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
@@ -411,7 +555,6 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                 height: '60px',
                 borderRadius: '50%'
               }}>
-                {/* Remove emoji content since we're using background image */}
               </div>
               <div className="info">
                 <h3>Shiva's Assistant</h3>
@@ -419,7 +562,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
               </div>
             </div>
             
-            {/* Voice controls */}
+            {/* EXISTING: Voice controls (preserved) */}
             {speechSupported && (
               <div className="voice-controls">
                 <button 
@@ -445,10 +588,13 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
             <button onClick={() => setIsOpen(false)}>✕</button>
           </div>
                   
+          {/* EXISTING: Messages container (preserved) */}
           <div className="messages-container">
             {messages.map((message, index) => (
               <div key={index} className={`message ${message.type}`}>
-                <div className="message-content">{message.content}</div>
+                <div className={`message-content ${message.isHungerMessage ? 'hunger-status-message' : ''}`}>
+                  {message.content}
+                </div>
                 {message.type === 'ai' && voiceEnabled && (
                   <button 
                     className="speak-button"
@@ -462,7 +608,6 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                       backgroundPosition: 'center'
                     }}
                   >
-                    {/* Remove emoji content since we're using background image */}
                   </button>
                 )}
               </div>
@@ -482,7 +627,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Suggestion Pills */}
+          {/* EXISTING: Suggestion Pills (preserved) */}
           {messages.length === 1 && !isLoading && (
             <div className="suggestions-container">
               <div className="suggestions-title">💡 Try asking:</div>
@@ -500,6 +645,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
             </div>
           )}
 
+          {/* EXISTING: Input container (preserved) */}
           <div className="input-container">
             <div className="input-wrapper">
               <input
@@ -509,7 +655,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                 placeholder={`Ask about Shiva's ${currentPage}...`}
               />
               
-              {/* Beautiful Voice Input with Spectrum Animation */}
+              {/* EXISTING: Beautiful Voice Input with Spectrum Animation (preserved) */}
               {speechSupported && (
                 <div 
                   className={`voice-input-container ${isListening ? 'listening' : ''}`}
@@ -592,6 +738,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
                 </div>
               )}
               
+              {/* EXISTING: Send button (preserved) */}
               <button 
                 className="btn btn--primary send-btn"
                 onClick={handleSendMessage} 
@@ -605,6 +752,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
               </button>
             </div>
             
+            {/* EXISTING: Voice not supported message (preserved) */}
             {!speechSupported && (
               <div className="voice-not-supported">
                 <small>⚠️ Voice features not supported in this browser</small>
