@@ -79,7 +79,7 @@ const HeroSection = ({ onSuccess }) => {
               setTimeout(() => {
                 onSuccess(username);
               }, 2000);
-            }, 3000); // Show intro for 3 seconds then auto redirect
+            }, 4000); // Increased to 4 seconds to show the buddy message
           }, 1200);
         });
       }, 400);
@@ -323,6 +323,72 @@ const HeroSection = ({ onSuccess }) => {
           font-size: 1.1rem;
         }
 
+        .buddy-message {
+          margin-top: 24px;
+          padding: 16px 20px;
+          background: rgba(96, 165, 250, 0.1);
+          border: 1px solid rgba(96, 165, 250, 0.2);
+          border-radius: 16px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.95rem;
+          color: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          animation: buddyGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes buddyGlow {
+          0%, 100% { 
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.1);
+            border-color: rgba(96, 165, 250, 0.2);
+          }
+          50% { 
+            box-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
+            border-color: rgba(96, 165, 250, 0.3);
+          }
+        }
+
+        .buddy-emoji {
+          font-size: 1.2em;
+          margin: 0 4px;
+          display: inline-block;
+          animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-8px); }
+          60% { transform: translateY(-4px); }
+        }
+
+        .food-stickers {
+          margin-top: 12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .food-sticker {
+          font-size: 1.4em;
+          animation: foodFloat 3s ease-in-out infinite;
+          display: inline-block;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .food-sticker:nth-child(1) { animation-delay: 0s; }
+        .food-sticker:nth-child(2) { animation-delay: 0.5s; }
+        .food-sticker:nth-child(3) { animation-delay: 1s; }
+        .food-sticker:nth-child(4) { animation-delay: 1.5s; }
+        .food-sticker:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes foodFloat {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          25% { transform: translateY(-6px) rotate(5deg); }
+          50% { transform: translateY(-3px) rotate(-3deg); }
+          75% { transform: translateY(-8px) rotate(3deg); }
+        }
+
         .spinner {
           width: 60px;
           height: 60px;
@@ -371,6 +437,15 @@ const HeroSection = ({ onSuccess }) => {
           .intro-name {
             font-size: 2.5rem;
           }
+
+          .buddy-message {
+            font-size: 0.9rem;
+            padding: 14px 18px;
+          }
+
+          .food-sticker {
+            font-size: 1.2em;
+          }
         }
 
         @media (max-width: 480px) {
@@ -391,6 +466,15 @@ const HeroSection = ({ onSuccess }) => {
           .name-input, .submit-button {
             padding: 14px 18px;
             font-size: 0.95rem;
+          }
+
+          .buddy-message {
+            font-size: 0.85rem;
+            padding: 12px 16px;
+          }
+
+          .food-sticker {
+            font-size: 1.1em;
           }
         }
       `}</style>
@@ -441,6 +525,22 @@ const HeroSection = ({ onSuccess }) => {
             <div className="role-wrapper">
               <p className="intro-subtitle">I'm a <span className="role">Full-Stack Developer</span></p>
             </div>
+            
+            <div className="buddy-message">
+              <div>
+                Don't forget to feed my AI buddy 🤖  <span className="buddy-emoji">😊</span> 
+                <br />
+                Look for food around the site to make him happy
+              </div>
+              <div className="food-stickers">
+                <span className="food-sticker">🍕</span>
+                <span className="food-sticker">🍔</span>
+                <span className="food-sticker">🍰</span>
+                <span className="food-sticker">🍎</span>
+                <span className="food-sticker">🍪</span>
+              </div>
+            </div>
+            
             <p className="intro-subtitle" style={{marginTop: '20px', fontSize: '1rem', opacity: '0.8'}}>
               Redirecting to portfolio...
             </p>
