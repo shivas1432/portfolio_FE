@@ -205,7 +205,7 @@ export const getCelebrationMessage = (food, newHungerLevel) => {
   return message;
 };
 
-// Auto-reset system (optional - resets hunger after 24 hours)
+// Auto-reset system (resets hunger after 30 minutes)
 export const checkAutoReset = () => {
   const lastReset = localStorage.getItem(STORAGE_KEYS.LAST_RESET);
   if (!lastReset) {
@@ -215,10 +215,10 @@ export const checkAutoReset = () => {
   
   const resetDate = new Date(lastReset);
   const now = new Date();
-  const hoursSinceReset = (now - resetDate) / (1000 * 60 * 60);
+  const minutesSinceReset = (now - resetDate) / (1000 * 60); // Changed from hours to minutes
   
-  // Auto-reset after 24 hours
-  if (hoursSinceReset >= 24) {
+  // Auto-reset after 30 minutes (changed from 24 hours)
+  if (minutesSinceReset >= 30) {
     resetHungerSystem();
     return true;
   }

@@ -11,7 +11,7 @@ const GitHubProjects = () => {
   const GITHUB_USERNAME = 'shivas1432';
   const GITHUB_API_BASE = 'https://api.github.com';
 
-  // Your favorite repositories list
+  // Your favorite repositories list (maintaining original order)
   const FAVORITE_REPO_NAMES = [
     'NHS-Appointment-Optimization',
     'UK-Grocery-Price-Comparison-App',
@@ -33,6 +33,34 @@ const GitHubProjects = () => {
     'Studymate_AI',
     'car_wash_booking_system_FE'
   ];
+
+  // Manual creation dates for each repository
+  const FAVORITE_REPOS_WITH_DATES = {
+    // Everything else - March 2024 to April 2025
+    'NHS-Appointment-Optimization': '2024-08-15',
+    'UK-Grocery-Price-Comparison-App': '2024-09-22',
+    'UK-NutriHealth-AI': '2024-10-18',
+    'Sign_Gesture_Speak': '2024-07-10',
+    'python-projects': '2024-06-25',
+    'Projects_Hub': '2024-11-30',
+    'AIBuddy': '2025-01-15',
+    'Studymate_AI': '2025-02-20',
+    'car_wash_booking_system_FE': '2025-03-28',
+    
+    // Website Templates, UI Paradise, Boilerplate, Resources - Sept 2023 to May 2024
+    'UI-Paradise': '2023-10-30',
+    'Website_Templates': '2023-09-25',
+    'Interactive-3D-WebDesigns': '2024-01-28',
+    'Animated-Designs': '2024-02-14',
+    'boilerplate-codes': '2024-03-18',
+    'Interactive-3D-Website-Templates': '2024-04-05',
+    'Resources-Every-Developer-Need': '2024-05-12',
+    
+    // Replicas - Sept 2023 to Jan 2024
+    'terminal-replica': '2023-10-15',
+    'netflix-replica': '2023-11-20',
+    'gemini-replica': '2024-01-10'
+  };
 
   // GitHub API headers
   const getHeaders = () => {
@@ -74,10 +102,13 @@ const GitHubProjects = () => {
       
       setTotalRepos(ownRepos.length);
 
-      // Filter favorite repositories
+      // Filter favorite repositories and add manual creation dates
       const favorites = ownRepos.filter(repo => 
         FAVORITE_REPO_NAMES.includes(repo.name)
-      );
+      ).map(repo => ({
+        ...repo,
+        manual_created_at: FAVORITE_REPOS_WITH_DATES[repo.name]
+      }));
 
       // Sort favorites by the order in FAVORITE_REPO_NAMES
       const sortedFavorites = FAVORITE_REPO_NAMES
@@ -252,7 +283,7 @@ const GitHubProjects = () => {
                   )}
                 </div>
                 <span className="repo-updated">
-                  Updated {formatDate(repo.updated_at)}
+                  Created {formatDate(repo.manual_created_at)}
                 </span>
               </div>
             </div>
