@@ -356,7 +356,7 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     }
   };
 
-  // EXISTING: Handle send message (preserved exactly)
+  // UPDATED: Handle send message (CLEAN VERSION - NO DEBUG)
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
@@ -366,18 +366,21 @@ const PortfolioAssistant = ({ currentPage = 'portfolio' }) => {
     setIsLoading(true);
 
     try {
-     const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
-const response = await fetch(`${API_BASE_URL}/api/chatbot`, {
+      const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8081';
+      const requestUrl = `${API_BASE_URL}/api/chatbot`;
+
+      const response = await fetch(requestUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           message: userMessage.content, 
           context: currentPage,
-          pageInfo: currentPageContent // Send page context to backend
+          pageInfo: currentPageContent
         }),
       });
 
       const data = await response.json();
+
       if (data.success) {
         const aiMessage = { type: 'ai', content: data.response, timestamp: new Date() };
         setMessages(prev => [...prev, aiMessage]);
@@ -392,7 +395,7 @@ const response = await fetch(`${API_BASE_URL}/api/chatbot`, {
     } catch (error) {
       const errorMessage = {
         type: 'ai',
-        content: "FREE API limit reached. Service temporarily unavailable. Please try again shortly. Thank you for your understanding",
+        content: "I apologize, but I'm experiencing technical difficulties. Please try again in a moment.",
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -420,7 +423,6 @@ const response = await fetch(`${API_BASE_URL}/api/chatbot`, {
     if (hungerState === 'starving' || hungerState === 'hungry') return 'hungry';
     return '';
   };
-
   return (
     <div className={`portfolio-assistant ${isOpen ? 'open' : 'closed'}`}>
       {/* EXISTING: Mouse tracking area (preserved) */}
@@ -719,23 +721,6 @@ const response = await fetch(`${API_BASE_URL}/api/chatbot`, {
                       </div>
                     </div>
                   </div>
-                  {/* Debug info - remove this in production */}
-                  {process.env.NODE_ENV === 'development' && (
-                    <div style={{ 
-                      position: 'absolute', 
-                      top: '-25px', 
-                      left: '0', 
-                      fontSize: '10px', 
-                      color: isListening ? 'red' : 'green',
-                      background: 'rgba(0,0,0,0.7)',
-                      padding: '2px 4px',
-                      borderRadius: '4px',
-                      whiteSpace: 'nowrap',
-                      zIndex: 1000
-                    }}>
-                      {isListening ? 'LISTENING' : 'READY'}
-                    </div>
-                  )}
                 </div>
               )}
               
