@@ -1,13 +1,12 @@
 // frontend/src/components/hungerSystem.jsx
 
-// Food configuration for each page
+// Food configuration for each page - REMOVED WEATHER
 export const PAGE_FOODS = {
   'projects': { emoji: '🍎', name: 'Apple', color: '#ff6b6b' },
   'github-projects': { emoji: '🍕', name: 'Pizza', color: '#ffa500' },
   'about': { emoji: '🍔', name: 'Burger', color: '#32cd32' },
   'skills': { emoji: '🧁', name: 'Cupcake', color: '#ff69b4' },
   'contact': { emoji: '🍓', name: 'Strawberry', color: '#ff1493' },
-  'weather': { emoji: '☕', name: 'Coffee', color: '#8b4513' },
   'news': { emoji: '🍰', name: 'Cake', color: '#dda0dd' }
 };
 
@@ -22,7 +21,7 @@ export const HUNGER_LEVELS = {
   FULL: { min: 76, max: 100, state: 'full' }
 };
 
-// Points per food item (7 foods total = ~14% each for 100%)
+// Points per food item (6 foods total = ~16.6% each for 100%)
 export const FOOD_POINTS = Math.floor(100 / FOOD_PAGES.length);
 
 // Storage keys
@@ -137,6 +136,36 @@ export const getHungerStatus = () => {
   };
 };
 
+// NEW: Get lovable food request messages for when bot is still hungry
+export const getLovableFoodRequest = () => {
+  const status = getHungerStatus();
+  const { hungerLevel, remainingFoods, isFullyFed } = status;
+  
+  if (isFullyFed) {
+    return null; // Don't show when full
+  }
+  
+  const lovableMessages = [
+    "Feed me more? 🥺💕",
+    "Still hungry! 😋💖",
+    "More food please? 🍽️✨",
+    "Yummy treats? 😊🍴",
+    "I need snacks! 🥺🍕",
+    "Feed me love! 💕🍎",
+    "Hungry buddy here! 😋",
+    "Food adventure? 🚀🍔"
+  ];
+  
+  // Different messages based on hunger level
+  if (hungerLevel === 0) {
+    return "I'm starving! Feed me? 🥺💔";
+  } else if (hungerLevel < 50) {
+    return lovableMessages[Math.floor(Math.random() * lovableMessages.length)];
+  } else {
+    return `Almost full! ${remainingFoods} more? 😊✨`;
+  }
+};
+
 // Get hunger-aware messages - UPDATED with better flow
 export const getHungerMessage = (currentPage) => {
   const status = getHungerStatus();
@@ -153,11 +182,15 @@ export const getHungerMessage = (currentPage) => {
     }
   }
 
-  // Don't show hunger messages on pages - let the greeting handle it first
+  // For other pages - show lovable food request if not full and no popup
+  if (!isFullyFed) {
+    return getLovableFoodRequest();
+  }
+
   return null;
 };
 
-// Get collection guidance message - NEW
+// Get collection guidance message - UPDATED (removed weather reference)
 export const getCollectionGuidanceMessage = (currentPage, totalCollected) => {
   const availablePages = FOOD_PAGES.filter(page => !isFoodCollected(page));
   
@@ -174,14 +207,13 @@ export const getCollectionGuidanceMessage = (currentPage, totalCollected) => {
       case 'about': return 'About';
       case 'skills': return 'Skills';
       case 'contact': return 'Contact';
-      case 'weather': return 'Weather';
       case 'news': return 'News';
       default: return page;
     }
   });
 
   if (pageNames.length === 1) {
-    return `Look in ${pageNames[0]} for more food! 𓌉◯𓇋`;
+    return `Look in ${pageNames[0]} for more food! 🔍✨`;
   } else {
     return `Look in ${pageNames[0]} or ${pageNames[1]} for more food! 🍽️`;
   }
@@ -215,9 +247,9 @@ export const checkAutoReset = () => {
   
   const resetDate = new Date(lastReset);
   const now = new Date();
-  const minutesSinceReset = (now - resetDate) / (1000 * 60); // Changed from hours to minutes
+  const minutesSinceReset = (now - resetDate) / (1000 * 60);
   
-  // Auto-reset after 30 minutes (changed from 24 hours)
+  // Auto-reset after 30 minutes
   if (minutesSinceReset >= 30) {
     resetHungerSystem();
     return true;
