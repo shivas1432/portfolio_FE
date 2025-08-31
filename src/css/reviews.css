@@ -264,20 +264,20 @@
   margin: 0 0 6px 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #333;
+  color: #070707;
 }
 
 .reviewer-name {
   margin: 0 0 6px 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #333;
+  color: #080808;
 }
 
 .reviewer-role {
   margin: 0;
   font-size: 0.95rem;
-  color: #666;
+  color: #080808;
   opacity: 0.8;
   font-weight: 500;
 }

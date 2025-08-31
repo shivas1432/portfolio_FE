@@ -1,4 +1,4 @@
-/* Projects.css - Clean Version with Better Typography */
+/* Projects.css - Enhanced Version with Professional Experience Section */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -120,6 +120,17 @@
   border-radius: 2px;
 }
 
+.section-subtitle {
+  font-family: var(--font-secondary);
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  max-width: 600px;
+  margin: -2rem auto 3rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -235,11 +246,29 @@
 
 .social-buttons {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
-  gap: 30px !important;
-  max-width: 1200px !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 24px !important;
+  max-width: 1600px !important;
   margin: 0 auto !important;
   padding: 0 20px !important;
+}
+
+/* Dual button container for Medium/Dev.to card */
+.dual-button-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.dual-button {
+  max-width: 120px !important;
+  padding: 12px 16px !important;
+  font-size: 13px !important;
+}
+
+.dual-button span {
+  font-size: 13px !important;
 }
 
 .social-card {
@@ -382,12 +411,465 @@
   filter: brightness(1.1) !important;
 }
 
+.medium-button {
+  background: linear-gradient(135deg, #00ab6c 0%, #12c971 50%, #00d084 100%) !important;
+  box-shadow: 0 4px 15px rgba(0, 171, 108, 0.3) !important;
+}
+
+.medium-button:hover {
+  background: linear-gradient(135deg, #00ab6c 0%, #12c971 50%, #00d084 100%) !important;
+  box-shadow: 0 8px 25px rgba(0, 171, 108, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+.dev-button {
+  background: linear-gradient(135deg, #3b49df 0%, #0a0a23 50%, #6366f1 100%) !important;
+  box-shadow: 0 4px 15px rgba(59, 73, 223, 0.3) !important;
+}
+
+.dev-button:hover {
+  background: linear-gradient(135deg, #3b49df 0%, #0a0a23 50%, #6366f1 100%) !important;
+  box-shadow: 0 8px 25px rgba(59, 73, 223, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+.dev-button {
+  background: linear-gradient(135deg, #3b49df 0%, #0a0a23 50%, #6366f1 100%) !important;
+  box-shadow: 0 4px 15px rgba(59, 73, 223, 0.3) !important;
+}
+
+.dev-button:hover {
+  background: linear-gradient(135deg, #3b49df 0%, #0a0a23 50%, #6366f1 100%) !important;
+  box-shadow: 0 8px 25px rgba(59, 73, 223, 0.4) !important;
+  filter: brightness(1.05) !important;
+}
+
+/* ===== COMBINED PROFESSIONAL & MENTORSHIP SECTION ===== */
+.combined-section {
+  padding: 4rem 2rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.combined-container {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.combined-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  margin-top: 2rem;
+  align-items: start;
+}
+
+.section-half {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 600px;
+}
+
+.section-half .section-title {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.section-half .section-title:after {
+  left: 0;
+  transform: none;
+  width: 60px;
+}
+
+.section-half .section-subtitle {
+  text-align: left;
+  margin: 0 0 2rem 0;
+  font-size: 1rem;
+}
+
+.experience-cards-container,
+.achievements-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+}
+
+/* Remove old sections */
+.experience-section,
+.popular-repos-section {
+  display: none;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.experience-card {
+  background: rgba(35, 38, 54, 0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  border-radius: 20px 20px 0 0;
+}
+
+.experience-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.company-info h3 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.01em;
+}
+
+.job-title {
+  font-family: var(--font-secondary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 0.3rem 0;
+}
+
+.duration {
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-weight: 400;
+}
+
+.experience-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.backend-icon {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.analyst-icon {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.experience-achievements {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.single-achievement {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.achievement-item {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.achievement-metric {
+  display: block;
+  font-family: var(--font-primary);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00ff88;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.achievement-desc {
+  font-family: var(--font-secondary);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.experience-description {
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  margin: 0;
+}
+
+.tech-highlight {
+  color: #64ffda;
+  font-weight: 600;
+  background: rgba(100, 255, 218, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+/* ===== ACHIEVEMENTS SECTION UPDATES ===== */
+.popular-repos-section {
+  padding: 4rem 2rem;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.achievements-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.repo-card {
+  background: rgba(35, 38, 54, 0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.repo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  border-radius: 20px 20px 0 0;
+}
+
+.repo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.achievement-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+}
+
+.achievement-number {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 20px rgba(255, 51, 102, 0.3);
+}
+
+.achievement-label {
+  font-family: var(--font-secondary);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 1rem 0;
+}
+
+.repo-description {
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.repo-link-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+}
+
+.repo-link-button:hover {
+  background: transparent;
+  color: var(--primary-color);
+  transform: scale(1.05);
+  text-decoration: none;
+}
+
+/* ===== GITHUB NAVIGATION SECTION ===== */
+.github-navigation-section {
+  margin: 3rem 0;
+  text-align: center;
+  padding: 0 2rem;
+}
+
+.github-nav-card {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.github-nav-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.github-nav-icon {
+  font-size: 3rem;
+  color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+.github-nav-text {
+  flex: 1;
+  text-align: left;
+}
+
+.github-nav-title {
+  font-family: var(--font-primary);
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.github-nav-description {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: var(--font-secondary);
+}
+
+.github-nav-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.github-nav-button:hover {
+  background: var(--hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 51, 102, 0.3);
+}
+
 /* ===== MOBILE OPTIMIZATION ===== */
+
+/* Medium Screens */
+@media (max-width: 1400px) {
+  .social-buttons {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .combined-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .section-half .section-title {
+    text-align: center;
+  }
+  
+  .section-half .section-title:after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .section-half .section-subtitle {
+    text-align: center;
+  }
+}
 
 /* Medium Screens */
 @media (max-width: 991px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .social-buttons {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
   }
 }
 
@@ -446,6 +928,86 @@
     max-width: none !important;
     width: 100% !important;
   }
+  
+  /* Mobile Experience Section */
+  .combined-section {
+    padding: 2rem 1rem;
+  }
+  
+  .combined-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .experience-cards-container,
+  .achievements-cards-container {
+    gap: 1rem;
+  }
+  
+  .experience-card {
+    padding: 1.5rem;
+  }
+  
+  .experience-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .experience-achievements {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .achievement-metric {
+    font-size: 1.5rem;
+  }
+  
+  .achievement-desc {
+    font-size: 0.75rem;
+  }
+  
+  /* Mobile GitHub Navigation */
+  .github-nav-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .github-nav-text {
+    text-align: center;
+  }
+  
+  .github-nav-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.875rem 1.5rem;
+  }
+  
+  /* Mobile Achievements */
+  .repo-card {
+    padding: 1.5rem;
+  }
+  
+  .achievement-number {
+    font-size: 2.5rem;
+  }
+  
+  .achievement-label {
+    font-size: 1.1rem;
+  }  /* Mobile Achievements */
+  .repo-card {
+    padding: 1.5rem;
+  }
+  
+  .achievement-number {
+    font-size: 2.5rem;
+  }
+  
+  .achievement-label {
+    font-size: 1.1rem;
+  }
 }
 
 /* Small Mobile Screens */
@@ -502,6 +1064,45 @@
   .social-button span {
     font-size: 14px !important;
   }
+  
+  /* Small Mobile Experience */
+  .experience-card {
+    padding: 1.25rem;
+  }
+  
+  .company-info h3 {
+    font-size: 1.3rem;
+  }
+  
+  .job-title {
+    font-size: 1rem;
+  }
+  
+  .experience-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .experience-description {
+    font-size: 0.9rem;
+  }
+  
+  .section-half .section-title {
+    font-size: 2rem;
+  }
+  
+  /* Small Mobile GitHub Nav */
+  .github-nav-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .github-nav-title {
+    font-size: 1.5rem;
+  }
+  
+  .github-nav-description {
+    font-size: 0.9rem;
+  }
 }
 
 /* Very Small Mobile Screens */
@@ -517,6 +1118,22 @@
   .visit-site-button {
     padding: 8px 16px;
     font-size: 11px;
+  }
+  
+  .experience-achievements {
+    padding: 0.75rem;
+  }
+  
+  .achievement-metric {
+    font-size: 1.3rem;
+  }
+  
+  .github-nav-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .combined-section {
+    padding: 1.5rem 0.5rem;
   }
 }
 
@@ -560,6 +1177,22 @@
   .social-media-container {
     margin: 40px 0 !important;
   }
+  
+  .experience-card {
+    padding: 1rem;
+  }
+  
+  .company-info h3 {
+    font-size: 1.2rem;
+  }
+  
+  .github-nav-title {
+    font-size: 1.3rem;
+  }
+  
+  .section-half .section-title {
+    font-size: 1.8rem;
+  }
 }
 
 /* ===== ADDITIONAL UTILITIES ===== */
@@ -574,70 +1207,4 @@
   -moz-user-select: none !important;
   -ms-user-select: none !important;
   user-select: none !important;
-}
-/* Simple GitHub Navigation Section */
-.github-navigation-section {
-  margin: 2rem 0;
-  text-align: center;
-}
-
-.github-nav-card {
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.github-nav-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.github-nav-icon {
-  font-size: 2rem;
-  color: var(--primary-color);
-}
-
-.github-nav-text h2 {
-  margin: 0 0 0.5rem 0;
-  color: var(--text-color);
-  font-size: 1.5rem;
-}
-
-.github-nav-text p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1rem;
-}
-
-.github-nav-button {
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.github-nav-button:hover {
-  background: var(--hover-color);
-}
-
-@media (max-width: 768px) {
-  .github-nav-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .github-nav-button {
-    width: 100%;
-    justify-content: center;
-  }
 }

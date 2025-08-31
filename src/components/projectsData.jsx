@@ -13,12 +13,7 @@ export const templatesProjects = [
     image: "https://imgur.com/LGOCNkk.png",
     website: "https://strategixx.netlify.app/",
   },
-  {
-    id: 3,
-    title: "Chillcat1",
-    image: "https://imgur.com/eeGJBhs.png",
-    website: "https://chillcat1.netlify.app/",
-  },
+ 
   {
     id: 4,
     title: "Coffeee11",
