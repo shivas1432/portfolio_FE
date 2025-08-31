@@ -195,7 +195,7 @@
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
-  height: 180px;
+  height: 220px;
   display: flex;
   flex-direction: column;
 }
@@ -395,5 +395,85 @@
 
   .repository-card {
     padding: 1rem;
+  }
+}
+
+
+/* Demo Button Styles */
+.repo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  min-width: fit-content;
+}
+
+.demo-btn:hover {
+  background: linear-gradient(135deg, #218838, #1fa189);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.demo-btn:active {
+  transform: translateY(0);
+}
+
+.demo-icon {
+  font-size: 0.75rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Update existing repo-footer styles */
+.repo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .demo-btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .repo-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .repo-actions {
+    width: 100%;
   }
 }
