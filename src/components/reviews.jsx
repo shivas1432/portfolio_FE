@@ -149,7 +149,7 @@ const Reviews = () => {
         alert(`Failed to submit review: ${errorData.message || 'Unknown error'}`);
       }
 
-      // Reset form only if submission was successful
+      
       if (response.ok) {
         setNewReview({
           reviewer_name: '',
