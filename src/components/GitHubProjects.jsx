@@ -376,9 +376,11 @@ const GitHubProjects = () => {
             </span>
           )}
         </div>
-        <span className="repo-updated">
-          {isFavorite ? 'Created' : 'Updated'} {formatDate(isFavorite ? repo.manual_created_at : repo.updated_at)}
-        </span>
+        {isFavorite && (
+          <span className="repo-updated">
+            Created {formatDate(repo.manual_created_at)}
+          </span>
+        )}
       </div>
     </div>
   );
