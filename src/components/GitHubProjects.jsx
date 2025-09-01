@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaSpinner, FaPlay, FaStar } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaSpinner, FaPlay, FaStar, FaCode, FaCopy, FaPalette, FaFolder, FaUser } from 'react-icons/fa';
 import '../css/GitHubProjects.css';
 
 const GitHubProjects = () => {
   const [favoriteRepos, setFavoriteRepos] = useState([]);
-  const [otherRepos, setOtherRepos] = useState([]);
+  const [allRepos, setAllRepos] = useState([]);
+  const [categorizedRepos, setCategorizedRepos] = useState({});
   const [totalRepos, setTotalRepos] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState('fullstack'); // Default to first category
 
   const GITHUB_USERNAME = 'shivas1432';
   const GITHUB_API_BASE = 'https://api.github.com';
@@ -34,6 +36,102 @@ const GitHubProjects = () => {
     'Studymate_AI',
     'car_wash_booking_system_FE'
   ];
+
+  // Repository categories configuration
+  const REPOSITORY_CATEGORIES = {
+    'fullstack': {
+      title: 'Full Stack Applications',
+      description: 'Complete web applications with frontend and backend integration',
+      icon: FaCode,
+      repos: [
+        'NHS-Appointment-Optimization-',
+        'UK-Grocery-Price-Comparison-App',
+        'UK-Grocery-Price-Comparison-App1',
+        'UK-NutriHealth-AI',
+        'Sign_Gesture_Speak',
+        'AIBuddy',
+        'Studymate_AI',
+        'car_wash_booking_system_FE',
+        'python-projects',
+        'Projects_Hub',
+        'AI_VoiceCoach',
+        'react_vapeshop_FE',
+        'react_vapeshop_BE',
+        'chat_react_FE',
+        'chat_react_BE',
+        'final_project_BE',
+        'final_project_FE',
+        'portfolio_FE',
+        'portfolio_BE',
+        'dashboard_BE',
+        'dashboard_FE',
+        'HelloBuddy',
+        'SocialMedia_react_FE',
+        'Socialmedia_react_BE',
+        'IMAGE-to-RECIPE',
+        'ShivaAnimix'
+      ]
+    },
+    'replicas': {
+      title: 'Application Replicas',
+      description: 'Recreations of popular applications and platforms',
+      icon: FaCopy,
+      repos: [
+        'terminal-replica',
+        'netflix-replica',
+        'gemini-replica',
+        'instagram-replica',
+        'spotify-replica',
+        'Amezon_Replica'
+      ]
+    },
+    'ui-designs': {
+      title: 'Animated & UI Designs',
+      description: 'Interactive designs, animations, and modern UI components',
+      icon: FaPalette,
+      repos: [
+        'UI-Paradise',
+        'Interactive-3D-WebDesigns',
+        'Interactive-3D-Website-Templates',
+        'Animated-Designs',
+        'Animated-DesignsP1',
+        'Animated-DesignsP2',
+        'Animated-DesignsP3',
+        'Animated-DesignsP4',
+        'css-designs',
+        'css-magic-collection',
+        'Multiple-3D-Window',
+        '404-template-designs'
+      ]
+    },
+    'templates': {
+      title: 'Templates & Resources',
+      description: 'Reusable templates and developer resources',
+      icon: FaFolder,
+      repos: [
+        'Website_Templates',
+        'boilerplate-codes',
+        'Boilerplate-codes-Web-App',
+        'Resources-Every-Developer-Need',
+        'formgenius',
+        'CS-Notes-Hub',
+        'JavaScript-Studio',
+        'LeetCode_Company_Hub',
+        'SandboxGUI',
+        'PixelFlow',
+        'weather-app',
+        'portfolio'
+      ]
+    },
+    'profile': {
+      title: 'Personal Profile',
+      description: 'GitHub profile and personal branding',
+      icon: FaUser,
+      repos: [
+        'shivas1432'
+      ]
+    }
+  };
 
   // Manual creation dates for each repository
   const FAVORITE_REPOS_WITH_DATES = {
@@ -63,7 +161,7 @@ const GitHubProjects = () => {
     'gemini-replica': '2024-01-10'
   };
 
-  // Demo links for each repository - you can replace these with actual links
+  // Demo links for each repository - ONLY for featured repos
   const DEMO_LINKS = {
     'NHS-Appointment-Optimization': 'https://demo-nhs-appointment.vercel.app',
     'UK-Grocery-Price-Comparison-App': 'https://uk-grocery-price-comparison-app.netlify.app/',
@@ -126,6 +224,29 @@ const GitHubProjects = () => {
     return colors[language] || '#6e7681';
   };
 
+  // Categorize repositories
+  const categorizeRepositories = (repos) => {
+    const categorized = {};
+    
+    Object.keys(REPOSITORY_CATEGORIES).forEach(categoryKey => {
+      const category = REPOSITORY_CATEGORIES[categoryKey];
+      categorized[categoryKey] = repos.filter(repo => 
+        category.repos.includes(repo.name)
+      ).sort((a, b) => {
+        // Sort by whether it's featured first, then by updated date
+        const aIsFeatured = FAVORITE_REPO_NAMES.includes(a.name);
+        const bIsFeatured = FAVORITE_REPO_NAMES.includes(b.name);
+        
+        if (aIsFeatured && !bIsFeatured) return -1;
+        if (!aIsFeatured && bIsFeatured) return 1;
+        
+        return new Date(b.updated_at) - new Date(a.updated_at);
+      });
+    });
+    
+    return categorized;
+  };
+
   // Fetch repositories
   const fetchRepositories = async () => {
     try {
@@ -147,37 +268,26 @@ const GitHubProjects = () => {
       
       setTotalRepos(ownRepos.length);
 
-      // Separate favorite and other repositories
-      const favorites = [];
-      const others = [];
+      // Enhanced repositories with demo links and favorite status
+      const enhancedRepos = ownRepos.map(repo => ({
+        ...repo,
+        manual_created_at: FAVORITE_REPOS_WITH_DATES[repo.name] || repo.created_at,
+        demo_link: DEMO_LINKS[repo.name], // Demo links only for featured repos
+        is_favorite: FAVORITE_REPO_NAMES.includes(repo.name)
+      }));
 
-      ownRepos.forEach(repo => {
-        const enhancedRepo = {
-          ...repo,
-          manual_created_at: FAVORITE_REPOS_WITH_DATES[repo.name] || repo.created_at,
-          demo_link: DEMO_LINKS[repo.name],
-          is_favorite: FAVORITE_REPO_NAMES.includes(repo.name)
-        };
+      setAllRepos(enhancedRepos);
 
-        if (FAVORITE_REPO_NAMES.includes(repo.name)) {
-          favorites.push(enhancedRepo);
-        } else {
-          others.push(enhancedRepo);
-        }
-      });
-
-      // Sort favorites by the order in FAVORITE_REPO_NAMES
-      const sortedFavorites = FAVORITE_REPO_NAMES
-        .map(name => favorites.find(repo => repo.name === name))
+      // Separate favorite repositories
+      const favorites = FAVORITE_REPO_NAMES
+        .map(name => enhancedRepos.find(repo => repo.name === name))
         .filter(repo => repo !== undefined);
 
-      // Sort other repositories by updated date (most recent first)
-      const sortedOthers = others.sort((a, b) => 
-        new Date(b.updated_at) - new Date(a.updated_at)
-      );
+      setFavoriteRepos(favorites);
 
-      setFavoriteRepos(sortedFavorites);
-      setOtherRepos(sortedOthers);
+      // Categorize all repositories
+      const categorized = categorizeRepositories(enhancedRepos);
+      setCategorizedRepos(categorized);
 
     } catch (err) {
       setError(err.message);
@@ -218,15 +328,16 @@ const GitHubProjects = () => {
   };
 
   // Repository Card Component
-  const RepositoryCard = ({ repo, isFavorite = false }) => (
+  const RepositoryCard = ({ repo, isFavorite = false, showFeaturedBadge = false }) => (
     <div
       key={repo.id}
-      className={`repository-card ${isFavorite ? 'favorite-repo' : 'other-repo'}`}
+      className={`repository-card ${isFavorite ? 'favorite-repo' : 'category-repo'} ${showFeaturedBadge && repo.is_favorite ? 'featured-in-category' : ''}`}
       onClick={() => handleRepoClick(repo.html_url)}
     >
       <div className="repo-header">
         <h3 className="repo-name">
           {isFavorite && <FaStar className="favorite-icon" />}
+          {showFeaturedBadge && repo.is_favorite && <FaStar className="featured-badge" />}
           {repo.name}
           <FaExternalLinkAlt className="repo-external-icon" />
         </h3>
@@ -238,7 +349,8 @@ const GitHubProjects = () => {
 
       <div className="repo-footer">
         <div className="repo-actions">
-          {repo.demo_link && (
+          {/* Show demo button only for featured repos */}
+          {isFavorite && repo.demo_link && (
             <button 
               className="demo-btn"
               onClick={(e) => handleDemoClick(e, repo.demo_link)}
@@ -347,37 +459,81 @@ const GitHubProjects = () => {
         </div>
       </div>
 
-      {/* Other Repositories Section */}
-      {otherRepos.length > 0 && (
-        <div className="repositories-section other-repos-section">
-          <div className="repos-header">
-            <div className="header-content">
-              <FaGithub className="github-icon" />
-              <div className="header-text">
-                <h1>Other Repositories</h1>
-                <p className="repo-count">
-                  Showing {otherRepos.length} additional repositories • Total: {totalRepos} repositories
-                </p>
-              </div>
+      {/* Categories Section */}
+      <div className="repositories-section categories-section">
+        <div className="repos-header">
+          <div className="header-content">
+            <FaFolder className="categories-icon" />
+            <div className="header-text">
+              <h1>Repository Categories</h1>
+              <p className="repo-count">
+                Browse all 75+ repositories organized by type and technology
+              </p>
             </div>
           </div>
+        </div>
 
-          <div className="repositories-grid">
-            {otherRepos.map((repo) => (
-              <RepositoryCard key={repo.id} repo={repo} isFavorite={false} />
-            ))}
+        {/* Category Navigation */}
+        <div className="category-navigation">
+          {Object.keys(REPOSITORY_CATEGORIES).map(categoryKey => {
+            const category = REPOSITORY_CATEGORIES[categoryKey];
+            const IconComponent = category.icon;
+            const repoCount = categorizedRepos[categoryKey]?.length || 0;
+            
+            return (
+              <button
+                key={categoryKey}
+                className={`category-tab ${selectedCategory === categoryKey ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(categoryKey)}
+              >
+                <IconComponent className="category-icon" />
+                <div className="category-info">
+                  <span className="category-title">{category.title}</span>
+                  <span className="category-count">{repoCount} repos</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Category Content */}
+        {selectedCategory && categorizedRepos[selectedCategory] && (
+          <div className="category-content">
+            <div className="category-header">
+              <div className="category-description">
+                <h2>{REPOSITORY_CATEGORIES[selectedCategory].title}</h2>
+                <p>{REPOSITORY_CATEGORIES[selectedCategory].description}</p>
+              </div>
+              <div className="category-stats">
+                <span className="repo-count">
+                  {categorizedRepos[selectedCategory].length} repositories
+                </span>
+              </div>
+            </div>
+
+            <div className="repositories-grid">
+              {categorizedRepos[selectedCategory].map((repo) => (
+                <RepositoryCard 
+                  key={repo.id} 
+                  repo={repo} 
+                  isFavorite={false} 
+                  showFeaturedBadge={true}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {favoriteRepos.length === 0 && otherRepos.length === 0 && (
-        <div className="no-repos">
-          <p>Loading your repositories...</p>
-          <button onClick={handleGitHubProfileClick} className="view-all-btn">
-            View all repositories on GitHub
-          </button>
-        </div>
-      )}
+        {/* Empty state */}
+        {selectedCategory && (!categorizedRepos[selectedCategory] || categorizedRepos[selectedCategory].length === 0) && (
+          <div className="no-repos">
+            <p>No repositories found in this category.</p>
+            <button onClick={handleGitHubProfileClick} className="view-all-btn">
+              View all repositories on GitHub
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
