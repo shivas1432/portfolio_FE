@@ -219,71 +219,10 @@ export const templatesProjects = [
     website: "https://gamestoressk.netlify.app",
   },
   {
-    id: 1,
-    title: "Reasonate",
-    image: "https://imgur.com/iNXe7A0.png",
-    website: "https://reasonate.netlify.app/",
-  },
- 
-  {
-    id: 4,
-    title: "Coffeee11",
-    image: "https://imgur.com/8xk6zv5.png",
-    website: "https://coffeee11.netlify.app/",
-  },
-  {
-    id: 6,
-    title: "Defective",
-    image: "https://imgur.com/uegOnBp.png",
-    website: "https://defective.netlify.app/",
-  },
-  {
-    id: 7,
-    title: "Ekvator",
-    image: "https://imgur.com/ykIXEjH.png",
-    website: "https://ekvator.netlify.app/",
-  },
-  {
-    id: 8,
-    title: "Introspace",
-    image: "https://imgur.com/V6h7oNZ.png",
-    website: "https://introspace.netlify.app/",
-  },
-  {
-    id: 9,
-    title: "Rydex",
-    image: "https://imgur.com/yalMOA8.png",
-    website: "https://rydex.netlify.app/",
-  },
-  {
     id: 11,
     title: "Tutomile",
     image: "https://imgur.com/882sTJc.png",
-    website: "https://tutomile.netlify.app/",
-  },
-  {
-    id: 12,
-    title: "Willey11",
-    image: "https://imgur.com/jV2JbKz.png",
-    website: "https://willey11.netlify.app/",
-  },
-  {
-    id: 14,
-    title: "Arqline1",
-    image: "https://imgur.com/AFTlaql.png",
-    website: "https://arqline1.netlify.app/",
-  },
-  {
-    id: 18,
-    title: "Craftplay",
-    image: "https://imgur.com/ECB6Vak.png",
-    website: "https://craftplay-ss-template.netlify.app/",
-  },
-  {
-    id: 25,
-    title: "Bitjoy",
-    image: "https://imgur.com/OWhjtKZ.png",
-    website: "https://food-bite.netlify.app/",
+    website: "https://hairsalooooon.netlify.app/",
   },
   {
     id: 28,
