@@ -80,6 +80,12 @@ export const templatesProjects = [
     website: "https://sstemplate1.netlify.app/",
   },
    {
+    id: 17,
+    title: "musiccraft",
+    image: "https://imgur.com/hG5zpYS.png",
+    website: "https://imaginative-cat-ae97bd.netlify.app/",
+  },
+   {
     id: 30,
     title: "Portfolio",
     image: "https://imgur.com/QoQ3NKd.png",
@@ -172,8 +178,8 @@ export const templatesProjects = [
   },
     {
     id: 11,
-    title: "Tutomile",
-    image: "https://imgur.com/882sTJc.png",
+    title: "hair Salon",
+    image: "https://imgur.com/Nytl4Wk.png",
     website: "https://hairsalooooon.netlify.app/",
   },
   {
