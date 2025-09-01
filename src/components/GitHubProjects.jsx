@@ -17,24 +17,26 @@ const GitHubProjects = () => {
   // Your favorite repositories list (maintaining original order)
   const FAVORITE_REPO_NAMES = [
     'NHS-Appointment-Optimization',
-    'UK-Grocery-Price-Comparison-App',
     'UK-NutriHealth-AI',
-    'Sign_Gesture_Speak',
+    'UK-Grocery-Price-Comparison-App',
+    'CS-Notes-Hub',
+    'PixelFlow',
+    'Projects_Hub',
+    'JavaScript-Studio',
     'python-projects',
     'UI-Paradise',
     'Website_Templates',
     'Interactive-3D-WebDesigns',
     'Animated-Designs',
-    'boilerplate-codes',
+    'Boilerplate-codes-Web-App',
     'Interactive-3D-Website-Templates',
-    'Projects_Hub',
+    'Sign_Gesture_Speak',
     'terminal-replica',
     'netflix-replica',
     'gemini-replica',
     'Resources-Every-Developer-Need',
     'AIBuddy',
-    'Studymate_AI',
-    'car_wash_booking_system_FE'
+    'Studymate_AI'
   ];
 
   // Repository categories configuration
