@@ -1,4 +1,4 @@
-// projectsData.jsx - Centralized project data (UPDATED with new templates)
+// projectsData.jsx - Centralized project data 
 
 export const templatesProjects = [
    {

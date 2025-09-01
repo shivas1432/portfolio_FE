@@ -162,28 +162,37 @@ const GitHubProjects = () => {
     'netflix-replica': '2023-11-20',
     'gemini-replica': '2024-01-10'
   };
-
-  // Demo links for each repository - ONLY for featured repos
   const DEMO_LINKS = {
+    // Main Featured Apps
     'NHS-Appointment-Optimization': 'https://nhs-appointment-optimization.netlify.app/',
     'UK-Grocery-Price-Comparison-App': 'https://uk-grocery-price-comparison-app.netlify.app/',
     'UK-NutriHealth-AI': 'https://beamish-kashata-836ad2.netlify.app/',
     'Sign_Gesture_Speak': 'https://signgesture.netlify.app/',
-    'python-projects': 'https://github.com/shivas1432/python-projects',
-    'UI-Paradise': 'https://www.instagram.com/ss_web_innovations/',
-    'Website_Templates': 'https://shivashanker.com/projects',
-    'Interactive-3D-WebDesigns': 'https://www.instagram.com/ss_web_innovations/',
-    'Animated-Designs': 'https://www.instagram.com/ss_web_innovations/',
-    'boilerplate-codes': 'https://api-boilerplate-code-generator.netlify.app/',
-    'Interactive-3D-Website-Templates': 'https://shivashanker.com/projects',
-    'Projects_Hub': 'https://github.com/shivas1432/Projects_Hub.git',
-    'terminal-replica': 'https://terminal-replica-demo.vercel.app',
-    'netflix-replica': 'https://netflix-replica-demo.netlify.app',
-    'gemini-replica': 'https://gemini-replica-demo.vercel.app',
-    'Resources-Every-Developer-Need': 'https://github.com/shivas1432/Resources-Every-Developer-Need.git',
-    'AIBuddy': 'https://github.com/shivas1432/AIBuddy',
+    'AIBuddy': 'https://github.com/shivas1432/AIBuddy.git',
     'Studymate_AI': 'https://studymatee-ai.netlify.app/',
-    'car_wash_booking_system_FE': 'https://carwash-booking-demo.vercel.app'
+    
+    // Project Collections & Studios
+    'python-projects': 'https://github.com/shivas1432/python-projects.git',
+    'Projects_Hub': 'https://github.com/shivas1432/Projects_Hub.git',
+    'JavaScript-Studio': 'https://javascript-studio1.netlify.app/',
+    'CS-Notes-Hub': 'https://cs-notes-hub.netlify.app/',
+    'PixelFlow': 'https://pixelflowdesigns.netlify.app/',
+    
+    // UI & Design Showcases
+    'UI-Paradise': 'https://github.com/shivas1432/UI-Paradise.git',
+    'Website_Templates': 'https://github.com/shivas1432/Website_Templates.git',
+    'Interactive-3D-WebDesigns': 'https://interactive-3d-designs.netlify.app/',
+    'Animated-Designs': 'https://github.com/shivas1432/Animated-Designs.git',
+    'Interactive-3D-Website-Templates': 'https://github.com/shivas1432/Interactive-3D-Website-Templates.git',
+    
+    // Templates & Boilerplates
+    'Boilerplate-codes-Web-App': 'https://api-boilerplate-code-generator.netlify.app/',
+    'Resources-Every-Developer-Need': 'https://github.com/shivas1432/Resources-Every-Developer-Need.git',
+    
+    // Application Replicas
+    'terminal-replica': 'https://github.com/shivas1432/terminal-replica.git',
+    'netflix-replica': 'https://github.com/shivas1432/netflix-replica.git',
+    'gemini-replica': 'https://github.com/shivas1432/gemini-replica.git'
   };
 
   // GitHub API headers
@@ -274,7 +283,7 @@ const GitHubProjects = () => {
       const enhancedRepos = ownRepos.map(repo => ({
         ...repo,
         manual_created_at: FAVORITE_REPOS_WITH_DATES[repo.name] || repo.created_at,
-        demo_link: DEMO_LINKS[repo.name], // Demo links only for featured repos
+        demo_link: DEMO_LINKS[repo.name], // Demo links for featured repos
         is_favorite: FAVORITE_REPO_NAMES.includes(repo.name)
       }));
 
@@ -351,11 +360,12 @@ const GitHubProjects = () => {
 
       <div className="repo-footer">
         <div className="repo-actions">
-          {/* Show demo button only for featured repos */}
+          {/* Show demo button ONLY for featured repos with demo links */}
           {isFavorite && repo.demo_link && (
             <button 
               className="demo-btn"
               onClick={(e) => handleDemoClick(e, repo.demo_link)}
+              title="View Live Demo"
             >
               <FaPlay className="demo-icon" />
               <span>Live Demo</span>
@@ -441,7 +451,7 @@ const GitHubProjects = () => {
             <div className="header-text">
               <h1>Featured Repositories</h1>
               <p className="repo-count">
-                My {favoriteRepos.length} favorite and most impactful projects
+                My {favoriteRepos.length} favorite and most impactful projects with live demos
               </p>
             </div>
           </div>
