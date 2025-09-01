@@ -170,6 +170,36 @@ export const templatesProjects = [
     image: "https://imgur.com/etjs1HV.png",
     website: "https://wildlifessk.netlify.app",
   },
+    {
+    id: 11,
+    title: "Tutomile",
+    image: "https://imgur.com/882sTJc.png",
+    website: "https://hairsalooooon.netlify.app/",
+  },
+  {
+    id: 28,
+    title: "Services",
+    image: "https://imgur.com/wMW6tqs.png",
+    website: "https://sswebservicess.netlify.app/",
+  },
+    {
+    id: 50,
+    title: "SOLAR",
+    image: "https://imgur.com/YFyxZ0o.png",
+    website: "https://solarssk.netlify.app",
+  },
+  {
+    id: 51,
+    title: "RESTAURANT",
+    image: "https://imgur.com/stjW8BW.png",
+    website: "https://restaurantssk.netlify.app",
+  },
+   {
+    id: 48,
+    title: "KINGDOM RUSH",
+    image: "https://imgur.com/faTJCBo.png",
+    website: "https://kingdom-rush.netlify.app/",
+  },
   {
     id: 46,
     title: "PRO HEALTH",
@@ -182,30 +212,14 @@ export const templatesProjects = [
     image: "https://imgur.com/3mV3g4v.png",
     website: "https://melodypulsessk.netlify.app",
   },
-  {
-    id: 48,
-    title: "KINGDOM RUSH",
-    image: "https://imgur.com/faTJCBo.png",
-    website: "https://kingdom-rush.netlify.app/",
-  },
+
   {
     id: 49,
     title: "RESUME BUILDER",
     image: "https://imgur.com/Swlckqm.png",
     website: "https://resumebuilderssk.netlify.app",
   },
-  {
-    id: 50,
-    title: "SOLAR",
-    image: "https://imgur.com/YFyxZ0o.png",
-    website: "https://solarssk.netlify.app",
-  },
-  {
-    id: 51,
-    title: "RESTAURANT",
-    image: "https://imgur.com/stjW8BW.png",
-    website: "https://restaurantssk.netlify.app",
-  },
+
   {
     id: 52,
     title: "TRAVEL PLANNER",
@@ -218,17 +232,6 @@ export const templatesProjects = [
     image: "https://imgur.com/w33xXou.png",
     website: "https://gamestoressk.netlify.app",
   },
-  {
-    id: 11,
-    title: "Tutomile",
-    image: "https://imgur.com/882sTJc.png",
-    website: "https://hairsalooooon.netlify.app/",
-  },
-  {
-    id: 28,
-    title: "Services",
-    image: "https://imgur.com/wMW6tqs.png",
-    website: "https://sswebservicess.netlify.app/",
-  },
+
  
 ];
