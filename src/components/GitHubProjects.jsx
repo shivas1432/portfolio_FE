@@ -163,9 +163,9 @@ const GitHubProjects = () => {
 
   // Demo links for each repository - ONLY for featured repos
   const DEMO_LINKS = {
-    'NHS-Appointment-Optimization': 'https://demo-nhs-appointment.vercel.app',
+    'NHS-Appointment-Optimization': 'https://nhs-appointment-optimization.netlify.app/',
     'UK-Grocery-Price-Comparison-App': 'https://uk-grocery-price-comparison-app.netlify.app/',
-    'UK-NutriHealth-AI': 'https://demo-nutrihealth.herokuapp.com',
+    'UK-NutriHealth-AI': 'https://beamish-kashata-836ad2.netlify.app/',
     'Sign_Gesture_Speak': 'https://signgesture.netlify.app/',
     'python-projects': 'https://github.com/shivas1432/python-projects',
     'UI-Paradise': 'https://www.instagram.com/ss_web_innovations/',
@@ -179,7 +179,7 @@ const GitHubProjects = () => {
     'netflix-replica': 'https://netflix-replica-demo.netlify.app',
     'gemini-replica': 'https://gemini-replica-demo.vercel.app',
     'Resources-Every-Developer-Need': 'https://github.com/shivas1432/Resources-Every-Developer-Need.git',
-    'AIBuddy': 'https://github.com/shivas1432/AIBuddy.git',
+    'AIBuddy': 'https://github.com/shivas1432/AIBuddy',
     'Studymate_AI': 'https://studymatee-ai.netlify.app/',
     'car_wash_booking_system_FE': 'https://carwash-booking-demo.vercel.app'
   };
